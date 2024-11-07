@@ -20,6 +20,10 @@ Route::middleware('auth')->group(function () {
 
 route::get('/products', function () {
     return view('products');
+});
+route::get('/products/show', function () {
+    return view('products.products-show');
+
 })->name('products');
 
 route::get('/machines', function () {
@@ -33,7 +37,5 @@ route::get('/customers', function () {
 route::get('/orders', function () {
     return view('orders');
 })->name('orders');
-
-
 
 require __DIR__.'/auth.php';
