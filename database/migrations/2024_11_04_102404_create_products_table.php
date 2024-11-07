@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('storage_id');
             $table->foreignId('product_category_id');
+            $table->string('name');
             $table->decimal('price');
             $table->timestamps();
         });
