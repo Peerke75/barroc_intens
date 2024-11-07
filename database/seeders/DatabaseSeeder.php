@@ -25,6 +25,15 @@ class DatabaseSeeder extends Seeder
             ProductsSeeder::class,
             StoragesSeeder::class,
             UsersSeeder::class,
+            CustomerServicesSeeder::class,
+            OrdersSeeder::class,
+            ProposalsSeeder::class,
+            OrderLinesSeeder::class,
+            ProposalPriceLinesSeeder::class,
+            MalfunctionsSeeder::class,
+            ScheduleSeeder::class,
+            MachinesSeeder::class,
+            MaintenanceSeeder::class,
         ]);
     }
 }
