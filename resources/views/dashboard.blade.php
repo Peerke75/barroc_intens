@@ -2,7 +2,7 @@
 <?php
 use Illuminate\Support\Facades\Auth;
 ?>
-<title> Barroc Intens | Dashboard</title>
+<title> Barroc Intens | Dashboard</title> 
 @section('content')
 
 <div class="bg-white text-black">
