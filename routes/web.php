@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -27,13 +28,15 @@ route::get('/machines', function () {
 })->name('machines');
 
 route::get('/customers', function () {
-    return view('customers');
+    return view('customers.klanten-show');
 })->name('customers');
+Route::get('/customers', [CustomerController::class, 'index'])->name('customers');
+
+
 
 route::get('/orders', function () {
     return view('orders');
 })->name('orders');
-
 
 
 require __DIR__.'/auth.php';
