@@ -23,8 +23,13 @@ route::get('/products', function () {
 });
 route::get('/products/show', function () {
     return view('products.products-show');
-
 })->name('products');
+
+route::get('/products/info', function () {
+    return view('products.products-info');
+})->name('products');
+
+
 
 route::get('/machines', function () {
     return view('machines');
