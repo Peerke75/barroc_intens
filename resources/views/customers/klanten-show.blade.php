@@ -31,6 +31,23 @@
     // Prepare customers with invoices data
     let customers = @json($customers);
 
+    // Random description generator function
+    function generateRandomDescription(customerId) {
+        const descriptions = [
+            "Customer specializes in web development services with innovative online solutions.",
+            "Customer is a consulting firm offering strategic business advice and marketing optimization.",
+            "Customer provides cloud hosting services with a focus on scalable web infrastructure.",
+            "Customer is a design agency known for minimalist web designs and great user experiences.",
+            "Customer offers SEO optimization services to improve online visibility for businesses.",
+            "Customer focuses on digital marketing strategies with an emphasis on social media growth.",
+            "Customer is a tech company developing mobile apps for various industries.",
+            "Customer offers financial services, specializing in tax consulting and investment strategies."
+        ];
+
+        // Return a random description from the list for each customer
+        return descriptions[Math.floor(Math.random() * descriptions.length)];
+    }
+
     // Random invoice generation function
     function generateRandomInvoice() {
         const descriptions = ["Web development services", "Consulting", "Design services", "Hosting", "SEO optimization"];
@@ -71,7 +88,7 @@
                 paymentStatusText = 'Unknown';
             }
 
-            // Update Customer Details section
+            // Update Customer Details section with random description for each customer
             let detailsSection = `
                 <div class="mt-8 space-y-4">
                     <h3 class="text-2xl font-semibold text-gray-800">${customer.name}</h3>
@@ -81,7 +98,7 @@
                     <p class="text-lg text-gray-700"><strong>BKR Check:</strong> ${customer['BKR-check'] ? 'Passed' : 'Failed'}</p>
                     <div class="mt-4">
                         <p class="text-lg text-gray-700"><strong>Description:</strong></p>
-                        <p class="text-gray-600">${customer.description || 'No description available.'}</p>
+                        <p class="text-gray-600">${generateRandomDescription(customerId)}</p>
                     </div>
 
                     <!-- Payment Status Box -->
@@ -133,4 +150,3 @@
 </script>
 
 @endsection
-    
