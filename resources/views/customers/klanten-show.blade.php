@@ -53,8 +53,23 @@
         let customer = customers.find(c => c.id === customerId);
 
         if (customer) {
-            // Log customer invoices to see if the data exists
-            console.log(customer.invoices);  // Log invoices to the console
+            // Hard-coded Payment Status Box
+            let paymentStatusClass = '';
+            let paymentStatusText = '';
+            // Hard-coding different payment statuses for demonstration
+            if (customerId === 1) {
+                paymentStatusClass = 'bg-green-500';  // Paid
+                paymentStatusText = 'Paid';
+            } else if (customerId === 2) {
+                paymentStatusClass = 'bg-yellow-500';  // Pending
+                paymentStatusText = 'Pending';
+            } else if (customerId === 3) {
+                paymentStatusClass = 'bg-red-500';  // Overdue
+                paymentStatusText = 'Overdue';
+            } else {
+                paymentStatusClass = 'bg-gray-500';  // Default
+                paymentStatusText = 'Unknown';
+            }
 
             // Update Customer Details section
             let detailsSection = `
@@ -67,6 +82,11 @@
                     <div class="mt-4">
                         <p class="text-lg text-gray-700"><strong>Description:</strong></p>
                         <p class="text-gray-600">${customer.description || 'No description available.'}</p>
+                    </div>
+
+                    <!-- Payment Status Box -->
+                    <div class="mt-4 p-4 rounded-lg ${paymentStatusClass} text-white text-center">
+                        <p class="text-xl font-semibold">Payment Status: ${paymentStatusText}</p>
                     </div>
                 </div>
             `;
@@ -113,3 +133,4 @@
 </script>
 
 @endsection
+    
