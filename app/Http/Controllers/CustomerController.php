@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Customer;  // Import the Customer model
+use App\Models\Customer;
 use Illuminate\Http\Request;
+use App\Models\Invoice;
+
 
 class CustomerController extends Controller
 {
     public function index()
     {
-        // Fetch all customers from the database
-        $customers = Customer::all();
-
-        // Pass customers to the view
+        $customers = Customer::with('invoices')->get();
         return view('customers.klanten-show', compact('customers'));
     }
+
 }
