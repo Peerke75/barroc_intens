@@ -18,22 +18,25 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-route::get('/products', function () {
-    return view('products');
-})->name('products');
+Route::get('/products', [ProductController::class, 'index'])->name('products');
+Route::get('/products/{id}/info', [ProductController::class, 'show'])->name('products.info');
 
-route::get('/machines', function () {
+Route::get('/products/{product}/buy', [ProductController::class, 'buy'])->name('products.buy');
+Route::post('/products/{product}/buy', [ProductController::class, 'storeOrder'])->name('products.storeOrder');
+
+
+
+// Andere bestaande routes
+Route::get('/machines', function () {
     return view('machines');
 })->name('machines');
 
-route::get('/customers', function () {
+Route::get('/customers', function () {
     return view('customers');
 })->name('customers');
 
-route::get('/orders', function () {
+Route::get('/orders', function () {
     return view('orders');
 })->name('orders');
-
-
 
 require __DIR__.'/auth.php';
