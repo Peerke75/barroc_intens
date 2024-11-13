@@ -7,6 +7,7 @@
             <a href="{{ route ('products') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Voorraad</a>
             <a href="{{ route ('machines') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Apparaten</a>
             <a href="{{ route ('customers') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Klanten</a>
+            <a href="{{ route ('storingen') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Storingen</a>
         </div>
 
         <div class="flex space-x-4">

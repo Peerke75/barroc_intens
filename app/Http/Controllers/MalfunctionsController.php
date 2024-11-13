@@ -1,79 +1,87 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Malfunction;
+use App\Models\Customer;
 
 class MalfunctionsController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Toon een lijst van alle storingen.
      */
     public function index()
     {
-        $malfunctions = Malfunction::orderBy('date', 'asc')->get();
-
+        $malfunctions = Malfunction::with('customer')->get();
         return view('malfunctions.malfunction-index', compact('malfunctions'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Toon het formulier om een nieuwe storing aan te maken.
      */
     public function create()
     {
-        return view('malfunctions.malfunction-create');
+        $customers = Customer::all();
+        return view('malfunctions.malfunction-create', compact('customers'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Sla een nieuwe storing op in de database.
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'customer_id' => 'required|exists:customers,id',
+            'description' => 'required|string|max:255',
+            'date' => 'required|date',
+        ]);
+
         Malfunction::create($request->all());
 
-        return redirect()->route('malfunctions.malfunction-index')->with('success', 'Storing toegevoegd');
+        return redirect()->route('storingen.index')->with('success', 'Storing succesvol aangemaakt.');
     }
 
     /**
-     * Display the specified resource.
+     * Toon een specifieke storing.
      */
-    public function show(string $id)
+    public function show(Malfunction $malfunction)
     {
-        $malfunction = Malfunction::findOrFail($id);
-
+        $malfunction = Malfunction::with('customer')->findOrFail($malfunction->id);
         return view('malfunctions.malfunction-show', compact('malfunction'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Toon het formulier om een bestaande storing te bewerken.
      */
-    public function edit(string $id)
+    public function edit(Malfunction $malfunction)
     {
-        $malfunction = Malfunction::findOrFail($id);
-
-        return view('malfunctions.malfunction-edit', compact('malfunction'));
+        $customers = Customer::all();
+        return view('malfunctions.malfunction-edit', compact('malfunction', 'customers'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Werk een bestaande storing bij in de database.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Malfunction $malfunction)
     {
-        $malfunction = Malfunction::findOrFail($id);
+        $request->validate([
+            'customer_id' => 'required|exists:customers,id',
+            'description' => 'required|string|max:255',
+            'date' => 'required|date',
+        ]);
+
         $malfunction->update($request->all());
 
-        return redirect()->route('malfunctions.malfunction-index')->with('success', 'Storing bijgewerkt');
+        return redirect()->route('storingen.index')->with('success', 'Storing succesvol bijgewerkt.');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Verwijder een bestaande storing uit de database.
      */
-    public function destroy(string $id)
+    public function destroy(Malfunction $malfunction)
     {
-        $malfunction = Malfunction::findOrFail($id);
         $malfunction->delete();
 
-        return redirect()->route('malfunctions.malfunction-index')->with('success', 'Storing verwijderd');
+        return redirect()->route('storingen.index')->with('success', 'Storing succesvol verwijderd.');
     }
 }

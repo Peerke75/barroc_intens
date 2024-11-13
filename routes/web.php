@@ -39,7 +39,15 @@ route::get('/orders', function () {
 })->name('orders');
 
 
-route::resource('storingen', MalfunctionsController::class);
-route::get('/storingen', [MalfunctionsController::class, 'show'])->name('malfunctions.malfunction-show');
+Route::resource('/storingen', MalfunctionsController::class)->names([
+    'index' => 'storingen.index',
+    'create' => 'storingen.create',
+    'store' => 'storingen.store',
+    'show' => 'storingen.show',
+    'edit' => 'storingen.edit',
+    'update' => 'storingen.update',
+    'destroy' => 'storingen.destroy',
+]);
+
 
 require __DIR__.'/auth.php';

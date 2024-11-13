@@ -9,7 +9,6 @@ class DashboardController extends Controller
     {
         // Retrieve the logged-in user's function_id
         $function_id = Auth::user()->function_id;
-        dd($function_id);
 
         // Choose a dashboard view based on the function_id
         switch ($function_id) {
