@@ -5,9 +5,8 @@ use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MaintenanceController;
-use App\Http\Livewire\Storingen;
+use App\Http\Controllers\MalfunctionsController;
 use App\Models\Malfunction;
-use Database\Seeders\MalfunctionsSeeder;
 
 Route::get('/', function () {
     return redirect('/login');
@@ -40,6 +39,7 @@ route::get('/orders', function () {
 })->name('orders');
 
 
-Route::get('/storingen', [MaintenanceController::class, 'index'])->name('storingen');
+route::resource('storingen', MalfunctionsController::class);
+route::get('/storingen', [MalfunctionsController::class, 'show'])->name('malfunctions.malfunction-show');
 
 require __DIR__.'/auth.php';
