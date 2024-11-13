@@ -53,11 +53,12 @@ class MalfunctionsController extends Controller
     /**
      * Toon het formulier om een bestaande storing te bewerken.
      */
-    public function edit(Malfunction $malfunction)
+    public function edit($id)
     {
-        $customers = Customer::all();
-        return view('malfunctions.malfunction-edit', compact('malfunction', 'customers'));
+        $malfunction = Malfunction::findOrFail($id);
+        return view('malfunctions.malfunction-edit', compact('malfunction'));
     }
+    
 
     /**
      * Werk een bestaande storing bij in de database.

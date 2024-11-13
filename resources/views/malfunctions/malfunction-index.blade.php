@@ -4,6 +4,10 @@
 <div class="container mx-auto mt-10">
     <h1 class="text-3xl font-bold mb-5">Storingen</h1>
 
+
+    <div class="flex justify-end mb-5">
+        <a href="{{ route('storingen.create') }}" class="btn btn-primary">Nieuwe storing aanmaken</a>
+    </div>
     <table class="table-auto w-full bg-white border border-gray-300 rounded-lg">
         <thead>
             <tr class="bg-gray-200 text-left">
@@ -19,13 +23,13 @@
                 <td class="px-4 py-2 border">{{ $malfunction->id }}</td>
                 <td class="px-4 py-2 border">{{ $malfunction->customer->name }}</td>
                 <td class="px-4 py-2 border">{{ $malfunction->date }}</td>
-                <td>
+                <td class="px-4 py-2 border">
                     <a href="{{ route('storingen.show', $malfunction->id) }}" class="btn btn-info">Bekijk</a>
                     <a href="{{ route('storingen.edit', $malfunction->id) }}" class="btn btn-warning">Bewerk</a>
 
                 </td>
             </tr>
-            @if ($malfunction->status == 'open')
+            @if ($malfunction->status == 'Closed')
             <tr>
                 <td colspan="6" class="px-4 py-2 border text-center">Geen storingen gevonden</td>
             </tr>
