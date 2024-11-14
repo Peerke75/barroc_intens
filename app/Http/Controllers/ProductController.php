@@ -110,4 +110,17 @@ public function destroy($id)
 
         return redirect()->route('products.show')->with('success', 'Bestelling geplaatst!');
     }
+    public function search(Request $request)
+    {
+        $query = $request->get('query');
+
+        // Zoek alleen in de kolom 'name'
+        $products = \App\Models\Product::where('name', 'LIKE', "%{$query}%")
+                                        ->limit(5)
+                                        ->get();
+
+        // Geef de producten terug als JSON
+        return response()->json($products);
+    }
+
 }
