@@ -38,7 +38,18 @@
                 </select>
             </div>
 
-            <button type="submit" class="py-2 px-4 bg-blue-500 text-white rounded">Product Bijwerken</button>
+            <!-- Flex container voor beide knoppen -->
+            <div class="flex space-x-2">
+                <!-- Bewerk button -->
+                <button type="submit" class="py-2 px-4 bg-blue-500 text-white rounded">Product Bijwerken</button>
         </form>
+
+                <!-- Verwijder button in een aparte form -->
+                <form action="{{ route('products.destroy', $product->id) }}" method="POST" onsubmit="return confirm('Weet je zeker dat je dit product wilt verwijderen?');">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="py-2 px-4 bg-red-500 text-white rounded">Verwijderen</button>
+                </form>
+            </div>
     </div>
 @endsection
