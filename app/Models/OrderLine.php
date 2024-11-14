@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Customer extends Model
+class OrderLine extends Model
 {
     use HasFactory;
 
-    protected $table = 'customers';
+    protected $table = 'order_lines';
 }

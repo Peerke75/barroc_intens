@@ -18,28 +18,34 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-route::get('/products', function () {
-    return view('products');
-});
-route::get('/products/show', function () {
-    return view('products.products-show');
-})->name('products');
-
-route::get('/products/info', function () {
-    return view('products.products-info');
-})->name('products');
+Route::get('/products/search', [ProductController::class, 'search'])->name('products.search');
 
 
+Route::get('/products', [ProductController::class, 'index'])->name('products');
+Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
+Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
 
-route::get('/machines', function () {
+Route::get('/products/{id}/info', [ProductController::class, 'show'])->name('products.info');
+
+
+Route::get('/products/{product}/buy', [ProductController::class, 'buy'])->name('products.buy');
+Route::post('/products/{product}/buy', [ProductController::class, 'storeOrder'])->name('products.storeOrder');
+
+
+
+// Andere bestaande routes
+Route::get('/machines', function () {
     return view('machines');
 })->name('machines');
 
-route::get('/customers', function () {
+Route::get('/customers', function () {
     return view('customers');
 })->name('customers');
 
-route::get('/orders', function () {
+Route::get('/orders', function () {
     return view('orders');
 })->name('orders');
 
