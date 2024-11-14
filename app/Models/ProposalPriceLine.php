@@ -9,5 +9,10 @@ class ProposalPriceLine extends Model
 {
     use HasFactory;
 
-    protected $table = 'proposal_price_lines';
+    protected $fillable = ['proposal_id', 'price', 'amount'];
+
+    public function proposal()
+    {
+        return $this->belongsTo(Proposal::class);
+    }
 }

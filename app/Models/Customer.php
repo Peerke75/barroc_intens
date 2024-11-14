@@ -18,4 +18,23 @@ class Customer extends Model
     {
         return $this->hasMany(Invoice::class);
     }
+
+
+    protected $fillable = [
+        'contract_id',
+        'contact_persons_id',
+        'company_name',
+        'name',
+        'mail',
+        'BKR-check',
+        'order_status',
+    ];
+
+    // Relatie naar Proposals
+    public function proposals()
+    {
+        return $this->hasMany(Proposal::class);
+    }
 }
+
+

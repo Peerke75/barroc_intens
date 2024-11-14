@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\MalfunctionsController;
+use App\Http\Controllers\ProposalController;
 use App\Models\Malfunction;
 
 
@@ -16,6 +17,14 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', [DashboardController::class, 'showDashboard'])->middleware(['auth', 'verified'])->name('dashboard');
+
+
+Route::resource('proposals', ProposalController::class)->middleware('auth');
+// web.php
+Route::get('/proposals/create', [ProposalController::class, 'create'])->name('proposals.create');
+Route::post('/proposals', [ProposalController::class, 'store'])->name('proposals.store');
+Route::get('/proposals/{proposal}', [ProposalController::class, 'show'])->name('proposals.show');
+Route::delete('proposals/{proposal}', [ProposalController::class, 'destroy'])->name('proposals.destroy');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
