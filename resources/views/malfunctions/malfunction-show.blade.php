@@ -37,7 +37,7 @@
                     <th class="px-4 py-2 border">Oplossing</th>
                 </tr>
             </thead>
-            // hier komt de fout melding geschiedenis
+           
         </table>
     </div>
 </div>

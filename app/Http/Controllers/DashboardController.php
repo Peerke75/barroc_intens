@@ -29,7 +29,7 @@ class DashboardController extends Controller
             case 8:
                 return view('dashboard.maintenance-head'); // Custom dashboard 
             case 9:
-                return view('dashboard.marketing-head'); // Custom dashboard  
+                return view('dashboard.marketing-head'); // Custom dashboard 
             default:
                 return redirect()->route('home')->with('error', 'Dashboard not found'); // Redirect if no dashboard is found
         }

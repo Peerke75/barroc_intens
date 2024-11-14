@@ -1,7 +1,7 @@
 @extends('layouts.app')
 <title> Barroc intens | storing aanmaken</title>
 @section('content')
-<div class="container">
+<div class="container px-3">
     <h2 class="text-lg font-semibold mb-4">Nieuwe Storing Aanmaken</h2>
 
     <form action="{{ route('storingen.store') }}" method="POST" class="space-y-4">

@@ -3,8 +3,6 @@
 @section('content')
 <div class="container mx-auto mt-10">
     <h1 class="text-3xl font-bold mb-5">Storingen</h1>
-
-
     <div class="flex justify-end mb-5">
         <a href="{{ route('storingen.create') }}" class="btn btn-primary">Nieuwe storing aanmaken</a>
     </div>

@@ -2,7 +2,7 @@
 <title> Barroc intens | storing aanpassen</title>
 
 @section('content')
-<div class="container">
+<div class="container px-3">
     <h2 class="text-lg font-semibold mb-4">Storing Bewerken</h2>
 
     <form action="{{ route('storingen.update', $malfunction->id) }}" method="POST" class="space-y-4">

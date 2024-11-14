@@ -44,11 +44,12 @@ class MalfunctionsController extends Controller
     /**
      * Toon een specifieke storing.
      */
-    public function show(Malfunction $malfunction)
-    {
-        $malfunction = Malfunction::with('customer')->findOrFail($malfunction->id);
-        return view('malfunctions.malfunction-show', compact('malfunction'));
-    }
+public function show($id)
+{
+    $malfunction = Malfunction::findOrFail($id); // Zorg dat het juiste model wordt gevonden
+    return view('malfunctions.malfunction-show', compact('malfunction'));
+}
+
 
     /**
      * Toon het formulier om een bestaande storing te bewerken.
