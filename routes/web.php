@@ -46,11 +46,10 @@ Route::get('/machines', function () {
     return view('machines');
 })->name('machines');
 
-route::get('/customers', function () {
-    return view('customers.klanten-show');
-})->name('customers');
 Route::get('/customers', [CustomerController::class, 'index'])->name('customers');
-Route::get('/customers/{customer}', [CustomerController::class, 'show'])->name('customers.show');  // Add this route for customer details
+
+Route::get('/customers/create', [CustomerController::class, 'create'])->name('customers.create');
+Route::post('/customers', [CustomerController::class, 'store'])->name('customers.store');
 
 Route::get('/customers/{customer}/invoice/create', [InvoiceController::class, 'create'])->name('invoice.create');
 Route::post('/customers/{customer}/invoice', [InvoiceController::class, 'store'])->name('invoice.store');
