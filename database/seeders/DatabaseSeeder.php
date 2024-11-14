@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
             ScheduleSeeder::class,
             MachinesSeeder::class,
             MaintenanceSeeder::class,
+            InvoiceSeeder::class,
         ]);
     }
 }

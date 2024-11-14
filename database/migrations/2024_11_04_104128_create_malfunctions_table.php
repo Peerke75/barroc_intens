@@ -17,11 +17,12 @@ return new class extends Migration
             $table->foreignId('customer_id');
             $table->string('message');
             $table->string('status');
-            $table->dateTime('date');
+            $table->dateTime('date')->change();
             $table->timestamps();
         });
     }
 
+    
     /**
      * Reverse the migrations.
      */
