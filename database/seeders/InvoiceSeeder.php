@@ -31,10 +31,11 @@ class InvoiceSeeder extends Seeder
                 // Create the invoice
                 Invoice::create([
                     'customer_id' => $customer->id,
-                    'number' => $invoiceNumber,
+                    'invoice_number' => $invoiceNumber,
                     'description' => $faker->sentence(),
                     'price' => $faker->randomFloat(2, 50, 1000), // Random price between 50 and 1000
                     'quantity' => rand(1, 5), // Random quantity between 1 and 5
+                    'total' => $faker->randomFloat(2, 50, 1000),
                 ]);
             }
         }

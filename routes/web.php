@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\InvoiceController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -31,7 +32,10 @@ route::get('/customers', function () {
     return view('customers.klanten-show');
 })->name('customers');
 Route::get('/customers', [CustomerController::class, 'index'])->name('customers');
+Route::get('/customers/{customer}', [CustomerController::class, 'show'])->name('customers.show');  // Add this route for customer details
 
+Route::get('/customers/{customer}/invoice/create', [InvoiceController::class, 'create'])->name('invoice.create');
+Route::post('/customers/{customer}/invoice', [InvoiceController::class, 'store'])->name('invoice.store');
 
 
 route::get('/orders', function () {

@@ -43,8 +43,6 @@
             "Customer is a tech company developing mobile apps for various industries.",
             "Customer offers financial services, specializing in tax consulting and investment strategies."
         ];
-
-        // Return a random description from the list for each customer
         return descriptions[Math.floor(Math.random() * descriptions.length)];
     }
 
@@ -55,40 +53,35 @@
         const randomPrice = (Math.random() * (500 - 50) + 50).toFixed(2); // Price between 50 and 500 EUR
         const randomQuantity = Math.floor(Math.random() * 5) + 1; // Quantity between 1 and 5
 
-        const invoice = {
-            number: "INV-" + Math.floor(Math.random() * 100000), // Random invoice number
+        return {
+            number: "INV-" + Math.floor(Math.random() * 100000),
             description: randomDescription,
             price: parseFloat(randomPrice),
             quantity: randomQuantity
         };
-
-        return invoice;
     }
 
     function showCustomerDetails(customerId) {
-        // Find the customer object by ID
         let customer = customers.find(c => c.id === customerId);
 
         if (customer) {
-            // Hard-coded Payment Status Box
             let paymentStatusClass = '';
             let paymentStatusText = '';
-            // Hard-coding different payment statuses for demonstration
+
             if (customerId === 1) {
-                paymentStatusClass = 'bg-green-500';  // Paid
+                paymentStatusClass = 'bg-green-500';
                 paymentStatusText = 'Paid';
             } else if (customerId === 2) {
-                paymentStatusClass = 'bg-yellow-500';  // Pending
+                paymentStatusClass = 'bg-yellow-500';
                 paymentStatusText = 'Pending';
             } else if (customerId === 3) {
-                paymentStatusClass = 'bg-red-500';  // Overdue
+                paymentStatusClass = 'bg-red-500';
                 paymentStatusText = 'Overdue';
             } else {
-                paymentStatusClass = 'bg-gray-500';  // Default
+                paymentStatusClass = 'bg-gray-500';
                 paymentStatusText = 'Unknown';
             }
 
-            // Update Customer Details section with random description for each customer
             let detailsSection = `
                 <div class="mt-8 space-y-4">
                     <h3 class="text-2xl font-semibold text-gray-800">${customer.name}</h3>
@@ -105,16 +98,22 @@
                     <div class="mt-4 p-4 rounded-lg ${paymentStatusClass} text-white text-center">
                         <p class="text-xl font-semibold">Payment Status: ${paymentStatusText}</p>
                     </div>
+
+                    <!-- Make Invoice Button -->
+                    <div class="mt-4">
+                        <a href="/customers/${customerId}/invoice/create" class="inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors duration-200">
+                            Make Invoice
+                        </a>
+                    </div>
                 </div>
             `;
             document.getElementById('customer-details').innerHTML = detailsSection;
 
-            // Generate random invoice if no customer invoices are found
             let randomInvoice = generateRandomInvoice();
 
             let invoiceSection = `
                 <h2 class="text-3xl font-bold">FACTUUR</h2>
-                <p class="mt-4"><strong>Klant:</strong> ${customer.name}</p> <!-- Changed from Klantnr. to Customer Name -->
+                <p class="mt-4"><strong>Klant:</strong> ${customer.name}</p>
                 <p><strong>Contractnr.:</strong> ${customer.contract_number || 'N/A'}</p>
                 <p><strong>Factuurnr.:</strong> ${randomInvoice.number || 'N/A'}</p>
 

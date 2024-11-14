@@ -17,6 +17,7 @@ class Invoice extends Model
         'quantity',
         'description',
         'price'
+        
     ];
 
     public function customer()
