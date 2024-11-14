@@ -12,24 +12,24 @@ class DashboardController extends Controller
 
         // Choose a dashboard view based on the function_id
         switch ($function_id) {
-            case 1:
+            case 0:
                 return view('dashboard.admin'); // Admin dashboard
-            case 2:
+            case 1:
                 return view('dashboard.sales'); // sales dashboard
-            case 3:
+            case 2:
                 return view('dashboard.finance'); // finance dashboard
-            case 4:
+            case 3:
                 return view('dashboard.maintenance'); // maintenance dashboard
+            case 4:
+                return view('dashboard.marketing'); // marketing dashboard
             case 5:
-                return view('dashboard.marketing'); // marketing dashboard 
+                return view('dashboard.sales-head'); // Custom dashboard
             case 6:
-                return view('dashboard.sales-head'); // Custom dashboard 
+                return view('dashboard.finance-head'); // Custom dashboard
             case 7:
-                return view('dashboard.finance-head'); // Custom dashboard 
+                return view('dashboard.maintenance-head'); // Custom dashboard
             case 8:
-                return view('dashboard.maintenance-head'); // Custom dashboard 
-            case 9:
-                return view('dashboard.marketing-head'); // Custom dashboard 
+                return view('dashboard.marketing-head'); // Custom dashboard
             default:
                 return redirect()->route('home')->with('error', 'Dashboard not found'); // Redirect if no dashboard is found
         }
