@@ -10,4 +10,8 @@ class Customer extends Model
     use HasFactory;
 
     protected $table = 'customers';
+    public function malfunctions()
+    {
+        return $this->hasMany(Malfunction::class);
+    }
 }

@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
+
 
 Route::get('/', function () {
     return redirect('/login');
@@ -48,5 +50,17 @@ Route::get('/customers', function () {
 Route::get('/orders', function () {
     return view('orders');
 })->name('orders');
+
+
+Route::resource('/storingen', MalfunctionsController::class)->names([
+    'index' => 'storingen.index',
+    'create' => 'storingen.create',
+    'store' => 'storingen.store',
+    'show' => 'storingen.show',
+    'edit' => 'storingen.edit',
+    'update' => 'storingen.update',
+    'destroy' => 'storingen.destroy',
+]);
+
 
 require __DIR__.'/auth.php';
