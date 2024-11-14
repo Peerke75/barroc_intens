@@ -4,6 +4,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MaintenanceController;
+use App\Http\Controllers\MalfunctionsController;
+use App\Models\Malfunction;
 
 
 Route::get('/', function () {
