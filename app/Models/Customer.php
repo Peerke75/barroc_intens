@@ -24,23 +24,12 @@ class Customer extends Model
         'order_status',
     ];
 
-    
+
 
     public function invoices()
     {
         return $this->hasMany(Invoice::class);
     }
-
-
-    protected $fillable = [
-        'contract_id',
-        'contact_persons_id',
-        'company_name',
-        'name',
-        'mail',
-        'BKR-check',
-        'order_status',
-    ];
 
     // Relatie naar Proposals
     public function proposals()
