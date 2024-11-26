@@ -23,8 +23,18 @@ Route::resource('proposals', ProposalController::class)->middleware('auth');
 // web.php
 Route::get('/proposals/create', [ProposalController::class, 'create'])->name('proposals.create');
 Route::post('/proposals', [ProposalController::class, 'store'])->name('proposals.store');
+Route::get('/proposals/{id}/edit', [ProposalController::class, 'edit'])->name('proposals.edit');
 Route::get('/proposals/{proposal}', [ProposalController::class, 'show'])->name('proposals.show');
 Route::delete('proposals/{proposal}', [ProposalController::class, 'destroy'])->name('proposals.destroy');
+
+Route::delete('/proposals/price-lines/{id}', [ProposalController::class, 'destroyPriceLine'])->name('proposals.priceLines.destroy');
+
+Route::post('/proposals/{proposal}/price-line', [ProposalController::class, 'addPriceLine'])
+    ->name('proposals.addPriceLine');
+
+Route::delete('/price-line/{priceLine}', [ProposalController::class, 'removePriceLine'])
+    ->name('proposals.removePriceLine');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -51,9 +61,7 @@ Route::post('/products/{product}/buy', [ProductController::class, 'storeOrder'])
 
 
 // Andere bestaande routes
-Route::get('/machines', function () {
-    return view('machines');
-})->name('machines');
+
 
 route::get('/customers', function () {
     return view('customers.klanten-show');

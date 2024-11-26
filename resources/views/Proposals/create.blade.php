@@ -31,6 +31,15 @@
                 <label for="price" class="block font-semibold text-gray-700">Prijs</label>
                 <input type="number" name="price[]" step="0.01" required class="w-full p-2 border rounded mb-2">
 
+                <label for="product_id" class="block font-semibold text-gray-700">Product</label>
+                <select name="product_id[]" id="product_id" required class="block w-full p-2 border rounded bg-white">
+                    <option value="">-- Selecteer een product --</option>
+                    @foreach ($products as $product)
+                        <option value="{{ $product->id }}">{{ $product->name }}</option>
+                    @endforeach
+                </select>
+
+
                 <label for="amount" class="block font-semibold text-gray-700">Aantal</label>
                 <input type="number" name="amount[]" required class="w-full p-2 border rounded">
             </div>
