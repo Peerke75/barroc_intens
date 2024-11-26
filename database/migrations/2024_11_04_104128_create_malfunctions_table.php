@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('customer_id');
             $table->string('message');
             $table->string('status');
-            $table->dateTime('date')->change();
+            $table->dateTime('date');
             $table->timestamps();
         });
     }

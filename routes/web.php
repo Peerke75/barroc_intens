@@ -6,6 +6,8 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\InvoiceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SalesController;
+
 use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\MalfunctionsController;
 use App\Models\Malfunction;
@@ -70,5 +72,15 @@ Route::resource('/storingen', MalfunctionsController::class)->names([
     'destroy' => 'storingen.destroy',
 ]);
 
+
+Route::resource('sales', SalesController::class)->names([
+    'index' => 'sales.index',
+    'create' => 'sales.create',
+    'store' => 'sales.store',
+    'show' => 'sales.show',
+    'edit' => 'sales.edit',
+    'update' => 'sales.update',
+    'destroy' => 'sales.destroy',
+]);
 
 require __DIR__.'/auth.php';

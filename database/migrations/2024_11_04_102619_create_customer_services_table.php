@@ -15,9 +15,14 @@ return new class extends Migration
             $table->id();
             $table->foreignId('customer_id');
             $table->foreignId('user_id');
+            $table->foreignId('malfunction_id');
+            $table->string('description');
+            $table->boolean('priority')->default(false);
+            $table->string('location');
             $table->dateTime('date');
             $table->string('status');
-            $table->boolean('priority')->default(false);
+            $table->time('start_appointment')->nullable();
+            $table->time('end_appointment')->nullable();
             $table->timestamps();
         });
     }
