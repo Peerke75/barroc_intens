@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Models\Proposal;
+use App\Models\Product;
 use App\Models\ProposalPriceLine;
 use Illuminate\Http\Request;
 
@@ -14,12 +15,38 @@ class ProposalController extends Controller
         return view('proposals.index', compact('proposals'));
     }
 
-// ProposalController.php
-public function create()
+    public function show($id)
     {
-        $customers = Customer::all();
-        return view('proposals.create', compact('customers'));
+        $proposal = Proposal::with('customer', 'priceLines.product')->findOrFail($id);
+        $products = Product::all(); // Haal alle producten op om te tonen in de dropdown
+
+        return view('proposals.show', compact('proposal', 'products'));
     }
+
+    public function edit($id)
+    {
+        $proposal = Proposal::with('customer', 'priceLines.product')->findOrFail($id);
+        $products = Product::all();
+
+        return view('proposals.edit', compact('proposal', 'products'));
+    }
+
+
+    public function destroyPriceLine($id)
+    {
+        $priceLine = ProposalPriceLine::findOrFail($id);
+        $priceLine->delete();
+
+        return redirect()->back()->with('success', 'Prijsregel succesvol verwijderd.');
+    }
+    
+public function create()
+{
+    $customers = Customer::all();
+    $products = Product::all(); // Haal alle producten op.
+    return view('proposals.create', compact('customers', 'products'));
+}
+
 
     public function store(Request $request)
     {
@@ -27,6 +54,7 @@ public function create()
         $request->validate([
             'customer_id' => 'required|exists:customers,id',
             'date' => 'required|date',
+            'product_id.*' => 'required|exists:products,id', // Zorg dat de producten bestaan
             'price.*' => 'required|numeric|min:0',
             'amount.*' => 'required|integer|min:1',
         ]);
@@ -39,23 +67,20 @@ public function create()
         ]);
 
         // Voeg de prijsregels toe aan de offerte
-        foreach ($request->price as $index => $price) {
+        foreach ($request->product_id as $index => $product_id) {
             ProposalPriceLine::create([
                 'proposal_id' => $proposal->id,
-                'price' => $price,
+                'product_id' => $product_id,
+                'price' => $request->price[$index],
                 'amount' => $request->amount[$index],
             ]);
         }
 
-        return redirect()->route('proposals.show', $proposal->id)->with('success', 'Offerte succesvol aangemaakt.');
+        return redirect()->route('proposals.show', $proposal->id)
+            ->with('success', 'Offerte succesvol aangemaakt.');
     }
 
 
-    public function show($id)
-    {
-        $proposal = Proposal::with('customer')->findOrFail($id);
-        return view('proposals.show', compact('proposal'));
-    }
     public function destroy($id)
     {
         $proposal = Proposal::findOrFail($id);
@@ -63,4 +88,36 @@ public function create()
 
         return redirect()->route('proposals.index')->with('success', 'Offerte succesvol verwijderd.');
     }
+
+    public function addPriceLine(Request $request, $proposalId)
+    {
+        $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'price' => 'required|numeric|min:0',
+            'amount' => 'required|integer|min:1',
+        ]);
+
+        ProposalPriceLine::create([
+            'proposal_id' => $proposalId,
+            'product_id' => $request->product_id,
+            'price' => $request->price,
+            'amount' => $request->amount,
+        ]);
+
+        return redirect()->route('proposals.show', $proposalId)
+            ->with('success', 'Prijsregel succesvol toegevoegd.');
+    }
+
+    public function removePriceLine($priceLineId)
+    {
+        $priceLine = ProposalPriceLine::findOrFail($priceLineId);
+        $proposalId = $priceLine->proposal_id;
+
+        $priceLine->delete();
+
+        return redirect()->route('proposals.show', $proposalId)
+            ->with('success', 'Prijsregel succesvol verwijderd.');
+    }
+
+
 }

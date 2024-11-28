@@ -110,11 +110,7 @@
                     </div>
 
                     <!-- Make Invoice Button -->
-                    <div class="mt-4">
-                        <a href="/customers/${customerId}/invoice/create" class="inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors duration-200">
-                            Make Invoice
-                        </a>
-                    </div>
+                    
                 </div>
             `;
             document.getElementById('customer-details').innerHTML = detailsSection;
