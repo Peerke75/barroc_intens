@@ -7,9 +7,11 @@ use App\Http\Controllers\InvoiceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SalesController;
-
 use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\MalfunctionsController;
+use App\Http\Controllers\ProposalController;
+use App\Http\Controllers\CustomerServiceController;
+use App\Http\Controllers\AppointmentController;
 use App\Models\Malfunction;
 
 
@@ -82,5 +84,10 @@ Route::resource('sales', SalesController::class)->names([
     'update' => 'sales.update',
     'destroy' => 'sales.destroy',
 ]);
+Route::get('/appointments', [DashboardController::class, 'index']);
+Route::post('/appointments', [DashboardController::class, 'store']);
+Route::put('/appointments/{id}', [DashboardController::class, 'update']);
+Route::delete('/appointments/{id}', [DashboardController::class, 'destroy']);
+
 
 require __DIR__.'/auth.php';
