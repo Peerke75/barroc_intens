@@ -35,6 +35,7 @@ Route::post('/customers', [CustomerController::class, 'store'])->name('customers
 
 Route::get('/customers/{customer}/invoice/create', [InvoiceController::class, 'create'])->name('invoice.create');
 Route::post('/customers/{customer}/invoice', [InvoiceController::class, 'store'])->name('invoice.store');
+Route::get('/customers/{customer}', [CustomerController::class, 'show'])->name('customers.show');
 
 
 route::get('/orders', function () {
