@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 use App\Models\Customer;
+use App\Models\Invoice;
 use App\Models\Proposal;
 use App\Models\Product;
 use App\Models\ProposalPriceLine;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Storage;
 
 class ProposalController extends Controller
 {
@@ -39,7 +42,7 @@ class ProposalController extends Controller
 
         return redirect()->back()->with('success', 'Prijsregel succesvol verwijderd.');
     }
-    
+
 public function create()
 {
     $customers = Customer::all();
@@ -119,5 +122,19 @@ public function create()
             ->with('success', 'Prijsregel succesvol verwijderd.');
     }
 
+    public function downloadPdf(Proposal $proposal)
+    {
+        // Genereer de PDF vanuit de view
+        $pdf = Pdf::loadView('proposals.pdf.proposal', ['proposal' => $proposal]);
 
+        // Definieer een tijdelijke bestandsnaam en pad
+        $fileName = 'proposal-' . $proposal->id . '.pdf';
+        $filePath = 'public/temp/' . $fileName;
+
+        // Sla de PDF tijdelijk op in de opslag
+        Storage::put($filePath, $pdf->output());
+
+        // Download de PDF direct
+        return $pdf->download($fileName);
+    }
 }

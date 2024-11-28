@@ -36,6 +36,11 @@ Route::delete('/price-line/{priceLine}', [ProposalController::class, 'removePric
     ->name('proposals.removePriceLine');
 
 
+    Route::get('/proposals/{proposal}/download-pdf', [ProposalController::class, 'downloadPdf'])
+    ->name('proposals.downloadPdf');
+
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
