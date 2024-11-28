@@ -31,6 +31,6 @@ class InvoiceController extends Controller
         $invoice->total = $request->price * $request->quantity;
         $invoice->save();
 
-        return redirect()->route('customers.show', $customer->id)->with('success', 'Invoice created successfully.');
+        return redirect()->route('customers', $customer->id)->with('success', 'Invoice created successfully.');
     }
 }
