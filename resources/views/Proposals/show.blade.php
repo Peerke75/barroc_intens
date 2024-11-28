@@ -41,6 +41,13 @@
             </svg>
         </a>
 
+        <div class="mt-6">
+            <a href="{{ route('proposals.downloadPdf', $proposal->id) }}"
+                class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">
+                Download PDF
+            </a>
+        </div>
+
     </div>
     <form action="{{ route('proposals.destroy', $proposal->id) }}" method="POST" onsubmit="return confirm('Weet je zeker dat je deze offerte wilt verwijderen?');">
         @csrf
