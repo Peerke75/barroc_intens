@@ -9,11 +9,12 @@ use App\Models\Invoice;
 
 class CustomerController extends Controller
 {
-    public function index()
-    {
-        $customers = Customer::with('invoices')->get();
-        return view('customers.klanten-show', compact('customers',));
+    public function index() {
+        $customers = Customer::with('invoices')->get(); // Assuming you have a relationship 'invoices' on the Customer model
+
+        return view('customers.index', compact('customers'));
     }
+
 
     public function create()
     {
@@ -82,4 +83,11 @@ class CustomerController extends Controller
             'total' => 100.00,
         ];
     }
+
+    public function show(Customer $customer)
+    {
+        $customer->load('invoices'); // Load related invoices
+        return view('customers.show', compact('customer'));
+    }
+
 }

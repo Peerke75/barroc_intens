@@ -19,10 +19,17 @@ class Customer extends Model
         'order_status',
     ];
 
-    
+
 
     public function invoices()
     {
         return $this->hasMany(Invoice::class);
     }
+
+    public function index()
+    {
+        $customers = Customer::with('invoices')->get(); // Eager load invoices
+        return view('customers.index', compact('customers'));
+    }
+
 }

@@ -8,29 +8,27 @@
         </div>
     @endif
 
-    <h2 class="text-3xl font-semibold mb-6">Customer Details for {{ $customer->name }}</h2>
-
-    <!-- Customer Details Content Here -->
+    <h2 class="text-3xl font-semibold mb-6">Maak Factuur voor: {{ $customer->name }}</h2>
 
     <form action="{{ route('invoice.store', $customer->id) }}" method="POST" class="space-y-4">
         @csrf
         <div>
-            <label class="block font-medium">Description</label>
-            <input type="text" name="description" class="w-full p-2 border rounded" required>
+            <label class="block font-medium">Omschrijving</label>
+            <input type="text" name="description" value="{{ old('description') }}" class="w-full p-2 border rounded" required>
         </div>
         <div>
-            <label class="block font-medium">Price (€)</label>
-            <input type="number" name="price" step="0.01" class="w-full p-2 border rounded" required>
+            <label class="block font-medium">Prijs (€)</label>
+            <input type="number" name="price" value="{{ old('price') }}" step="0.01" class="w-full p-2 border rounded" required>
         </div>
         <div>
-            <label class="block font-medium">Quantity</label>
-            <input type="number" name="quantity" class="w-full p-2 border rounded" required>
+            <label class="block font-medium">Hoeveelheid</label>
+            <input type="number" name="quantity" value="{{ old('quantity') }}" class="w-full p-2 border rounded" required>
         </div>
         <div class="mt-6">
             <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
-                Save Invoice
+                Factuur opslaan
             </button>
-            <a href="{{ route('customers.show', $customer->id) }}" class="ml-4 text-gray-700 hover:underline">Cancel</a>
+            <a href="{{ route('customers.show', $customer->id) }}" class="ml-4 text-gray-700 hover:underline">Annuleren</a>
         </div>
     </form>
 </div>

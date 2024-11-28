@@ -16,13 +16,11 @@
             </a>
         </div>
         <ul class="space-y-2">
-            @foreach($customers as $customer)
             <li class="hover:bg-gray-300 p-2 rounded transition-colors duration-200">
                 <a href="javascript:void(0)" class="block text-gray-800 font-medium" onclick="showCustomerDetails({{ $customer->id }})">
                     {{ $customer->name }}
                 </a>
             </li>
-            @endforeach
         </ul>
     </div>
 
@@ -39,7 +37,7 @@
 
 <script>
     // Prepare customers with invoices data
-    let customers = @json($customers);
+    let customers = @json($customer);
 
     // Random description generator function
     function generateRandomDescription(customerId) {
@@ -72,60 +70,18 @@
     }
 
     function showCustomerDetails(customerId) {
-        let customer = customers.find(c => c.id === customerId);
+    let customer = customers.find(c => c.id === customerId);
 
-        if (customer) {
-            let paymentStatusClass = '';
-            let paymentStatusText = '';
+    if (customer) {
+        // Fetch the latest saved invoice if available
+        const newInvoice = @json(session('new_invoice'));
 
-            if (customerId === 1) {
-                paymentStatusClass = 'bg-green-500';
-                paymentStatusText = 'Paid';
-            } else if (customerId === 2) {
-                paymentStatusClass = 'bg-yellow-500';
-                paymentStatusText = 'Pending';
-            } else if (customerId === 3) {
-                paymentStatusClass = 'bg-red-500';
-                paymentStatusText = 'Overdue';
-            } else {
-                paymentStatusClass = 'bg-gray-500';
-                paymentStatusText = 'Unknown';
-            }
-
-            let detailsSection = `
-                <div class="mt-8 space-y-4">
-                    <h3 class="text-2xl font-semibold text-gray-800">${customer.name}</h3>
-                    <p class="text-lg text-gray-700"><strong>Company:</strong> ${customer.company_name}</p>
-                    <p class="text-lg text-gray-700"><strong>Email:</strong> ${customer.mail}</p>
-                    <p class="text-lg text-gray-700"><strong>Status:</strong> ${customer.order_status}</p>
-                    <p class="text-lg text-gray-700"><strong>BKR Check:</strong> ${customer['BKR-check'] ? 'Passed' : 'Failed'}</p>
-                    <div class="mt-4">
-                        <p class="text-lg text-gray-700"><strong>Description:</strong></p>
-                        <p class="text-gray-600">${generateRandomDescription(customerId)}</p>
-                    </div>
-
-                    <!-- Payment Status Box -->
-                    <div class="mt-4 p-4 rounded-lg ${paymentStatusClass} text-white text-center">
-                        <p class="text-xl font-semibold">Payment Status: ${paymentStatusText}</p>
-                    </div>
-
-                    <!-- Make Invoice Button -->
-                    <div class="mt-4">
-                        <a href="/customers/${customerId}/invoice/create" class="inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors duration-200">
-                            Make Invoice
-                        </a>
-                    </div>
-                </div>
-            `;
-            document.getElementById('customer-details').innerHTML = detailsSection;
-
-            let randomInvoice = generateRandomInvoice();
-
-            let invoiceSection = `
+        let invoiceSection = '';
+        if (newInvoice && customerId === newInvoice.customer_id) {
+            invoiceSection = `
                 <h2 class="text-3xl font-bold">FACTUUR</h2>
                 <p class="mt-4"><strong>Klant:</strong> ${customer.name}</p>
-                <p><strong>Contractnr.:</strong> ${customer.contract_number || 'N/A'}</p>
-                <p><strong>Factuurnr.:</strong> ${randomInvoice.number || 'N/A'}</p>
+                <p><strong>Factuurnr.:</strong> ${newInvoice.number}</p>
 
                 <div class="mt-4">
                     <table class="w-full text-left border-collapse">
@@ -140,22 +96,29 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="py-2">${randomInvoice.quantity}x</td>
-                                <td class="py-2">${randomInvoice.number}</td>
-                                <td class="py-2">${randomInvoice.description}</td>
-                                <td class="py-2">€${randomInvoice.price}</td>
-                                <td class="py-2">€${(randomInvoice.price * randomInvoice.quantity).toFixed(2)}</td>
+                                <td class="py-2">${newInvoice.quantity}x</td>
+                                <td class="py-2">${newInvoice.number}</td>
+                                <td class="py-2">${newInvoice.description}</td>
+                                <td class="py-2">€${newInvoice.price}</td>
+                                <td class="py-2">€${newInvoice.total}</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-
-                <p class="mt-4 font-bold">Totaal: €${(randomInvoice.price * randomInvoice.quantity).toFixed(2)}</p>
-                <p class="mt-4 text-sm">Te betalen binnen 14 dagen na dagtekening.</p>
+                <p class="mt-4 font-bold">Totaal: €${newInvoice.total}</p>
             `;
-            document.getElementById('invoice-placeholder').innerHTML = invoiceSection;
+        } else {
+            invoiceSection = `
+                <p class="text-gray-500 text-center">No invoice available</p>
+            `;
         }
+
+        document.getElementById('invoice-placeholder').innerHTML = invoiceSection;
     }
+}
+let customers = @json($customer);
+let newInvoice = @json(session('new_invoice', null)); // Pass the newly created invoice
+
 </script>
 
 @endsection
