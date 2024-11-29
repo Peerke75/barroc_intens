@@ -1,26 +1,22 @@
 <?php
-
+ 
 namespace App\Models;
-
+ 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
-class Malfunction extends Model
+ 
+class Event extends Model
 {
     use HasFactory;
+    
+    protected $table = 'event';
 
-    protected $table = 'malfunctions';
-
-    protected $dates = ['date'];
-
-    public function customer()
-    {
-        return $this->belongsTo(Customer::class);
-    }
-
+    protected $fillable = ['user_id', 'customer_id', 'title', 'start', 'end', 'description'];
+ 
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
+    }  
 }
+ 
+ 

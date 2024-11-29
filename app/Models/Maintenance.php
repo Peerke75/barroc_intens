@@ -10,4 +10,6 @@ class Maintenance extends Model
     use HasFactory;
 
     protected $table = 'maintenance';
+
+    
 }

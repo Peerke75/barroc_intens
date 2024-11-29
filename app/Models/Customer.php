@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\ContactPerson;
+use App\Models\Contract;
 
 class Customer extends Model
 {
@@ -24,7 +26,6 @@ class Customer extends Model
         'order_status',
     ];
 
-    
 
     public function invoices()
     {

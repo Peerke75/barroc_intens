@@ -12,8 +12,10 @@ use App\Http\Controllers\MalfunctionsController;
 use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\CustomerServiceController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\VisitController;
+use App\Http\Controllers\EventController;
 use App\Models\Malfunction;
-
+use App\Models\Sales;
 
 Route::get('/', function () {
     return redirect('/login');
@@ -84,10 +86,11 @@ Route::resource('sales', SalesController::class)->names([
     'update' => 'sales.update',
     'destroy' => 'sales.destroy',
 ]);
-Route::get('/appointments', [DashboardController::class, 'index']);
-Route::post('/appointments', [DashboardController::class, 'store']);
-Route::put('/appointments/{id}', [DashboardController::class, 'update']);
-Route::delete('/appointments/{id}', [DashboardController::class, 'destroy']);
+Route::get('/agenda', [SalesController::class, 'calendar'])->middleware('auth')->name('agenda');
+Route::get('/events', [EventController::class, 'index'])->middleware('auth');
+Route::post('/events', [EventController::class, 'store'])->middleware('auth');
+Route::put('/events/{id}', [EventController::class, 'update'])->middleware('auth');
+Route::delete('/events/{id}', [EventController::class, 'destroy'])->middleware('auth');
 
 
 require __DIR__.'/auth.php';

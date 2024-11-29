@@ -9,8 +9,8 @@ class Sales extends Model
 {
     use HasFactory;
 
-    protected $table = 'customer_services';
-    
+    protected $table = 'sales';
+
     protected $fillable = [
         'customer_id',
         'user_id',
@@ -23,4 +23,16 @@ class Sales extends Model
         'start_appointment',
         'end_appointment',
     ];
+
+    // Relatie met Customer model
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'customer_id');
+    }
+
+    // Relatie met User model
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

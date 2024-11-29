@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
+use App\Models\CustomerService;
 use Illuminate\Http\Request;
 use App\Models\Sales;
+use App\Models\Event;
 
 class SalesController extends Controller
 {
@@ -77,5 +80,16 @@ class SalesController extends Controller
     {
         $sale->delete();
         return redirect()->route('sales.index')->with('success', 'Afspraak succesvol verwijderd!');
+    }
+
+    public function calendar()
+    {
+        // Haal de bezoeken van de ingelogde gebruiker op
+        $customers = Customer::All();
+
+        // Formatteer de gegevens voor de frontend
+        $events = Event::All();
+        // Stuur de geformatteerde events naar de view
+        return view('calendar', ['events' => $events, 'customers' => $customers]);
     }
 }
