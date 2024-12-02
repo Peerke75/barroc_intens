@@ -31,4 +31,14 @@ class Customer extends Model
     {
         return $this->hasMany(Invoice::class);
     }
+
+    public function proposals()
+    {
+        return $this->hasMany(Proposal::class);
+    }
+
+    public function events()
+    {
+        return $this->HasMany(Event::class, 'customer_id');
+    }
 }

@@ -4,12 +4,10 @@
 <div class="container mx-auto p-6">
     <h1 class="text-3xl font-bold mb-6">Afspraken Overzicht</h1>
 
-    <!-- Knop om een nieuwe afspraak toe te voegen -->
     <a href="{{ route('sales.create') }}" class="mb-4 inline-block px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
         Nieuwe Afspraak
     </a>
 
-    <!-- Tabel -->
     <div class="bg-white shadow-md rounded-lg overflow-hidden">
         <table class="min-w-full table-auto border-collapse border border-gray-200">
             <thead>
@@ -43,17 +41,14 @@
                         </td>
                         <td class="px-4 py-2 border border-gray-200">
                             <div class="flex space-x-2">
-                                <!-- Show -->
                                 <a href="{{ route('sales.show', $sale->id) }}"
                                     class="px-2 py-1 bg-green-600 text-white rounded hover:bg-green-700">
                                     Bekijken
                                 </a>
-                                <!-- Edit -->
                                 <a href="{{ route('sales.edit', $sale->id) }}"
                                     class="px-2 py-1 bg-yellow-600 text-white rounded hover:bg-yellow-700">
                                     Bewerken
                                 </a>
-                                <!-- Delete -->
                                 <form action="{{ route('sales.destroy', $sale->id) }}" method="POST" onsubmit="return confirm('Weet je zeker dat je deze afspraak wilt verwijderen?');">
                                     @csrf
                                     @method('DELETE')

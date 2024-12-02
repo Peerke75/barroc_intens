@@ -1,7 +1,9 @@
 <nav class="bg-black p-4">
     <div class="container mx-auto flex justify-between items-center">
         <div class="flex space-x-4">
-            <!-- Logo -->
+
+            <a href="{{ route ('dashboard') }}" class="text-white font-bold text-xl">Barroc_Intens</a>
+            <a href="/" class="text-white font-bold text-xl">Barroc_Intens</a>
             <a href="{{ route ('dashboard') }}" class="text-white font-bold text-xl">Barroc_Intens</a>
             <a href="{{ route ('products') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Voorraad</a>
             <a href="{{ route ('machines') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Apparaten</a>

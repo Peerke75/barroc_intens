@@ -11,7 +11,6 @@
     <div id="calendar"></div>
 </div>
 
-<!-- Modal -->
 <div id="eventModal" style="z-index: 1000;" class="modal hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
     <div class="modal-content bg-white p-6 rounded-lg w-1/3">
         <h2 id="modalTitle" class="text-xl font-semibold mb-4">Afspraak toevoegen</h2>
@@ -25,7 +24,7 @@
                 <select id="eventCustomer" class="w-full border border-gray-300 rounded p-2" required>
                     <option value="">Selecteer een klant</option>
                     @foreach($customers as $customer)
-                    <option value="{{ $customer->id }}">{{ $customer->name }}</option>
+                    <option value="{{ $customer->id }}">{{ $customer->company_name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -43,7 +42,6 @@
             </div>
             <div class="flex justify-end">
                 <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded mr-2">Save</button>
-                <!-- Delete button -->
                 <button type="button" id="deleteEventButton" class="bg-red-500 text-white px-4 py-2 rounded mr-2">Delete</button>
                 <button type="button" id="closeModal" class="bg-gray-500 text-white px-4 py-2 rounded">Cancel</button>
             </div>

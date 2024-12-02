@@ -15,6 +15,7 @@ class EventSeeder extends Seeder
         $events = [
             [
                 'user_id' => 1,
+                'customer_id' => 1,
                 'title' => 'Meeting with customer',
                 'start' => '2024-11-04 10:00:00',
                 'end' => '2024-11-04 11:00:00',

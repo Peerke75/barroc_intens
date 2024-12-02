@@ -12,7 +12,6 @@
         @method('PUT')
         @endif
 
-        <!-- Customer ID -->
         <div class="mb-4">
             <label for="customer_id" class="block text-gray-700 font-medium">Klant ID</label>
             <input type="number" id="customer_id" name="customer_id" value="{{ old('customer_id', $sale->customer_id ?? '') }}"
@@ -20,7 +19,6 @@
             @error('customer_id') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
 
-        <!-- User ID -->
         <div class="mb-4">
             <label for="user_id" class="block text-gray-700 font-medium">Gebruiker ID</label>
             <input type="number" id="user_id" name="user_id" value="{{ old('user_id', $sale->user_id ?? '') }}"
@@ -28,7 +26,6 @@
             @error('user_id') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
 
-        <!-- Malfunction ID -->
         <div class="mb-4">
             <label for="malfunction_id" class="block text-gray-700 font-medium">Storing ID (optioneel)</label>
             <input type="number" id="malfunction_id" name="malfunction_id"
@@ -36,7 +33,6 @@
             @error('malfunction_id') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
 
-        <!-- Description -->
         <div class="mb-4">
             <label for="description" class="block text-gray-700 font-medium">Beschrijving</label>
             <textarea id="description" name="description" rows="3"
@@ -44,7 +40,6 @@
             @error('description') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
 
-        <!-- Priority -->
         <div class="mb-4">
             <label for="priority" class="block text-gray-700 font-medium">Prioriteit</label>
             <select type="dropdown" id="priority" name="priority" value="{{ old('priority', $sale->priority ?? '') }}"
@@ -54,7 +49,6 @@
             </select>
             @error('priority') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
-        <!-- Location -->
         <div class="mb-4">
             <label for="location" class="block text-gray-700 font-medium">Locatie</label>
             <input type="text" id="location" name="location" value="{{ old('location', $sale->location ?? '') }}"
@@ -62,7 +56,6 @@
             @error('location') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
 
-        <!-- Date -->
         <div class="mb-4">
             <label for="date" class="block text-gray-700 font-medium">Datum</label>
             <input type="date" id="date" name="date" value="{{ old('date', isset($sale) ? $sale->date->format('Y-m-d') : '') }}"
@@ -70,7 +63,6 @@
             @error('date') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
 
-        <!-- Status -->
         <div class="mb-4">
             <label for="status" class="block text-gray-700 font-medium">Status</label>
             <select id="status" name="status" class="w-full border rounded px-4 py-2">
@@ -81,7 +73,6 @@
             @error('status') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
 
-        <!-- Start Appointment -->
         <div class="mb-4">
             <label for="start_appointment" class="block text-gray-700 font-medium">Starttijd (optioneel)</label>
             <input type="time" id="start_appointment" name="start_appointment"
@@ -89,7 +80,6 @@
             @error('start_appointment') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
 
-        <!-- End Appointment -->
         <div class="mb-4">
             <label for="end_appointment" class="block text-gray-700 font-medium">Eindtijd (optioneel)</label>
             <input type="time" id="end_appointment" name="end_appointment"
@@ -97,7 +87,6 @@
             @error('end_appointment') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
 
-        <!-- Submit -->
         <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded">
             {{ isset($sale) ? 'Bijwerken' : 'Opslaan' }}
         </button>

@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
         dateClick: function (info) {
             openModal('Afspraak toevoegen', {
                 title: '',
-                customer: '',
+                customer_id: '',
                 start: info.dateStr + 'T00:00',
                 end: '',
                 description: '',
@@ -39,10 +39,10 @@ document.addEventListener('DOMContentLoaded', function () {
             selectedEvent = info.event;
             openModal('Afspraak aanpassen', {
                 title: info.event.title,
-                customer: info.event.extendedProps.customer || '',
                 start: info.event.start.toISOString().slice(0, 16),
                 end: info.event.end ? info.event.end.toISOString().slice(0, 16) : '',
                 description: info.event.extendedProps.description || '',
+                customer_id: info.event.extendedProps.customer_id || '',
             });
         },
     });
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
         selectedEvent = null;
         openModal('Afspraak toevoegen', {
             title: '',
-            customer: '',
+            customer_id: '',
             start: '',
             end: '',
             description: '',
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Haal gegevens op uit het formulier
         const eventData = {
             title: document.getElementById('eventName').value,
-            customer: document.getElementById('eventCustomer').value,
+            customer_id: document.getElementById('eventCustomer').value,
             start: document.getElementById('eventStartTime').value,
             end: document.getElementById('eventEndTime').value || null,
             description: document.getElementById('eventDescription').value.trim() || '', // Voorkom lege beschrijving
@@ -124,6 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // Maak een nieuw event aan
             axios.post('/events', eventData)
                 .then((response) => {
+                    console.log(eventData);
                     addNewEvent(response.data);
                 })
                 .catch((error) => console.error('Fout aanmaken afspraken:', error));
@@ -135,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function openModal(title, data) {
         modalTitle.textContent = title;
         document.getElementById('eventName').value = data.title;
-        document.getElementById('eventCustomer').value = data.customer;
+        document.getElementById('eventCustomer').value = data.customer_id;
         document.getElementById('eventStartTime').value = data.start;
         document.getElementById('eventEndTime').value = data.end;
         document.getElementById('eventDescription').value = data.description;
@@ -157,17 +158,17 @@ document.addEventListener('DOMContentLoaded', function () {
             end: eventData.end,
             extendedProps: {
                 description: eventData.description,
-                customer: eventData.customer,
-             },
+                customer: eventData.customer_id,
+            },
         });
     }
 
     // Update een bestaand event in de kalender
     function updateEvent(eventData) {
         selectedEvent.setProp('title', eventData.title);
-        selectedEvent.setExtendendProp('customer', eventData.customer);
         selectedEvent.setStart(eventData.start);
         selectedEvent.setEnd(eventData.end);
         selectedEvent.setExtendedProp('description', eventData.description);
+        selectedEvent.setExtendendProp('customer', eventData.customer_id);
     }
 });
