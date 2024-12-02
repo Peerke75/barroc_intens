@@ -17,6 +17,6 @@
         "vite": "^5.0"
     },
     "dependencies": {
-        "fullcalendar": "^6.1.15"
+        "leaflet": "^1.9.4"
     }
 }

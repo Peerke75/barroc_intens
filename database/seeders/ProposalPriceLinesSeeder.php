@@ -11,12 +11,14 @@ class ProposalPriceLinesSeeder extends Seeder
     {
         ProposalPriceLine::create([
             'proposal_id' => 1,
+            'product_id' => 1,
             'amount' => 5,
             'price' => 100.00,
         ]);
-        
+
         ProposalPriceLine::create([
             'proposal_id' => 2,
+            'product_id' => 2,
             'amount' => 3,
             'price' => 200.00,
         ]);

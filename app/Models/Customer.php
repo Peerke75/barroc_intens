@@ -2,13 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
     use HasFactory;
 
+    protected $table = 'customers';
+    public function malfunctions()
+    {
+        return $this->hasMany(Malfunction::class);
+    }
     protected $fillable = [
         'contract_id',
         'contact_persons_id',
@@ -32,4 +37,11 @@ class Customer extends Model
         return view('customers.index', compact('customers'));
     }
 
+    // Relatie naar Proposals
+    public function proposals()
+    {
+        return $this->hasMany(Proposal::class);
+    }
 }
+
+

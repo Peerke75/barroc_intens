@@ -11,11 +11,13 @@ class ProposalsSeeder extends Seeder
     {
         Proposal::create([
             'user_id' => 1,
+            'customer_id' => 1,
             'date' => '2024-11-07 10:30:00',
         ]);
-        
+
         Proposal::create([
             'user_id' => 2,
+            'customer_id' => 2,
             'date' => '2024-11-06 15:00:00',
         ]);
     }

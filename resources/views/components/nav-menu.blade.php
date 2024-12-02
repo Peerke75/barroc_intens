@@ -5,9 +5,9 @@
             <a href="/" class="text-white font-bold text-xl">Barroc_Intens</a>
 
             <a href="{{ route ('products') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Voorraad</a>
-            <a href="{{ route ('machines') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Apparaten</a>
             <a href="{{ route ('customers') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Klanten</a>
-        </div>
+            <a href="{{ route('storingen.index') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Storingen</a>
+            </div>
 
         <div class="flex space-x-4">
         @if (Auth::check())
