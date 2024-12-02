@@ -10,7 +10,6 @@
 
     <h2 class="text-3xl font-semibold mb-6">Customer Details for {{ $customer->name }}</h2>
 
-    <!-- Customer Details Content Here -->
 
     <form action="{{ route('invoice.store', $customer->id) }}" method="POST" class="space-y-4">
         @csrf
