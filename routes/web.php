@@ -47,7 +47,6 @@ Route::post('/products/{product}/buy', [ProductController::class, 'storeOrder'])
 
 
 
-// Andere bestaande routes
 Route::get('/machines', function () {
     return view('machines');
 })->name('machines');

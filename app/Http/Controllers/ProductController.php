@@ -9,14 +9,12 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
-    // Toon de productoverzichtspagina met alle producten
     public function index()
     {
         $products = Product::all();
         return view('products.products-show', compact('products'));
     }
 
-    // app/Http/Controllers/ProductController.php
 
 public function create()
 {
@@ -44,7 +42,6 @@ public function store(Request $request)
     return redirect()->route('products');
 }
 
-// app/Http/Controllers/ProductController.php
 
 public function edit($id)
 {
@@ -84,7 +81,6 @@ public function destroy($id)
     return redirect()->route('products');
 }
 
-    // Toon de detailpagina voor een specifiek product
     public function show($id)
     {
         $product = Product::findOrFail($id);
@@ -114,12 +110,10 @@ public function destroy($id)
     {
         $query = $request->get('query');
 
-        // Zoek alleen in de kolom 'name'
         $products = \App\Models\Product::where('name', 'LIKE', "%{$query}%")
                                         ->limit(5)
                                         ->get();
 
-        // Geef de producten terug als JSON
         return response()->json($products);
     }
 

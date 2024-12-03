@@ -23,12 +23,10 @@
         <h1 class="text-3xl font-bold text-center mb-8">Bestelling Bevestigen</h1>
 
         <div class="bg-white shadow-lg rounded-lg p-6 max-w-lg mx-auto">
-            <!-- Product Afbeelding en Naam -->
             <img src="https://via.placeholder.com/300" alt="{{ $product->name }}" class="w-full h-48 object-cover mb-4">
             <h2 class="text-2xl font-semibold mb-2">{{ $product->name }}</h2>
             <p class="text-lg text-gray-800 mb-4">Prijs per stuk: €{{ number_format($product->price, 2) }}</p>
 
-            <!-- Aantal en Totaal Bedrag -->
             <form action="{{ route('products.storeOrder', $product->id) }}" method="POST">
                 @csrf
                 <input type="hidden" name="product_id" value="{{ $product->id }}">

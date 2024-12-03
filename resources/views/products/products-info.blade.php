@@ -8,10 +8,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Informatie</title>
-    <!-- Tailwind CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script>
-        // Toggle dropdown visibility
         function toggleDropdown() {
             const dropdown = document.getElementById('dropdownMenu');
             dropdown.classList.toggle('hidden');
@@ -24,9 +22,7 @@
         <h1 class="text-3xl font-bold text-center mb-8">{{ $product->name }} - Product Informatie</h1>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <!-- Linkerkolom: Product Details -->
             <div class="bg-white shadow-lg rounded-lg p-6 relative">
-                <!-- SVG icon met dropdown menu -->
                 <div class="absolute top-4 right-4">
                     <button onclick="toggleDropdown()" class="focus:outline-none">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="24" height="24">
@@ -34,14 +30,12 @@
                         </svg>
                     </button>
 
-                    <!-- Dropdown menu -->
                     <div id="dropdownMenu" class="hidden absolute right-0 mt-2 w-28 bg-white border border-gray-200 rounded-md shadow-lg">
                         <a href="{{ route('products.create') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Create</a>
                         <a href="{{ route('products.edit', $product->id) }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Edit</a>
                     </div>
                 </div>
 
-                <!-- Product afbeelding en details -->
                 <img src="https://via.placeholder.com/300" alt="{{ $product->name }}" class="w-full h-60 object-cover mb-4">
 
                 <h2 class="text-2xl font-semibold mb-2">{{ $product->name }}</h2>
@@ -54,7 +48,6 @@
                  </a>
             </div>
 
-            <!-- Rechterkolom: Productomschrijving -->
             <div class="bg-white shadow-lg rounded-lg p-6">
                 <h3 class="text-2xl font-semibold mb-4">Productomschrijving</h3>
                 <p class="text-gray-700 mb-4">

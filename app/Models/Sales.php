@@ -24,13 +24,11 @@ class Sales extends Model
         'end_appointment',
     ];
 
-    // Relatie met Customer model
     public function customer()
     {
         return $this->belongsTo(Customer::class, 'customer_id');
     }
 
-    // Relatie met User model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

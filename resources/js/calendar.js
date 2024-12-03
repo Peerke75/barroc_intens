@@ -10,20 +10,18 @@ document.addEventListener('DOMContentLoaded', function () {
     const eventForm = document.getElementById('eventForm');
     const modalTitle = document.getElementById('modalTitle');
     const addEventButton = document.getElementById('addEventButton');
-    const deleteEventButton = document.getElementById('deleteEventButton'); // Verwijderknop
+    const deleteEventButton = document.getElementById('deleteEventButton'); 
 
     let selectedEvent = null;
     console.log(window.events);
-    // FullCalendar-initialisatie
     const calendar = new Calendar(calendarEl, {
         plugins: [dayGridPlugin, interactionPlugin],
         initialView: 'dayGridMonth',
-        events: window.events, // Laad alleen evenementen van de gebruiker
+        events: window.events,
         timeZone: 'UTC',
         editable: true,
         selectable: true,
 
-        // Klik op een datum om een nieuw event te maken
         dateClick: function (info) {
             openModal('Afspraak toevoegen', {
                 title: '',
@@ -34,7 +32,6 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         },
 
-        // Klik op een bestaand event om het te bewerken
         eventClick: function (info) {
             selectedEvent = info.event;
             openModal('Afspraak aanpassen', {
@@ -49,7 +46,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     calendar.render();
 
-    // Voeg event listener toe aan de "Afspraak toevoegen" knop
     addEventButton.addEventListener('click', function () {
         selectedEvent = null;
         openModal('Afspraak toevoegen', {
@@ -61,16 +57,12 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Voeg event listener toe aan de "Delete" knop
     deleteEventButton.addEventListener('click', function () {
         if (selectedEvent) {
-            // Toon een bevestigingsdialoog
             const confirmDelete = window.confirm("Weet je zeker dat je dit event wilt verwijderen?");
             if (confirmDelete) {
-                // Verwijder het geselecteerde event uit de database
                 axios.delete(`/events/${selectedEvent.id}`)
                     .then((response) => {
-                        // Verwijder het event uit de kalender
                         selectedEvent.remove();
                         closeModalHandler();
                         alert('Event succesvol verwijderd.');
@@ -83,10 +75,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Sluit modal
     closeModal.addEventListener('click', closeModalHandler);
 
-    // Verwerk formulier voor het aanmaken/bewerken van een event
     eventForm.addEventListener('submit', function (e) {
         e.preventDefault();
 
@@ -103,25 +93,22 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        // Haal gegevens op uit het formulier
         const eventData = {
             title: document.getElementById('eventName').value,
             customer_id: document.getElementById('eventCustomer').value,
             start: document.getElementById('eventStartTime').value,
             end: document.getElementById('eventEndTime').value || null,
-            description: document.getElementById('eventDescription').value.trim() || '', // Voorkom lege beschrijving
+            description: document.getElementById('eventDescription').value.trim() || '', 
         };
 
 
         if (selectedEvent) {
-            // Update een bestaand event
             axios.put(`/events/${selectedEvent.id}`, eventData)
                 .then((response) => {
                     updateEvent(response.data);
                 })
                 .catch((error) => console.error('Fout aanpassen afsrpaak:', error));
         } else {
-            // Maak een nieuw event aan
             axios.post('/events', eventData)
                 .then((response) => {
                     console.log(eventData);
@@ -132,7 +119,6 @@ document.addEventListener('DOMContentLoaded', function () {
         closeModalHandler();
     });
 
-    // Functie om de modal te openen en gegevens in te vullen
     function openModal(title, data) {
         modalTitle.textContent = title;
         document.getElementById('eventName').value = data.title;
@@ -143,13 +129,11 @@ document.addEventListener('DOMContentLoaded', function () {
         eventModal.classList.remove('hidden');
     }
 
-    // Sluit de modal
     function closeModalHandler() {
         eventModal.classList.add('hidden');
-        selectedEvent = null; // Reset selectedEvent na sluiten van de modal
+        selectedEvent = null; 
     }
 
-    // Voeg een nieuw event toe aan de kalender
     function addNewEvent(eventData) {
         calendar.addEvent({
             id: eventData.id,
@@ -163,7 +147,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Update een bestaand event in de kalender
     function updateEvent(eventData) {
         selectedEvent.setProp('title', eventData.title);
         selectedEvent.setStart(eventData.start);

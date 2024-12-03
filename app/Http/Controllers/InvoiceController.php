@@ -8,13 +8,11 @@ use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
 {
-    // Show the invoice creation form
     public function create(Customer $customer)
     {
         return view('invoices.create', compact('customer'));
     }
 
-    // Save the new invoice
     public function store(Request $request, Customer $customer)
     {
         $request->validate([

@@ -15,7 +15,6 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
-        // Valideer input
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'start' => 'required|date',
@@ -24,10 +23,8 @@ class EventController extends Controller
             'customer_id' => 'nullable|exists:customers,id'
         ]);
 
-        // Event opslaan in database
         $event = Event::create(array_merge($validated, ['user_id' => auth()->id()]));
 
-        // Terugsturen van aangemaakte event
         return response()->json($event, 201);
     }
 
