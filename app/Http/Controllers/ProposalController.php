@@ -26,29 +26,12 @@ class ProposalController extends Controller
         return view('proposals.show', compact('proposal', 'products'));
     }
 
-    public function edit($id)
+    public function create()
     {
-        $proposal = Proposal::with('customer', 'priceLines.product')->findOrFail($id);
-        $products = Product::all();
-
-        return view('proposals.edit', compact('proposal', 'products'));
+        $customers = Customer::all();
+        $products = Product::all(); // Haal alle producten op.
+        return view('proposals.create', compact('customers', 'products'));
     }
-
-
-    public function destroyPriceLine($id)
-    {
-        $priceLine = ProposalPriceLine::findOrFail($id);
-        $priceLine->delete();
-
-        return redirect()->back()->with('success', 'Prijsregel succesvol verwijderd.');
-    }
-
-public function create()
-{
-    $customers = Customer::all();
-    $products = Product::all(); // Haal alle producten op.
-    return view('proposals.create', compact('customers', 'products'));
-}
 
 
     public function store(Request $request)
@@ -92,6 +75,28 @@ public function create()
         return redirect()->route('proposals.index')->with('success', 'Offerte succesvol verwijderd.');
     }
 
+    public function destroyPriceLine($id)
+    {
+        $priceLine = ProposalPriceLine::findOrFail($id);
+        $priceLine->delete();
+
+        return redirect()->back()->with('success', 'Prijsregel succesvol verwijderd.');
+    }
+    public function search(Request $request)
+    {
+        $query = $request->get('query');
+
+        // Zoek op klantnaam en laad de relatie met de klant
+        $proposals = Proposal::whereHas('customer', function ($queryBuilder) use ($query) {
+            $queryBuilder->where('company_name', 'LIKE', "%{$query}%");
+        })
+        ->with('customer') // Laad klantgegevens
+        ->limit(5) // Beperk het aantal resultaten
+        ->get();
+
+        return response()->json($proposals); // Retourneer resultaten als JSON
+    }
+
     public function addPriceLine(Request $request, $proposalId)
     {
         $request->validate([
@@ -122,13 +127,13 @@ public function create()
             ->with('success', 'Prijsregel succesvol verwijderd.');
     }
 
-    public function downloadPdf(Proposal $proposal)
+    public function downloadPdf(Proposal $proposal, Customer $customer)
     {
         // Genereer de PDF vanuit de view
         $pdf = Pdf::loadView('proposals.pdf.proposal', ['proposal' => $proposal]);
 
         // Definieer een tijdelijke bestandsnaam en pad
-        $fileName = 'proposal-' . $proposal->id . '.pdf';
+        $fileName = 'offerte-' . $proposal->customer->company_name . '.pdf';
         $filePath = 'public/temp/' . $fileName;
 
         // Sla de PDF tijdelijk op in de opslag

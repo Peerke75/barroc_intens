@@ -34,8 +34,9 @@ class Customer extends Model
     // Relatie naar Proposals
     public function proposals()
     {
-        return $this->hasMany(Proposal::class);
+        return $this->hasMany(Proposal::class, 'customer_id');
     }
+
 }
 
 
