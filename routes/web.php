@@ -1,10 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\InvoiceController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\MalfunctionsController;
@@ -19,24 +20,24 @@ Route::get('/', function () {
 Route::get('/dashboard', [DashboardController::class, 'showDashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 
+Route::get('/proposals/search', [ProposalController::class, 'search'])->name('proposals.search');
 Route::resource('proposals', ProposalController::class)->middleware('auth');
-// web.php
+
 Route::get('/proposals/create', [ProposalController::class, 'create'])->name('proposals.create');
 Route::post('/proposals', [ProposalController::class, 'store'])->name('proposals.store');
-Route::get('/proposals/{id}/edit', [ProposalController::class, 'edit'])->name('proposals.edit');
 Route::get('/proposals/{proposal}', [ProposalController::class, 'show'])->name('proposals.show');
 Route::delete('proposals/{proposal}', [ProposalController::class, 'destroy'])->name('proposals.destroy');
 
 Route::delete('/proposals/price-lines/{id}', [ProposalController::class, 'destroyPriceLine'])->name('proposals.priceLines.destroy');
 
+
 Route::post('/proposals/{proposal}/price-line', [ProposalController::class, 'addPriceLine'])
     ->name('proposals.addPriceLine');
-
 Route::delete('/price-line/{priceLine}', [ProposalController::class, 'removePriceLine'])
     ->name('proposals.removePriceLine');
 
 
-    Route::get('/proposals/{proposal}/download-pdf', [ProposalController::class, 'downloadPdf'])
+Route::get('/proposals/{proposal}/download-pdf', [ProposalController::class, 'downloadPdf'])
     ->name('proposals.downloadPdf');
 
 
@@ -46,6 +47,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
 
 Route::get('/products/search', [ProductController::class, 'search'])->name('products.search');
 

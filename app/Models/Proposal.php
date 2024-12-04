@@ -19,10 +19,9 @@ class Proposal extends Model
         'date',
     ];
 
-    // Voeg 'date' toe aan de $dates array, zodat Laravel weet dat dit een Carbon object moet zijn
     protected $dates = ['date'];
 
-    // Zorg ervoor dat de 'date' altijd als een Carbon object wordt geïnterpreteerd
+
     public function getDateAttribute($value)
     {
         return Carbon::parse($value);  // Zet de datum om naar een Carbon object
@@ -31,7 +30,7 @@ class Proposal extends Model
     // Relatie met de Customer: elke offerte behoort tot één klant
     public function customer()
     {
-        return $this->belongsTo(Customer::class);
+        return $this->belongsTo(Customer::class, 'customer_id');
     }
 
     // Relatie met ProposalPriceLine: een offerte kan meerdere prijsregels hebben
@@ -39,4 +38,5 @@ class Proposal extends Model
     {
         return $this->hasMany(ProposalPriceLine::class);
     }
+
 }

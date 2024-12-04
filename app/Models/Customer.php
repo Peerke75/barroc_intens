@@ -30,11 +30,11 @@ class Customer extends Model
         'order_status',
     ];
 
-    // Relatie naar Proposals
     public function proposals()
     {
-        return $this->hasMany(Proposal::class);
+        return $this->hasMany(Proposal::class, 'customer_id');
     }
+
 }
 
 

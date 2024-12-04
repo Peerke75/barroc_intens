@@ -18,71 +18,71 @@ class ProductController extends Controller
 
     // app/Http/Controllers/ProductController.php
 
-public function create()
-{
-    return view('products.products-create');
-}
+    public function create()
+    {
+        return view('products.products-create');
+    }
 
-public function store(Request $request)
-{
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'price' => 'required|numeric',
-        'product_category_id' => 'required|exists:product_categories,id',
-        'storage_id' => 'required|exists:storages,id',
-    ]);
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'product_category_id' => 'required|exists:product_categories,id',
+            'storage_id' => 'required|exists:storages,id',
+        ]);
 
-    Product::create([
-        'name' => $request->name,
-        'price' => $request->price,
-        'product_category_id' => $request->product_category_id,
-        'storage_id' => $request->storage_id,
-    ]);
+        Product::create([
+            'name' => $request->name,
+            'price' => $request->price,
+            'product_category_id' => $request->product_category_id,
+            'storage_id' => $request->storage_id,
+        ]);
 
-    session()->flash('success', 'Product succesvol aangemaakt!');
+        session()->flash('success', 'Product succesvol aangemaakt!');
 
-    return redirect()->route('products');
-}
+        return redirect()->route('products');
+    }
 
-// app/Http/Controllers/ProductController.php
+    // app/Http/Controllers/ProductController.php
 
-public function edit($id)
-{
-    $product = Product::findOrFail($id);
-    return view('products.products-edit', compact('product'));
-}
+    public function edit($id)
+    {
+        $product = Product::findOrFail($id);
+        return view('products.products-edit', compact('product'));
+    }
 
-public function update(Request $request, $id)
-{
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'price' => 'required|numeric',
-        'product_category_id' => 'required|exists:product_categories,id',
-        'storage_id' => 'required|exists:storages,id',
-    ]);
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'product_category_id' => 'required|exists:product_categories,id',
+            'storage_id' => 'required|exists:storages,id',
+        ]);
 
-    $product = Product::findOrFail($id);
-    $product->update([
-        'name' => $request->name,
-        'price' => $request->price,
-        'product_category_id' => $request->product_category_id,
-        'storage_id' => $request->storage_id,
-    ]);
+        $product = Product::findOrFail($id);
+        $product->update([
+            'name' => $request->name,
+            'price' => $request->price,
+            'product_category_id' => $request->product_category_id,
+            'storage_id' => $request->storage_id,
+        ]);
 
-    session()->flash('success', 'Product succesvol bewerkt!');
+        session()->flash('success', 'Product succesvol bewerkt!');
 
-    return redirect()->route('products');
-}
+        return redirect()->route('products');
+    }
 
-public function destroy($id)
-{
-    $product = Product::findOrFail($id);
-    $product->delete();
+    public function destroy($id)
+    {
+        $product = Product::findOrFail($id);
+        $product->delete();
 
-    session()->flash('success', 'Product succesvol verwijderd!');
+        session()->flash('success', 'Product succesvol verwijderd!');
 
-    return redirect()->route('products');
-}
+        return redirect()->route('products');
+    }
 
     // Toon de detailpagina voor een specifiek product
     public function show($id)
