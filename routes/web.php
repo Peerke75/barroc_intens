@@ -66,7 +66,7 @@ Route::post('/products/{product}/buy', [ProductController::class, 'storeOrder'])
 
 
 // Andere bestaande routes
-
+Route::get('/customers/downloadPdf/{customer}', [CustomerController::class, 'downloadPdf'])->name('customers.downloadPdf');
 
 Route::get('/customers', [CustomerController::class, 'index'])->name('customers');
 
@@ -76,6 +76,8 @@ Route::post('/customers', [CustomerController::class, 'store'])->name('customers
 Route::get('/customers/{customer}/invoice/create', [InvoiceController::class, 'create'])->name('invoice.create');
 Route::post('/customers/{customer}/invoice', [InvoiceController::class, 'store'])->name('invoice.store');
 Route::get('/customers/{customer}', [CustomerController::class, 'show'])->name('customers.show');
+
+
 
 
 Route::get('/orders', function () {

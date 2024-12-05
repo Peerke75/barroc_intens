@@ -5,16 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Models\Invoice;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Storage;
+
 
 class InvoiceController extends Controller
 {
-    // Show the invoice creation form
     public function create(Customer $customer)
     {
         return view('invoices.create', compact('customer'));
     }
 
-    // Save the new invoice
     public function store(Request $request, Customer $customer)
     {
         $request->validate([
@@ -31,10 +32,10 @@ class InvoiceController extends Controller
         $invoice->total = $request->price * $request->quantity;
         $invoice->save();
 
-        // Store the new invoice in the session
         session(['new_invoice' => $invoice]);
 
         return redirect()->route('customers.show', $customer->id)->with('success', 'Invoice created successfully.');
     }
+
 
 }

@@ -71,11 +71,11 @@
 
     function showCustomerDetails(customerId) {
     let customer = customers.find(c => c.id === customerId);
-
+    }
     if (customer) {
         // Fetch the latest saved invoice if available
         const newInvoice = @json(session('new_invoice'));
-
+    }
         let invoiceSection = '';
         if (newInvoice && customerId === newInvoice.customer_id) {
             invoiceSection = `
