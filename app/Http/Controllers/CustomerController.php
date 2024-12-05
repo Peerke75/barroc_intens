@@ -15,15 +15,61 @@ class CustomerController extends Controller
         return view('customers.klanten-show', compact('customers',));
     }
 
-        // CustomerController.php
-    public function show($customerId)
+    public function create()
     {
-        $customer = Customer::find($customerId);
+        return view('customers.create'); // Laad de create-view
+    }
 
-        // Generate connection fee invoice
-        $invoice = $this->generateConnectionFeeInvoice($customerId);
+    public function store(Request $request)
+    {
+        // Validatie van het formulier
+        $validatedData = $request->validate([
+            'contract_id' => 'required|integer',
+            'contact_persons_id' => 'required|integer',
+            'company_name' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
+            'mail' => 'required|email|unique:customers',
+            'BKR_check' => 'required|boolean',
+            'order_status' => 'nullable|string',
+        ]);
 
-        return view('customers.show', compact('customer', 'invoice'));
+        // Nieuwe klant maken en opslaan
+        Customer::create($validatedData);
+
+        // Redirect naar de klantenlijst met een succesbericht
+        return redirect()->route('customers')->with('success', 'Klant succesvol toegevoegd!');
+    }
+
+    public function edit(Customer $customer)
+    {
+        $customer = Customer::findOrFail($customer->id);
+        return view('customers.edit', compact('customer'));
+    }
+
+    public function update(Request $request, Customer $customer)
+    {
+        // Validatie van het formulier
+        $validatedData = $request->validate([
+            'contract_id' => 'required|integer',
+            'contact_persons_id' => 'required|integer',
+            'company_name' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
+            'mail' => 'required|email|unique:customers',
+            'BKR_check' => 'required|boolean',
+            'order_status' => 'nullable|string',
+        ]);
+
+        // Klant updaten
+        $customer->update($validatedData);
+
+        // Redirect naar de klantenlijst met een succesbericht
+        return redirect()->route('customers')->with('success', 'Klant succesvol geüpdatet!');
+    }
+
+    public function destroy(Customer $customer)
+    {
+        $customer->delete();
+        return redirect()->route('customers.index')->with('success', 'Klant succesvol verwijderd!');
     }
 
     private function generateConnectionFeeInvoice($customerId)
@@ -36,7 +82,4 @@ class CustomerController extends Controller
             'total' => 100.00,
         ];
     }
-
-
-
 }

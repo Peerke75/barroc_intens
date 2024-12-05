@@ -14,22 +14,24 @@ class Customer extends Model
     {
         return $this->hasMany(Malfunction::class);
     }
-    public function invoices()
-    {
-        return $this->hasMany(Invoice::class);
-    }
-
-
     protected $fillable = [
         'contract_id',
         'contact_persons_id',
         'company_name',
         'name',
         'mail',
-        'BKR-check',
+        'BKR_check',
         'order_status',
     ];
 
+
+
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
+    }
+
+    // Relatie naar Proposals
     public function proposals()
     {
         return $this->hasMany(Proposal::class, 'customer_id');

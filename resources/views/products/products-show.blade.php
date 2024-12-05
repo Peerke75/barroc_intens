@@ -9,7 +9,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Product Zoeken</title>
 
-        <!-- Tailwind CSS CDN -->
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     </head>
 
@@ -17,20 +16,16 @@
 
         <div class="container mx-auto px-4 py-8">
 
-            <!-- Zoekbalk met een maximale breedte -->
             <div class="relative mb-6 max-w-md mx-auto">
                 <input type="text" id="product-search" placeholder="Zoek product..."
                     class="w-full p-3 border border-gray-300 rounded shadow focus:outline-none focus:ring-2 focus:ring-yellow-400"
                     style="background-color: #ffffff; color: #000;">
 
-                <!-- Suggesties container -->
                 <ul id="search-results"
                     class="absolute w-full border border-gray-300 rounded bg-white mt-1 hidden shadow-lg z-10">
-                    <!-- Suggesties worden hier geladen -->
                 </ul>
             </div>
 
-            <!-- Create Product Button -->
             <div class="mb-8 text-left">
                 <a href="{{ route('products.create') }}" style="background-color:#fdd716 ;color:#000000;"
                     class="text-white py-2 px-4 rounded transition hover:bg-yellow-400">
@@ -39,7 +34,6 @@
             </div>
 
             <h1 class="text-3xl font-bold text-center mb-8">Product Overzicht</h1>
-            <!-- Grid met 4 kolommen op grote schermen -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 @foreach ($products as $product)
                     <div class="bg-white shadow-lg rounded-lg overflow-hidden">
@@ -80,7 +74,7 @@
                             fetch(`/products/search?query=${query}`)
                                 .then(response => response.json())
                                 .then(data => {
-                                    resultsContainer.innerHTML = ''; // Leeg de vorige resultaten
+                                    resultsContainer.innerHTML = ''; 
 
                                     if (data.length > 0) {
                                         resultsContainer.classList.remove('hidden');
@@ -108,7 +102,6 @@
                         }
                     });
 
-                    // Verberg resultaten wanneer er buiten het zoekveld wordt geklikt
                     document.addEventListener('click', function(event) {
                         if (!resultsContainer.contains(event.target) && event.target !== searchInput) {
                             resultsContainer.classList.add('hidden');
