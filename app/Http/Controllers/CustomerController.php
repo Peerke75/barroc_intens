@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Models\Invoice;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 
 class CustomerController extends Controller
@@ -12,17 +13,17 @@ class CustomerController extends Controller
     public function index()
     {
         $customers = Customer::with('invoices')->get();
-        return view('customers.klanten-show', compact('customers',));
+        return view('customers.index', compact('customers'));
     }
+
 
     public function create()
     {
-        return view('customers.create'); // Laad de create-view
+        return view('customers.create');
     }
 
     public function store(Request $request)
     {
-        // Validatie van het formulier
         $validatedData = $request->validate([
             'contract_id' => 'required|integer',
             'contact_persons_id' => 'required|integer',
@@ -33,10 +34,8 @@ class CustomerController extends Controller
             'order_status' => 'nullable|string',
         ]);
 
-        // Nieuwe klant maken en opslaan
         Customer::create($validatedData);
 
-        // Redirect naar de klantenlijst met een succesbericht
         return redirect()->route('customers')->with('success', 'Klant succesvol toegevoegd!');
     }
 
@@ -48,7 +47,6 @@ class CustomerController extends Controller
 
     public function update(Request $request, Customer $customer)
     {
-        // Validatie van het formulier
         $validatedData = $request->validate([
             'contract_id' => 'required|integer',
             'contact_persons_id' => 'required|integer',
@@ -59,10 +57,8 @@ class CustomerController extends Controller
             'order_status' => 'nullable|string',
         ]);
 
-        // Klant updaten
         $customer->update($validatedData);
 
-        // Redirect naar de klantenlijst met een succesbericht
         return redirect()->route('customers')->with('success', 'Klant succesvol geüpdatet!');
     }
 
@@ -81,5 +77,29 @@ class CustomerController extends Controller
             'quantity' => 1,
             'total' => 100.00,
         ];
+    }
+
+    public function show(Customer $customer)
+    {
+        $customer->load('invoices');
+        return view('customers.show', compact('customer'));
+    }
+
+
+    public function downloadPdf($customerId)
+    {
+        $customer = Customer::findOrFail($customerId);
+
+        $invoices = $customer->invoices;
+        if ($invoices->isEmpty()) {
+            return redirect()->back()->with('error', 'No invoices available for this customer.');
+        }
+
+        $pdf = Pdf::loadView('invoices.pdf', [
+            'customer' => $customer,
+            'invoices' => $invoices,
+        ]);
+
+        return $pdf->download('factuur-' . $customerId . '-invoice.pdf');
     }
 }
