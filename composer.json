@@ -9,12 +9,7 @@
         "barryvdh/laravel-dompdf": "^3.0",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
-<<<<<<< Updated upstream
-        "livewire/livewire": "^3.5",
-        "spatie/laravel-pdf": "^1.5"
-=======
         "spatie/browsershot": "^5.0"
->>>>>>> Stashed changes
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
