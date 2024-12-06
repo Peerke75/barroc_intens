@@ -23,9 +23,6 @@
                 <label for="eventCustomer" class="block font-semibold">Klant (optioneel): </label>
                 <select id="eventCustomer" class="w-full border border-gray-300 rounded p-2" required>
                     <option value="">Selecteer een klant</option>
-                    @foreach($customers as $customer)
-                    <option value="{{ $customer->id }}">{{ $customer->company_name }}</option>
-                    @endforeach
                 </select>
             </div>
             <div class="mb-4">
@@ -49,8 +46,6 @@
     </div>
 </div>
 
-<script>
-    window.events = @json($events);
-</script>
+
 
 @endsection

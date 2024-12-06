@@ -16,6 +16,10 @@ use App\Http\Controllers\VisitController;
 use App\Http\Controllers\EventController;
 use App\Models\Malfunction;
 use App\Models\Sales;
+use App\Models\Event;
+use App\Models\Customer;
+
+
 
 Route::get('/', function () {
     return redirect('/login');
@@ -75,6 +79,13 @@ Route::resource('/storingen', MalfunctionsController::class)->names([
     'destroy' => 'storingen.destroy',
 ]);
 
+route::get('/api/events', function(){
+    return Event::all();
+});
+
+route::get('/api/customers', function(){
+    return Customer::all();
+});
 
 Route::resource('sales', SalesController::class)->names([
     'index' => 'sales.index',
