@@ -2,7 +2,6 @@
 <title>Barroc intens | Klanten overzicht</title>
 @section('content')
     <div class="flex h-screen bg-gray-50">
-        <!-- Column 1: Customer list (scrollable) -->
         @if (session('success'))
             <div class="bg-green-100 text-green-700 px-4 py-2 rounded mb-4 shadow-lg mx-auto">
                 {{ session('success') }}
@@ -27,19 +26,17 @@
             </ul>
         </div>
 
-        <!-- Column 2: Customer details -->
         <div class="w-1/2 p-8 bg-gray-50 shadow-lg" id="customer-details">
             <p class="text-gray-400 text-center italic">Selecteer een klant voor meer details</p>
         </div>
 
-        <!-- Column 3: Invoice placeholder -->
         <div class="w-1/2 bg-gray-900 text-white p-8 shadow-lg" id="invoice-placeholder">
             <p class="text-gray-400 text-center italic">Factuur komt hier terecht</p>
         </div>
     </div>
 
     <script>
-        let customers = @json($customers); // Pass all customers and their invoices
+        let customers = @json($customers);
         function showCustomerDetails(customerId) {
             let customer = customers.find(c => c.id === customerId);
             console.log(customer)
@@ -145,17 +142,13 @@
                 `;
                 }
                 document.getElementById('invoice-placeholder').innerHTML = invoiceSection;
-                
-                document.getElementById('downloadPdfButton').addEventListener('click', function(e) {
-                    e.preventDefault(); // Zorg dat de standaardactie niet wordt uitgevoerd
 
-                    // Haal de klant-ID op uit het data-atribuut
+                document.getElementById('downloadPdfButton').addEventListener('click', function(e) {
+                    e.preventDefault(); 
                     const customerId = this.getAttribute('data-customer-id');
 
-                    // Dynamisch de URL genereren
                     const url = `/customers/downloadPdf/${customerId}`;
 
-                    // Ga naar de URL of download de PDF
                     window.location.href = url;
                 });
             }
