@@ -45,36 +45,7 @@
         </ul>
     </div>
 
-
     <div class="flex justify-between items-center">
-        <!-- Container voor inputvelden en plus-knop -->
-        <div id="new-line-form" class="hidden">
-            <form action="{{ route('proposals.addPriceLine', $proposal->id) }}" method="POST" class="flex items-end space-x-4">
-                @csrf
-                <div>
-                    <input type="number" name="price" step="0.01" placeholder="Prijs" required
-                        class="p-2 border rounded w-full">
-                </div>
-                <div>
-                    <select name="product_id" required class="p-2 border rounded w-full">
-                        <option value="">Selecteer product</option>
-                        @foreach ($products as $product)
-                            <option value="{{ $product->id }}">{{ $product->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div>
-                    <input type="number" name="amount" placeholder="Aantal" required
-                        class="p-2 border rounded w-full">
-                </div>
-                <div>
-                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
-                        Opslaan
-                    </button>
-                </div>
-            </form>
-        </div>
-
         <!-- Plus-icoon -->
         <div class="text-left">
             <a href="javascript:void(0);" class="text-green-600 hover:text-green-800" id="add-line-btn">
@@ -83,7 +54,35 @@
                 </svg>
             </a>
         </div>
+    </div>
 
+    <!-- Dynamisch Toevoegen van een prijsregel -->
+    <div id="new-line-form" class="hidden mt-4">
+        <form action="{{ route('proposals.addPriceLine', $proposal->id) }}" method="POST" class="flex items-center space-x-4">
+            @csrf
+            <div>
+                <select name="product_id" required class="p-2 border rounded w-full product-selector">
+                    <option value="">Selecteer product</option>
+                    @foreach ($products as $product)
+                        <option value="{{ $product->id }}" data-price="{{ $product->price }}">{{ $product->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div>
+                <input type="number" name="price" step="0.01" placeholder="Prijs" required readonly
+                    class="p-2 border rounded w-full price-input">
+            </div>
+            <div>
+                <input type="number" name="amount" placeholder="Aantal" required
+                    class="p-2 border rounded w-full">
+            </div>
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
+                Opslaan
+            </button>
+            <button type="button" id="cancel-btn" class="bg-gray-300 hover:bg-gray-400 text-black px-4 py-2 rounded">
+                Annuleren
+            </button>
+        </form>
     </div>
 
     <div class="mt-6 flex items-center justify-between">
@@ -106,52 +105,34 @@
     </div>
 
 </div>
-<a href="javascript:void(0);" class="text-green-600 hover:text-green-800" id="add-line-btn">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 inline-block">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-    </svg>
-</a>
-
-<!-- Container voor inputvelden -->
-<div id="new-line-form" class="hidden mt-4">
-    <form action="{{ route('proposals.addPriceLine', $proposal->id) }}" method="POST" class="flex items-center space-x-4">
-        @csrf
-        <div>
-            <input type="number" name="price" step="0.01" placeholder="Prijs" required
-                class="p-2 border rounded w-full">
-        </div>
-        <div>
-            <select name="product_id" required class="p-2 border rounded w-full">
-                <option value="">Selecteer product</option>
-                @foreach ($products as $product)
-                    <option value="{{ $product->id }}">{{ $product->name }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div>
-            <input type="number" name="amount" placeholder="Aantal" required
-                class="p-2 border rounded w-full">
-        </div>
-        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
-            Opslaan
-        </button>
-        <button type="button" id="cancel-btn" class="bg-gray-300 hover:bg-gray-400 text-black px-4 py-2 rounded">
-            Annuleren
-        </button>
-    </form>
-</div>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const addButton = document.getElementById('add-line-btn');
         const formContainer = document.getElementById('new-line-form');
+        const cancelButton = document.getElementById('cancel-btn');
 
         // Toon het formulier wanneer op de plus-knop wordt geklikt
         addButton.addEventListener('click', function () {
             formContainer.classList.remove('hidden');
             addButton.parentElement.classList.add('hidden'); // Verberg plus-knop
         });
+
+        // Annuleer het toevoegen van een prijsregel
+        cancelButton.addEventListener('click', function () {
+            formContainer.classList.add('hidden');
+            addButton.parentElement.classList.remove('hidden'); // Toon plus-knop opnieuw
+        });
+
+        // Vul automatisch de prijs in wanneer een product wordt geselecteerd
+        document.querySelectorAll('.product-selector').forEach(select => {
+            select.addEventListener('change', function() {
+                const selectedOption = this.options[this.selectedIndex];
+                const price = selectedOption.getAttribute('data-price');
+                const priceInput = this.closest('form').querySelector('.price-input');
+                priceInput.value = price || ''; // Vul de prijs in of laat leeg als geen product geselecteerd is
+            });
+        });
     });
 </script>
-
 @endsection
