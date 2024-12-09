@@ -7,10 +7,19 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SalesController;
 use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\MalfunctionsController;
 use App\Http\Controllers\ProposalController;
+use App\Http\Controllers\CustomerServiceController;
+use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\VisitController;
+use App\Http\Controllers\EventController;
 use App\Models\Malfunction;
+use App\Models\Sales;
+use App\Models\Event;
+use App\Models\Customer;
+
 
 
 Route::get('/', function () {
@@ -67,8 +76,11 @@ Route::post('/products/{product}/buy', [ProductController::class, 'storeOrder'])
 
 
 
-// Andere bestaande routes
 Route::get('/customers/downloadPdf/{customer}', [CustomerController::class, 'downloadPdf'])->name('customers.downloadPdf');
+
+Route::get('/machines', function () {
+    return view('machines');
+})->name('machines');
 
 Route::get('/customers', [CustomerController::class, 'index'])->name('customers');
 
@@ -96,6 +108,29 @@ Route::resource('/storingen', MalfunctionsController::class)->names([
     'update' => 'storingen.update',
     'destroy' => 'storingen.destroy',
 ]);
+
+route::get('/api/events', function(){
+    return Event::all();
+});
+
+route::get('/api/customers', function(){
+    return Customer::all();
+});
+
+Route::resource('sales', SalesController::class)->names([
+    'index' => 'sales.index',
+    'create' => 'sales.create',
+    'store' => 'sales.store',
+    'show' => 'sales.show',
+    'edit' => 'sales.edit',
+    'update' => 'sales.update',
+    'destroy' => 'sales.destroy',
+]);
+Route::get('/agenda', [SalesController::class, 'calendar'])->middleware('auth')->name('agenda');
+Route::get('/events', [EventController::class, 'index'])->middleware('auth');
+Route::post('/events', [EventController::class, 'store'])->middleware('auth');
+Route::put('/events/{id}', [EventController::class, 'update'])->middleware('auth');
+Route::delete('/events/{id}', [EventController::class, 'destroy'])->middleware('auth');
 
 
 require __DIR__.'/auth.php';

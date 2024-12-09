@@ -8,11 +8,7 @@ use Illuminate\Database\Seeder;
 
 class InvoiceSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
+
     public function run()
     {
         // Example of manually adding invoices for specific customers
@@ -28,19 +24,38 @@ class InvoiceSeeder extends Seeder
                 'price' => 150.00,
                 'total' => 300.00, // quantity * price
             ]);
-        }
+            $customers = Customer::all();
 
-        if ($customer2) {
-            Invoice::create([
-                'customer_id' => $customer2->id,
-                'invoice_number' => 'INV-1002',
-                'quantity' => 1,
-                'description' => 'Software subscription for 1 year',
-                'price' => 200.00,
-                'total' => 200.00,
-            ]);
-        }
+            $faker = Faker::create();
 
-        // Add more customers and invoices as needed
+            foreach ($customers as $customer) {
+                foreach (range(1, rand(1, 5)) as $i) {
+                    // Generate a random invoice number
+                    $invoiceNumber = 'INV-' . str_pad(rand(1000, 9999), 4, '0', STR_PAD_LEFT);
+
+                    Invoice::create([
+                        'customer_id' => $customer->id,
+                        'invoice_number' => $invoiceNumber,
+                        'description' => $faker->sentence(),
+                        'price' => $faker->randomFloat(2, 50, 1000),
+                        'quantity' => rand(1, 5),
+                        'total' => $faker->randomFloat(2, 50, 1000),
+                    ]);
+                }
+            }
+
+            if ($customer2) {
+                Invoice::create([
+                    'customer_id' => $customer2->id,
+                    'invoice_number' => 'INV-1002',
+                    'quantity' => 1,
+                    'description' => 'Software subscription for 1 year',
+                    'price' => 200.00,
+                    'total' => 200.00,
+                ]);
+            }
+
+            // Add more customers and invoices as needed
+        }
     }
 }

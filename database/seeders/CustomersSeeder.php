@@ -4,15 +4,13 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
-use App\Models\Invoice; // Import the Invoice model
-
+use App\Models\Invoice; 
 class CustomersSeeder extends Seeder
 {
     public function run(): void
     {
-        $faker = Faker::create(); // Initialize Faker
+        $faker = Faker::create(); 
 
-        // Insert 3 predefined customers
         DB::table('customers')->insert([
             'contract_id' => 1,
             'contact_persons_id' => 1,

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -9,14 +10,12 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
-    // Toon de productoverzichtspagina met alle producten
     public function index()
     {
         $products = Product::all();
         return view('products.products-show', compact('products'));
     }
 
-    // app/Http/Controllers/ProductController.php
 
     public function create()
     {
@@ -44,7 +43,6 @@ class ProductController extends Controller
         return redirect()->route('products');
     }
 
-    // app/Http/Controllers/ProductController.php
 
     public function edit($id)
     {
@@ -84,7 +82,6 @@ class ProductController extends Controller
         return redirect()->route('products');
     }
 
-    // Toon de detailpagina voor een specifiek product
     public function show($id)
     {
         $product = Product::findOrFail($id);
@@ -114,13 +111,10 @@ class ProductController extends Controller
     {
         $query = $request->get('query');
 
-        // Zoek alleen in de kolom 'name'
         $products = \App\Models\Product::where('name', 'LIKE', "%{$query}%")
-                                        ->limit(5)
-                                        ->get();
+            ->limit(5)
+            ->get();
 
-        // Geef de producten terug als JSON
         return response()->json($products);
     }
-
 }
