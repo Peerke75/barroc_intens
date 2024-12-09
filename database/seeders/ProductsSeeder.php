@@ -14,6 +14,7 @@ class ProductsSeeder extends Seeder
             'name' => 'Product 1',
             'price' => 199.99,
             'amount' => 10,
+            'ean' => 12345123,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -23,6 +24,7 @@ class ProductsSeeder extends Seeder
             'name' => 'Product 2',
             'price' => 49.99,
             'amount' => 20,
+            'ean' => 12345124,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -32,6 +34,7 @@ class ProductsSeeder extends Seeder
             'name' => 'Product 3',
             'price' => 29.99,
             'amount' => 30,
+            'ean' => 12345125,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

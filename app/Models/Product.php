@@ -11,7 +11,7 @@ class Product extends Model
 
     // Beschikbare velden voor mass-assignment
     protected $fillable = [
-        'name', 'price', 'product_category_id', 'amount',
+        'name', 'price', 'product_category_id', 'amount', 'ean'
     ];
 
     // Relatie met ProductCategory

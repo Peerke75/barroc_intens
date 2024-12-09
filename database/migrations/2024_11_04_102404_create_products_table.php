@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->decimal('price');
             $table->integer('amount');
+            $table->integer('ean');
             $table->timestamps();
         });
         

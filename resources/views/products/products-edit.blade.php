@@ -25,6 +25,12 @@
 
 
             <div class="mb-4">
+                <label for="ean" class="block text-gray-700 font-medium">Ean nummer</label>
+                <input type="number" name="ean" id="ean" value="{{ old('ean') }}" class="w-full p-2 border border-gray-300 rounded" step="0.01" required>
+            </div>
+
+
+            <div class="mb-4">
                 <label for="product_category_id" class="block text-gray-700 font-medium">Categorie</label>
                 <select name="product_category_id" id="product_category_id" class="w-full p-2 border border-gray-300 rounded" required>
                     <option value="">Selecteer een categorie</option>
