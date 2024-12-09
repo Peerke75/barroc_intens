@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Customer;
 use App\Models\Invoice;
 use App\Models\Proposal;
@@ -33,15 +34,13 @@ class ProposalController extends Controller
         return view('proposals.create', compact('customers', 'products'));
     }
 
-
     public function store(Request $request)
     {
         // Valideer de input
         $request->validate([
             'customer_id' => 'required|exists:customers,id',
             'date' => 'required|date',
-            'product_id.*' => 'required|exists:products,id', // Zorg dat de producten bestaan
-            'price.*' => 'required|numeric|min:0',
+            'product_id.*' => 'required|exists:products,id',
             'amount.*' => 'required|integer|min:1',
         ]);
 
@@ -54,10 +53,12 @@ class ProposalController extends Controller
 
         // Voeg de prijsregels toe aan de offerte
         foreach ($request->product_id as $index => $product_id) {
+            $product = Product::findOrFail($product_id); // Haal de productprijs op
+
             ProposalPriceLine::create([
                 'proposal_id' => $proposal->id,
                 'product_id' => $product_id,
-                'price' => $request->price[$index],
+                'price' => $product->price, // Gebruik de prijs uit de Product-tabel
                 'amount' => $request->amount[$index],
             ]);
         }
@@ -65,7 +66,6 @@ class ProposalController extends Controller
         return redirect()->route('proposals.show', $proposal->id)
             ->with('success', 'Offerte succesvol aangemaakt.');
     }
-
 
     public function destroy($id)
     {
@@ -82,6 +82,7 @@ class ProposalController extends Controller
 
         return redirect()->back()->with('success', 'Prijsregel succesvol verwijderd.');
     }
+
     public function search(Request $request)
     {
         $query = $request->get('query');
@@ -99,16 +100,20 @@ class ProposalController extends Controller
 
     public function addPriceLine(Request $request, $proposalId)
     {
+        // Valideer de invoer
         $request->validate([
             'product_id' => 'required|exists:products,id',
-            'price' => 'required|numeric|min:0',
             'amount' => 'required|integer|min:1',
         ]);
 
+        // Haal de productprijs op
+        $product = Product::findOrFail($request->product_id);
+
+        // Maak een nieuwe prijsregel
         ProposalPriceLine::create([
             'proposal_id' => $proposalId,
             'product_id' => $request->product_id,
-            'price' => $request->price,
+            'price' => $product->price, // Gebruik de prijs uit de Product-tabel
             'amount' => $request->amount,
         ]);
 
