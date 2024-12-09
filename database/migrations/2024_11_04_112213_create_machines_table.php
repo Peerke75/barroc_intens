@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('machines', function (Blueprint $table) {
             $table->id();
             $table->foreignId('malfunction_id');
-            $table->foreignId('storage_id');
             $table->decimal('price');
             $table->string('status');
             $table->timestamps();

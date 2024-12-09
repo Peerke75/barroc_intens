@@ -23,7 +23,6 @@ class DatabaseSeeder extends Seeder
             JobsSeeder::class,
             ProductCategoriesSeeder::class,
             ProductsSeeder::class,
-            StoragesSeeder::class,
             UsersSeeder::class,
             CustomerServicesSeeder::class,
             OrdersSeeder::class,

@@ -11,7 +11,7 @@ class Product extends Model
 
     // Beschikbare velden voor mass-assignment
     protected $fillable = [
-        'name', 'price', 'product_category_id', 'storage_id',
+        'name', 'price', 'product_category_id', 'amount',
     ];
 
     // Relatie met ProductCategory
@@ -20,9 +20,5 @@ class Product extends Model
         return $this->belongsTo(ProductCategory::class, 'product_category_id');
     }
 
-    // Relatie met Storage
-    public function storage()
-    {
-        return $this->belongsTo(Storage::class, 'storage_id');
-    }
+
 }

@@ -42,6 +42,7 @@
 
                 <h2 class="text-2xl font-semibold mb-2">{{ $product->name }}</h2>
                 <p class="text-lg font-bold text-gray-800 mb-2">Prijs: €{{ number_format($product->price, 2) }}</p>
+                <p class="text-gray-600">Aantal in voorraad: {{ $product->amount }}</p>
                 <p class="text-gray-600">Productcategorie: {{ $product->product_category_id }}</p>
                 <a href="{{ route('products.buy', $product->id) }}"
                     class="block text-center py-2 px-4 mt-4 rounded transition"
