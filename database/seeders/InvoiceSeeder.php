@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Customer;
 use App\Models\Invoice;
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
 
 class InvoiceSeeder extends Seeder
 {
