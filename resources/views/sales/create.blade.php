@@ -42,11 +42,11 @@
 
         <div class="mb-4">
             <label for="priority" class="block text-gray-700 font-medium">Prioriteit</label>
-            <select type="dropdown" id="priority" name="priority" value="{{ old('priority', $sale->priority ?? '') }}"
-                class="w-full border rounded px-4 py-2">
-                <option value="yes" {{ old('dropdown', $sale->dropdown ?? 'no') == 'yes' ? 'selected' : '' }}>Ja</option>
-                <option value="no" {{ old('dropdown', $sale->dropdown ?? 'no') == 'no' ? 'selected' : '' }}>Nee</option>
+            <select id="priority" name="priority" class="w-full border rounded px-4 py-2">
+                <option value="1" {{ old('priority', $sale->priority ?? '') == '1' ? 'selected' : '' }}>Ja</option>
+                <option value="0" {{ old('priority', $sale->priority ?? '') == '0' ? 'selected' : '' }}>Nee</option>
             </select>
+
             @error('priority') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
         <div class="mb-4">

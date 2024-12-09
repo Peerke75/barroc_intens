@@ -28,13 +28,16 @@ class SalesController extends Controller
             'user_id' => 'required|integer',
             'malfunction_id' => 'nullable|integer',
             'description' => 'required|string|max:255',
-            'priority' => 'required|integer',
+            'priority' => 'required|boolean', // Updated validation for priority
             'location' => 'required|string|max:255',
             'date' => 'required|date',
             'status' => 'required|string',
             'start_appointment' => 'nullable|date_format:H:i',
             'end_appointment' => 'nullable|date_format:H:i',
         ]);
+
+        // Handle 'yes'/'no' if that's how priority is passed
+        $validated['priority'] = $request->priority === 'yes' ? 1 : ($request->priority === 'no' ? 0 : $validated['priority']);
 
         Sales::create($validated);
         return redirect()->route('sales.index')->with('success', 'Afspraak succesvol aangemaakt!');
@@ -57,13 +60,16 @@ class SalesController extends Controller
             'user_id' => 'required|integer',
             'malfunction_id' => 'nullable|integer',
             'description' => 'required|string|max:255',
-            'priority' => 'required|integer',
+            'priority' => 'required|boolean', // Updated validation for priority
             'location' => 'required|string|max:255',
             'date' => 'required|date',
             'status' => 'required|string',
             'start_appointment' => 'nullable|date_format:H:i',
             'end_appointment' => 'nullable|date_format:H:i',
         ]);
+
+        // Handle 'yes'/'no' if that's how priority is passed
+        $validated['priority'] = $request->priority === 'yes' ? 1 : ($request->priority === 'no' ? 0 : $validated['priority']);
 
         $sale->update($validated);
         return redirect()->route('sales.index')->with('success', 'Afspraak succesvol bijgewerkt!');
@@ -80,7 +86,7 @@ class SalesController extends Controller
         $customers = Customer::All();
 
         $events = Event::All();
-        
+
         return view('calendar', ['events' => $events, 'customers' => $customers]);
     }
 }

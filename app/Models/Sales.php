@@ -33,4 +33,10 @@ class Sales extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function malfunction()
+    {
+        return $this->belongsTo(Malfunction::class, 'malfunction_id');
+    }
+
 }
