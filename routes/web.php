@@ -6,6 +6,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\InvoiceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MachineController;
 use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\MalfunctionsController;
 use App\Http\Controllers\ProposalController;
@@ -58,6 +59,14 @@ Route::get('/products/{id}/info', [ProductController::class, 'show'])->name('pro
 Route::get('/products/{product}/buy', [ProductController::class, 'buy'])->name('products.buy');
 Route::post('/products/{product}/buy', [ProductController::class, 'storeOrder'])->name('products.storeOrder');
 
+
+Route::get('machines', [MachineController::class, 'index'])->name('machines.index');
+Route::get('machines/create', [MachineController::class, 'create'])->name('machines.create');
+Route::post('machines', [MachineController::class, 'store'])->name('machines.store');
+Route::get('machines/{id}/edit', [MachineController::class, 'edit'])->name('machines.edit');
+Route::put('machines/{id}', [MachineController::class, 'update'])->name('machines.update');
+Route::get('machines/{id}', [MachineController::class, 'show'])->name('machines.show');
+Route::delete('machines/{id}', [MachineController::class, 'destroy'])->name('machines.destroy');
 
 
 // Andere bestaande routes
