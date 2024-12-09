@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -16,70 +17,70 @@ class ProductController extends Controller
     }
 
 
-public function create()
-{
-    return view('products.products-create');
-}
+    public function create()
+    {
+        return view('products.products-create');
+    }
 
-public function store(Request $request)
-{
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'price' => 'required|numeric',
-        'product_category_id' => 'required|exists:product_categories,id',
-        'storage_id' => 'required|exists:storages,id',
-    ]);
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'product_category_id' => 'required|exists:product_categories,id',
+            'storage_id' => 'required|exists:storages,id',
+        ]);
 
-    Product::create([
-        'name' => $request->name,
-        'price' => $request->price,
-        'product_category_id' => $request->product_category_id,
-        'storage_id' => $request->storage_id,
-    ]);
+        Product::create([
+            'name' => $request->name,
+            'price' => $request->price,
+            'product_category_id' => $request->product_category_id,
+            'storage_id' => $request->storage_id,
+        ]);
 
-    session()->flash('success', 'Product succesvol aangemaakt!');
+        session()->flash('success', 'Product succesvol aangemaakt!');
 
-    return redirect()->route('products');
-}
+        return redirect()->route('products');
+    }
 
 
-public function edit($id)
-{
-    $product = Product::findOrFail($id);
-    return view('products.products-edit', compact('product'));
-}
+    public function edit($id)
+    {
+        $product = Product::findOrFail($id);
+        return view('products.products-edit', compact('product'));
+    }
 
-public function update(Request $request, $id)
-{
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'price' => 'required|numeric',
-        'product_category_id' => 'required|exists:product_categories,id',
-        'storage_id' => 'required|exists:storages,id',
-    ]);
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'product_category_id' => 'required|exists:product_categories,id',
+            'storage_id' => 'required|exists:storages,id',
+        ]);
 
-    $product = Product::findOrFail($id);
-    $product->update([
-        'name' => $request->name,
-        'price' => $request->price,
-        'product_category_id' => $request->product_category_id,
-        'storage_id' => $request->storage_id,
-    ]);
+        $product = Product::findOrFail($id);
+        $product->update([
+            'name' => $request->name,
+            'price' => $request->price,
+            'product_category_id' => $request->product_category_id,
+            'storage_id' => $request->storage_id,
+        ]);
 
-    session()->flash('success', 'Product succesvol bewerkt!');
+        session()->flash('success', 'Product succesvol bewerkt!');
 
-    return redirect()->route('products');
-}
+        return redirect()->route('products');
+    }
 
-public function destroy($id)
-{
-    $product = Product::findOrFail($id);
-    $product->delete();
+    public function destroy($id)
+    {
+        $product = Product::findOrFail($id);
+        $product->delete();
 
-    session()->flash('success', 'Product succesvol verwijderd!');
+        session()->flash('success', 'Product succesvol verwijderd!');
 
-    return redirect()->route('products');
-}
+        return redirect()->route('products');
+    }
 
     public function show($id)
     {
@@ -111,10 +112,9 @@ public function destroy($id)
         $query = $request->get('query');
 
         $products = \App\Models\Product::where('name', 'LIKE', "%{$query}%")
-                                        ->limit(5)
-                                        ->get();
+            ->limit(5)
+            ->get();
 
         return response()->json($products);
     }
-
 }

@@ -1,10 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\InvoiceController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\MaintenanceController;
@@ -27,11 +28,35 @@ Route::get('/', function () {
 
 Route::get('/dashboard', [DashboardController::class, 'showDashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
+
+Route::get('/proposals/search', [ProposalController::class, 'search'])->name('proposals.search');
+Route::resource('proposals', ProposalController::class)->middleware('auth');
+
+Route::get('/proposals/create', [ProposalController::class, 'create'])->name('proposals.create');
+Route::post('/proposals', [ProposalController::class, 'store'])->name('proposals.store');
+Route::get('/proposals/{proposal}', [ProposalController::class, 'show'])->name('proposals.show');
+Route::delete('proposals/{proposal}', [ProposalController::class, 'destroy'])->name('proposals.destroy');
+
+Route::delete('/proposals/price-lines/{id}', [ProposalController::class, 'destroyPriceLine'])->name('proposals.priceLines.destroy');
+
+
+Route::post('/proposals/{proposal}/price-line', [ProposalController::class, 'addPriceLine'])
+    ->name('proposals.addPriceLine');
+Route::delete('/price-line/{priceLine}', [ProposalController::class, 'removePriceLine'])
+    ->name('proposals.removePriceLine');
+
+
+Route::get('/proposals/{proposal}/download-pdf', [ProposalController::class, 'downloadPdf'])
+    ->name('proposals.downloadPdf');
+
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
 
 Route::get('/products/search', [ProductController::class, 'search'])->name('products.search');
 
@@ -51,6 +76,8 @@ Route::post('/products/{product}/buy', [ProductController::class, 'storeOrder'])
 
 
 
+Route::get('/customers/downloadPdf/{customer}', [CustomerController::class, 'downloadPdf'])->name('customers.downloadPdf');
+
 Route::get('/machines', function () {
     return view('machines');
 })->name('machines');
@@ -62,6 +89,9 @@ Route::post('/customers', [CustomerController::class, 'store'])->name('customers
 
 Route::get('/customers/{customer}/invoice/create', [InvoiceController::class, 'create'])->name('invoice.create');
 Route::post('/customers/{customer}/invoice', [InvoiceController::class, 'store'])->name('invoice.store');
+Route::get('/customers/{customer}', [CustomerController::class, 'show'])->name('customers.show');
+
+
 
 
 Route::get('/orders', function () {

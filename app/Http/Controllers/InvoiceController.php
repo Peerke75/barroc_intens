@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Models\Invoice;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Storage;
+
 
 class InvoiceController extends Controller
 {
@@ -29,6 +32,10 @@ class InvoiceController extends Controller
         $invoice->total = $request->price * $request->quantity;
         $invoice->save();
 
+        session(['new_invoice' => $invoice]);
+
         return redirect()->route('customers.show', $customer->id)->with('success', 'Invoice created successfully.');
     }
+
+
 }

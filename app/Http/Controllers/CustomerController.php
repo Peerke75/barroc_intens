@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Models\Invoice;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 
 class CustomerController extends Controller
@@ -12,12 +13,13 @@ class CustomerController extends Controller
     public function index()
     {
         $customers = Customer::with('invoices')->get();
-        return view('customers.klanten-show', compact('customers',));
+        return view('customers.index', compact('customers'));
     }
+
 
     public function create()
     {
-        return view('customers.create'); 
+        return view('customers.create');
     }
 
     public function store(Request $request)
@@ -75,5 +77,29 @@ class CustomerController extends Controller
             'quantity' => 1,
             'total' => 100.00,
         ];
+    }
+
+    public function show(Customer $customer)
+    {
+        $customer->load('invoices');
+        return view('customers.show', compact('customer'));
+    }
+
+
+    public function downloadPdf($customerId)
+    {
+        $customer = Customer::findOrFail($customerId);
+
+        $invoices = $customer->invoices;
+        if ($invoices->isEmpty()) {
+            return redirect()->back()->with('error', 'No invoices available for this customer.');
+        }
+
+        $pdf = Pdf::loadView('invoices.pdf', [
+            'customer' => $customer,
+            'invoices' => $invoices,
+        ]);
+
+        return $pdf->download('factuur-' . $customerId . '-invoice.pdf');
     }
 }

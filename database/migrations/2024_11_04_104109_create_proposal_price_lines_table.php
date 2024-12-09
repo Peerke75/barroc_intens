@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('proposal_price_lines', function (Blueprint $table) {
             $table->id();
             $table->foreignId('proposal_id');
+            $table->foreignId('product_id');
             $table->decimal('price');
             $table->integer('amount');
             $table->timestamps();
