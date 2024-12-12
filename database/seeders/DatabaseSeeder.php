@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Sales;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -23,9 +24,8 @@ class DatabaseSeeder extends Seeder
             JobsSeeder::class,
             ProductCategoriesSeeder::class,
             ProductsSeeder::class,
-            StoragesSeeder::class,
             UsersSeeder::class,
-            CustomerServicesSeeder::class,
+            EventSeeder::class,
             OrdersSeeder::class,
             ProposalsSeeder::class,
             OrderLinesSeeder::class,
@@ -34,6 +34,8 @@ class DatabaseSeeder extends Seeder
             ScheduleSeeder::class,
             MachinesSeeder::class,
             MaintenanceSeeder::class,
+            InvoiceSeeder::class,
+            SalesSeeder::class
         ]);
     }
 }

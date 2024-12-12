@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Malfunction extends Model
 {
+    use HasFactory;
+
+    protected $table = 'malfunctions';
 
     protected $dates = ['date'];
 
@@ -13,4 +17,10 @@ class Malfunction extends Model
     {
         return $this->belongsTo(Customer::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

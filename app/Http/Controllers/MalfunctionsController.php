@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -32,18 +33,22 @@ class MalfunctionsController extends Controller
         return redirect()->route('storingen.index')->with('success', 'Storing succesvol aangemaakt.');
     }
 
-public function show($id)
-{
-    $malfunction = Malfunction::findOrFail($id); 
-    return view('malfunctions.malfunction-show', compact('malfunction'));
-}
+
+    public function show($id)
+    {
+        $malfunction = Malfunction::findOrFail($id);
+        return view('malfunctions.malfunction-show', compact('malfunction'));
+    }
+
+
 
     public function edit($id)
     {
         $malfunction = Malfunction::findOrFail($id);
         return view('malfunctions.malfunction-edit', compact('malfunction'));
     }
-    
+
+
     public function update(Request $request, Malfunction $malfunction)
     {
         $request->validate([

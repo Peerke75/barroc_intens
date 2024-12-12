@@ -10,6 +10,8 @@ class DashboardController extends Controller
         $function_id = Auth::user()->function_id;
 
         switch ($function_id) {
+            case 0:
+                return view('dashboard.admin'); 
             case 1:
                 return view('dashboard.admin'); 
             case 2:
