@@ -17,18 +17,22 @@
                     <th class="px-4 py-3 text-sm font-medium text-gray-600 border-b">Gebruiker ID</th>
                     <th class="px-4 py-3 text-sm font-medium text-gray-600 border-b">Beschrijving</th>
                     <th class="px-4 py-3 text-sm font-medium text-gray-600 border-b">Datum</th>
+                    <th class="px-4 py-3 text-sm font-medium text-gray-600 border-b">Prioriteit</th> 
                     <th class="px-4 py-3 text-sm font-medium text-gray-600 border-b">Status</th>
                     <th class="px-4 py-3 text-sm font-medium text-gray-600 border-b">Acties</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse($sales as $sale)
+                @forelse($sales->sortByDesc('priority') as $sale)
                     <tr class="hover:bg-gray-50">
                         <td class="px-4 py-3 text-sm text-gray-700 border-b">{{ $sale->id }}</td>
                         <td class="px-4 py-3 text-sm text-gray-700 border-b">{{ $sale->customer_id }}</td>
                         <td class="px-4 py-3 text-sm text-gray-700 border-b">{{ $sale->user_id }}</td>
                         <td class="px-4 py-3 text-sm text-gray-700 border-b">{{ \Illuminate\Support\Str::limit($sale->description, 50) }}</td>
                         <td class="px-4 py-3 text-sm text-gray-700 border-b">{{ $sale->date }}</td>
+                        <td class="px-4 py-3 text-sm text-gray-700 border-b">
+                            {{ $sale->priority == 1 ? 'Ja' : 'Nee' }}
+                        </td>
                         <td class="px-4 py-3 text-sm text-gray-700 border-b">
                             <span class="px-3 py-1 rounded-full text-xs font-semibold
                                 {{ $sale->status == 'open' ? 'bg-yellow-200 text-yellow-800' : '' }}
@@ -57,7 +61,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="7" class="text-center px-4 py-3 text-gray-500">Geen afspraken gevonden.</td>
+                        <td colspan="8" class="text-center px-4 py-3 text-gray-500">Geen afspraken gevonden.</td>
                     </tr>
                 @endforelse
             </tbody>
