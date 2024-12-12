@@ -25,7 +25,17 @@
             </div>
         </div>
 
+<<<<<<< Updated upstream
         <!-- Storingsgeschiedenis sectie -->
+=======
+                <p class="mb-2"><span class="font-bold">Oplossing:</span> {{ $malfunction->solution }}</p>
+            </div>
+            <div class="flex justify-start mt-5">
+                <a href="{{ route('agenda') }}" class="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded">Bezoek inplannen</a>
+            </div>
+        </div>
+        
+>>>>>>> Stashed changes
         <h2 class="text-xl font-bold mt-10 mb-5">Storingsgeschiedenis</h2>
         <table class="table-auto w-full bg-white border border-gray-300 rounded-lg">
             <thead>
@@ -38,7 +48,6 @@
                 </tr>
             </thead>
            
-        </table>
-    </div>
+</table>
 </div>
 @endsection

@@ -7,7 +7,6 @@
     <form action="{{ route('storingen.store') }}" method="POST" class="space-y-4">
         @csrf
 
-        <!-- miss dropdown maken zodat je het product kan kiezen als je de verkeerde hebt aangeklikt geldt hetzelfde voor klanten -->
         <div>
             <label for="product_id" class="block text-sm font-medium">Product ID</label>
             <input type="text" name="product_id" id="product_id" class="w-full border px-3 py-2" required>
