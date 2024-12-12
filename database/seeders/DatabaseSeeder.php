@@ -24,7 +24,6 @@ class DatabaseSeeder extends Seeder
             JobsSeeder::class,
             ProductCategoriesSeeder::class,
             ProductsSeeder::class,
-            StoragesSeeder::class,
             UsersSeeder::class,
             EventSeeder::class,
             OrdersSeeder::class,

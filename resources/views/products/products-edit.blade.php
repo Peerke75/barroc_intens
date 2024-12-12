@@ -19,21 +19,23 @@
             </div>
 
             <div class="mb-4">
+                <label for="amount" class="block text-gray-700 font-medium">Aantal</label>
+                <input type="number" name="amount" id="amount" value="{{ old('amount') }}" class="w-full p-2 border border-gray-300 rounded" step="0.01" required>
+            </div>
+
+
+            <div class="mb-4">
+                <label for="ean" class="block text-gray-700 font-medium">Ean nummer</label>
+                <input type="number" name="ean" id="ean" value="{{ old('ean') }}" class="w-full p-2 border border-gray-300 rounded" step="0.01" required>
+            </div>
+
+
+            <div class="mb-4">
                 <label for="product_category_id" class="block text-gray-700 font-medium">Categorie</label>
                 <select name="product_category_id" id="product_category_id" class="w-full p-2 border border-gray-300 rounded" required>
                     <option value="">Selecteer een categorie</option>
                     @foreach(\App\Models\ProductCategory::all() as $category)
                         <option value="{{ $category->id }}" {{ $product->product_category_id == $category->id ? 'selected' : '' }}>{{ $category->type }}</option>
-                    @endforeach
-                </select>
-            </div>
-
-            <div class="mb-4">
-                <label for="storage_id" class="block text-gray-700 font-medium">Opslaglocatie</label>
-                <select name="storage_id" id="storage_id" class="w-full p-2 border border-gray-300 rounded" required>
-                    <option value="">Selecteer opslaglocatie</option>
-                    @foreach(\App\Models\Storage::all() as $storage)
-                        <option value="{{ $storage->id }}" {{ $product->storage_id == $storage->id ? 'selected' : '' }}>{{ $storage->product_names }}</option>
                     @endforeach
                 </select>
             </div>

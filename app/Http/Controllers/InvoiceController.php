@@ -37,5 +37,4 @@ class InvoiceController extends Controller
         return redirect()->route('customers.show', $customer->id)->with('success', 'Invoice created successfully.');
     }
 
-
 }

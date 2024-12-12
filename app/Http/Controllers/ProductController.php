@@ -28,14 +28,16 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'price' => 'required|numeric',
             'product_category_id' => 'required|exists:product_categories,id',
-            'storage_id' => 'required|exists:storages,id',
+            'amount' => 'required',
+            'ean' => 'required',
         ]);
 
         Product::create([
             'name' => $request->name,
             'price' => $request->price,
             'product_category_id' => $request->product_category_id,
-            'storage_id' => $request->storage_id,
+            'amount' => $request->amount,
+            'ean' => $request->ean,
         ]);
 
         session()->flash('success', 'Product succesvol aangemaakt!');
@@ -56,7 +58,8 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'price' => 'required|numeric',
             'product_category_id' => 'required|exists:product_categories,id',
-            'storage_id' => 'required|exists:storages,id',
+            'amount' => 'required',
+            'ean' => 'required',
         ]);
 
         $product = Product::findOrFail($id);
@@ -64,7 +67,8 @@ class ProductController extends Controller
             'name' => $request->name,
             'price' => $request->price,
             'product_category_id' => $request->product_category_id,
-            'storage_id' => $request->storage_id,
+            'amount' => $request->amount,
+            'ean' => $request->ean,
         ]);
 
         session()->flash('success', 'Product succesvol bewerkt!');
@@ -94,18 +98,25 @@ class ProductController extends Controller
 
     public function storeOrder(Request $request, Product $product)
     {
+
         $request->validate([
-            'product_id' => 'required|exists:products,id',
-            'user_id' => 'required|exists:users,id'
+            'quantity' => 'required|integer|min:1',
         ]);
 
-        Order::create([
+        $quantity = $request->input('quantity');
+
+        $order = Order::create([
             'product_id' => $product->id,
             'user_id' => Auth::id(),
             'date' => now(),
         ]);
 
-        return redirect()->route('products.show')->with('success', 'Bestelling geplaatst!');
+
+        $product->increment('amount', $quantity);
+
+    // Redirect naar de info pagina van het product
+    return redirect()->route('products.info', ['id' => $product->id])
+        ->with('success', 'Bestelling is succesvol geplaatst!');
     }
     public function search(Request $request)
     {

@@ -7,8 +7,8 @@
 
             <div class="relative mb-6 max-w-md mx-auto">
                 <input type="text" id="proposal-search" placeholder="Zoek offerte..."
-                    class="w-full p-3 border border-gray-300 rounded shadow focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                    style="background-color: #ffffff; color: #000;">
+                class="w-full p-3 border border-gray-300 rounded shadow focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                style="background-color: #ffffff; color: #000;">
 
                 <!-- Suggesties container -->
                 <ul id="search-results"

@@ -13,6 +13,8 @@
             background-color: #f7f7f7;
             margin: 0;
             padding: 0;
+            background-color: #ffffff;
+
         }
         .container {
             width: 100%;
