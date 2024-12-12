@@ -17,7 +17,7 @@
                     <th class="px-4 py-3 text-sm font-medium text-gray-600 border-b">Gebruiker ID</th>
                     <th class="px-4 py-3 text-sm font-medium text-gray-600 border-b">Beschrijving</th>
                     <th class="px-4 py-3 text-sm font-medium text-gray-600 border-b">Datum</th>
-                    <th class="px-4 py-3 text-sm font-medium text-gray-600 border-b">Prioriteit</th> 
+                    <th class="px-4 py-3 text-sm font-medium text-gray-600 border-b">Prioriteit</th>
                     <th class="px-4 py-3 text-sm font-medium text-gray-600 border-b">Status</th>
                     <th class="px-4 py-3 text-sm font-medium text-gray-600 border-b">Acties</th>
                 </tr>

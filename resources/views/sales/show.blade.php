@@ -25,6 +25,19 @@
             <strong>Datum:</strong>
             <span class="text-blue-600">{{ \Carbon\Carbon::parse($sale->date)->format('d-m-Y') }}</span>
         </div>
+
+        <!-- Start Appointment -->
+        <div class="text-lg font-medium text-gray-700 flex items-center space-x-2">
+            <strong>Starttijd:</strong>
+            <span class="text-purple-600">{{ \Carbon\Carbon::parse($sale->start_appointment)->format('H:i') ?? 'N/A' }}</span>
+        </div>
+
+        <!-- End Appointment -->
+        <div class="text-lg font-medium text-gray-700 flex items-center space-x-2">
+            <strong>Eindtijd:</strong>
+            <span class="text-red-600">{{ \Carbon\Carbon::parse($sale->end_appointment)->format('H:i') ?? 'N/A' }}</span>
+        </div>
+
         <div class="text-lg font-medium text-gray-700 flex items-center space-x-2">
             <strong>Status:</strong>
             <span class="px-3 py-1 rounded-full text-xs font-semibold
@@ -40,8 +53,8 @@
         <a href="{{ route('sales.edit', $sale->id) }}" class="px-6 py-3 bg-yellow-600 text-white rounded-md shadow-lg hover:bg-yellow-700 transform transition duration-300 hover:scale-105">
             Bewerken
         </a>
-        <a href="{{ route('sales.index') }}" class="px-6 py-3 bg-green-600 text-white rounded-md shadow-lg hover:bg-gray-700 transform transition duration-300 hover:scale-105">
-            Terug naar Overzicht
+        <a href="{{ route('sales.index') }}" class="px-6 py-3 bg-gray-600 text-white rounded-md shadow-lg hover:bg-gray-700 transform transition duration-300 hover:scale-105">
+            Terug naar overzicht
         </a>
     </div>
 </div>
