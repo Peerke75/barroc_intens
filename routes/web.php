@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\DashboardController;
@@ -72,9 +73,8 @@ Route::get('/products/{id}/info', [ProductController::class, 'show'])->name('pro
 
 
 Route::get('/products/{product}/buy', [ProductController::class, 'buy'])->name('products.buy');
-Route::post('/products/{product}/buy', [ProductController::class, 'storeOrder'])->name('products.storeOrder');
 
-
+Route::post('/orders/{productId}', [OrderController::class, 'store'])->name('orders.store');
 
 Route::get('/customers/downloadPdf/{customer}', [CustomerController::class, 'downloadPdf'])->name('customers.downloadPdf');
 
