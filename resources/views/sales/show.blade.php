@@ -5,41 +5,58 @@
     <h1 class="text-4xl font-bold mb-6 text-gray-800 animate__animated animate__fadeInUp">Afspraak Details</h1>
 
     <div class="bg-white p-6 rounded-lg shadow-lg space-y-6 transition-transform transform hover:scale-105 hover:shadow-xl hover:bg-gray-50">
+        <!-- Klant ID -->
         <div class="text-lg font-medium text-gray-700 flex items-center space-x-2">
-            <strong>Klant ID:</strong>
+            <strong class="text-gray-800">Klant ID:</strong>
             <span class="text-indigo-600">{{ $sale->customer_id }}</span>
         </div>
+
+        <!-- Gebruiker ID -->
         <div class="text-lg font-medium text-gray-700 flex items-center space-x-2">
-            <strong>Gebruiker ID:</strong>
+            <strong class="text-gray-800">Gebruiker ID:</strong>
             <span class="text-indigo-600">{{ $sale->user_id }}</span>
         </div>
+
+        <!-- Storinginformatie -->
         <div class="text-lg font-medium text-gray-700 flex items-center space-x-2">
-            <strong>Beschrijving:</strong>
+            <strong class="text-gray-800">Storing Beschrijving:</strong>
+            <span class="text-red-600">{{ $sale->malfunction->description ?? 'Geen omschrijving beschikbaar' }}</span>
+        </div>
+
+
+        <!-- Beschrijving -->
+        <div class="text-lg font-medium text-gray-700 flex items-center space-x-2">
+            <strong class="text-gray-800">Beschrijving:</strong>
             <span class="text-gray-600">{{ $sale->description }}</span>
         </div>
+
+        <!-- Locatie -->
         <div class="text-lg font-medium text-gray-700 flex items-center space-x-2">
-            <strong>Locatie:</strong>
+            <strong class="text-gray-800">Locatie:</strong>
             <span class="text-green-600">{{ $sale->location }}</span>
         </div>
+
+        <!-- Datum -->
         <div class="text-lg font-medium text-gray-700 flex items-center space-x-2">
-            <strong>Datum:</strong>
+            <strong class="text-gray-800">Datum:</strong>
             <span class="text-blue-600">{{ \Carbon\Carbon::parse($sale->date)->format('d-m-Y') }}</span>
         </div>
 
-        <!-- Start Appointment -->
+        <!-- Starttijd -->
         <div class="text-lg font-medium text-gray-700 flex items-center space-x-2">
-            <strong>Starttijd:</strong>
+            <strong class="text-gray-800">Starttijd:</strong>
             <span class="text-purple-600">{{ \Carbon\Carbon::parse($sale->start_appointment)->format('H:i') ?? 'N/A' }}</span>
         </div>
 
-        <!-- End Appointment -->
+        <!-- Eindtijd -->
         <div class="text-lg font-medium text-gray-700 flex items-center space-x-2">
-            <strong>Eindtijd:</strong>
+            <strong class="text-gray-800">Eindtijd:</strong>
             <span class="text-red-600">{{ \Carbon\Carbon::parse($sale->end_appointment)->format('H:i') ?? 'N/A' }}</span>
         </div>
 
+        <!-- Status -->
         <div class="text-lg font-medium text-gray-700 flex items-center space-x-2">
-            <strong>Status:</strong>
+            <strong class="text-gray-800">Status:</strong>
             <span class="px-3 py-1 rounded-full text-xs font-semibold
                 {{ $sale->status == 'open' ? 'bg-yellow-200 text-yellow-800' : '' }}
                 {{ $sale->status == 'in_progress' ? 'bg-blue-200 text-blue-800' : '' }}
@@ -49,6 +66,7 @@
         </div>
     </div>
 
+    <!-- Action Buttons -->
     <div class="mt-6 flex items-center space-x-4">
         <a href="{{ route('sales.edit', $sale->id) }}" class="px-6 py-3 bg-yellow-600 text-white rounded-md shadow-lg hover:bg-yellow-700 transform transition duration-300 hover:scale-105">
             Bewerken

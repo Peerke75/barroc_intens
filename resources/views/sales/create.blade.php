@@ -16,24 +16,39 @@
             <!-- Customer ID -->
             <div class="mb-4">
                 <label for="customer_id" class="block text-gray-700 font-medium">Klant ID</label>
-                <input type="number" id="customer_id" name="customer_id" value="{{ old('customer_id', $sale->customer_id ?? '') }}"
-                    class="w-full sm:w-5/5 border-2 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-400 focus:outline-none transition">
+                <select id="customer_id" name="customer_id" class="w-full sm:w-5/5 border-2 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-400 focus:outline-none transition">
+                    @foreach ($customers as $customer)
+                        <option value="{{ $customer->id }}" {{ old('customer_id', $sale->customer_id ?? '') == $customer->id ? 'selected' : '' }}>
+                            {{ $customer->name }}
+                        </option>
+                    @endforeach
+                </select>
                 @error('customer_id') <span class="text-red-600">{{ $message }}</span> @enderror
             </div>
 
             <!-- User ID -->
             <div class="mb-4">
                 <label for="user_id" class="block text-gray-700 font-medium">Gebruiker ID</label>
-                <input type="number" id="user_id" name="user_id" value="{{ old('user_id', $sale->user_id ?? '') }}"
-                    class="w-full sm:w-5/5 border-2 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-400 focus:outline-none transition">
+                <select id="user_id" name="user_id" class="w-full sm:w-5/5 border-2 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-400 focus:outline-none transition">
+                    @foreach ($users as $user)
+                        <option value="{{ $user->id }}" {{ old('user_id', $sale->user_id ?? '') == $user->id ? 'selected' : '' }}>
+                            {{ $user->name }}
+                        </option>
+                    @endforeach
+                </select>
                 @error('user_id') <span class="text-red-600">{{ $message }}</span> @enderror
             </div>
 
             <!-- Malfunction ID -->
             <div class="mb-4">
                 <label for="malfunction_id" class="block text-gray-700 font-medium">Storing ID (optioneel)</label>
-                <input type="number" id="malfunction_id" name="malfunction_id"
-                    value="{{ old('malfunction_id', $sale->malfunction_id ?? '') }}" class="w-full sm:w-5/5 border-2 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-400 focus:outline-none transition">
+                <select id="malfunction_id" name="malfunction_id" class="w-full sm:w-5/5 border-2 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-400 focus:outline-none transition">
+                    @foreach ($malfunctions as $malfunction)
+                        <option value="{{ $malfunction->id }}" {{ old('malfunction_id', $sale->malfunction_id ?? '') == $malfunction->id ? 'selected' : '' }}>
+                            {{ $malfunction->description }}
+                        </option>
+                    @endforeach
+                </select>
                 @error('malfunction_id') <span class="text-red-600">{{ $message }}</span> @enderror
             </div>
 
