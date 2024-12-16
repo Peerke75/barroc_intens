@@ -26,10 +26,10 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'price' => 'required|numeric',
+            'price' => 'required|numeric|min:0',
             'product_category_id' => 'required|exists:product_categories,id',
             'amount' => 'required',
-            'ean' => 'required',
+            'ean' => 'required|integer',
         ]);
 
         Product::create([
