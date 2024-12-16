@@ -4,11 +4,12 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< Updated upstream
+
     "content-hash": "8ac1884049c76f4edf3b84d45157f1b4",
-=======
+
     "content-hash": "7196296cf26c5901abafe535bde03bd2",
->>>>>>> Stashed changes
+
+    "content-hash": "4ef55a112e49af0552f811ec57ba97e8",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -37,7 +38,6 @@
             },
             "type": "library",
             "extra": {
-<<<<<<< Updated upstream
                 "branch-alias": {
                     "dev-master": "3.0-dev"
                 },
@@ -49,19 +49,6 @@
                         "Pdf": "Barryvdh\\DomPDF\\Facade\\Pdf",
                         "PDF": "Barryvdh\\DomPDF\\Facade\\Pdf"
                     }
-=======
-                "laravel": {
-                    "aliases": {
-                        "PDF": "Barryvdh\\DomPDF\\Facade\\Pdf",
-                        "Pdf": "Barryvdh\\DomPDF\\Facade\\Pdf"
-                    },
-                    "providers": [
-                        "Barryvdh\\DomPDF\\ServiceProvider"
-                    ]
-                },
-                "branch-alias": {
-                    "dev-master": "3.0-dev"
->>>>>>> Stashed changes
                 }
             },
             "autoload": {
@@ -2076,7 +2063,7 @@
             "time": "2024-09-21T08:32:55+00:00"
         },
         {
-<<<<<<< Updated upstream
+
             "name": "livewire/livewire",
             "version": "v3.5.13",
             "source": {
@@ -2153,8 +2140,6 @@
             "time": "2024-11-27T14:56:05+00:00"
         },
         {
-=======
->>>>>>> Stashed changes
             "name": "masterminds/html5",
             "version": "2.9.0",
             "source": {

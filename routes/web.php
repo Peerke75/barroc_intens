@@ -9,6 +9,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SalesController;
+use App\Http\Controllers\MachineController;
 use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\MalfunctionsController;
 use App\Http\Controllers\ProposalController;
@@ -77,6 +78,14 @@ Route::get('/products/{product}/buy', [ProductController::class, 'buy'])->name('
 Route::post('/orders/{productId}', [OrderController::class, 'store'])->name('orders.store');
 
 Route::get('/customers/downloadPdf/{customer}', [CustomerController::class, 'downloadPdf'])->name('customers.downloadPdf');
+Route::get('machines', [MachineController::class, 'index'])->name('machines.index');
+Route::get('machines/create', [MachineController::class, 'create'])->name('machines.create');
+Route::post('machines', [MachineController::class, 'store'])->name('machines.store');
+Route::get('machines/{id}/edit', [MachineController::class, 'edit'])->name('machines.edit');
+Route::put('machines/{id}', [MachineController::class, 'update'])->name('machines.update');
+Route::get('machines/{id}', [MachineController::class, 'show'])->name('machines.show');
+Route::delete('machines/{id}', [MachineController::class, 'destroy'])->name('machines.destroy');
+
 
 Route::get('/machines', function () {
     return view('machines');

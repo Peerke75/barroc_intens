@@ -26,10 +26,13 @@ class MalfunctionsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'product_id' => 'required|exists:products,id', // Assuming a Product model
             'customer_id' => 'required|exists:customers,id',
-            'description' => 'required|string|max:255',
+            'message' => 'required|string|max:255',
+            'status' => 'required|in:Open,Closed',
             'date' => 'required|date',
         ]);
+        
 
         Malfunction::create($request->all());
 
@@ -55,10 +58,13 @@ class MalfunctionsController extends Controller
     public function update(Request $request, Malfunction $malfunction)
     {
         $request->validate([
+            'product_id' => 'required|exists:products,id', // Assuming a Product model
             'customer_id' => 'required|exists:customers,id',
-            'description' => 'required|string|max:255',
+            'message' => 'required|string|max:255',
+            'status' => 'required|in:Open,Closed',
             'date' => 'required|date',
         ]);
+        
 
         $malfunction->update($request->all());
 
