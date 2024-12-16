@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class SalesSeeder extends Seeder
 {
@@ -23,8 +24,8 @@ class SalesSeeder extends Seeder
             'location' => 'Customer location',
             'date' => '2024-11-29',
             'status' => 'Open',
-            'start_appointment' => '2024-11-29 10:00:00',
-            'end_appointment' => '2024-11-29 11:00:00',
+            'start_appointment' => Carbon::parse('2024-11-29 10:00:00'),
+            'end_appointment' => Carbon::parse('2024-11-29 11:00:00'),
         ]);
 
         DB::table('sales')->insert([
@@ -36,8 +37,8 @@ class SalesSeeder extends Seeder
             'location' => 'Customer location',
             'date' => '2024-11-30',
             'status' => 'Open',
-            'start_appointment' => '2024-11-30 10:00:00',
-            'end_appointment' => '2024-11-30 11:00:00',
+            'start_appointment' => Carbon::parse('2024-11-29 10:00:00'),
+            'end_appointment' => Carbon::parse('2024-11-29 11:00:00'),
         ]);
 
         DB::table('sales')->insert([
@@ -49,9 +50,9 @@ class SalesSeeder extends Seeder
             'location' => 'Customer location',
             'date' => '2024-12-01',
             'status' => 'Open',
-            'start_appointment' => '2024-12-01 10:00:00',
-            'end_appointment' => '2024-12-01 11:00:00',
+            'start_appointment' => Carbon::parse('2024-11-29 10:00:00'),
+            'end_appointment' => Carbon::parse('2024-11-29 11:00:00'),
         ]);
-        
+
     }
 }
