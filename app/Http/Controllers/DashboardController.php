@@ -13,22 +13,20 @@ class DashboardController extends Controller
             case 0:
                 return view('dashboard.admin'); 
             case 1:
-                return view('dashboard.admin'); 
-            case 2:
                 return view('dashboard.sales'); 
-            case 3:
+            case 2:
                 return view('dashboard.finance'); 
-            case 4:
+            case 3:
                 return view('dashboard.maintenance'); 
-            case 5:
+            case 4:
                 return view('dashboard.marketing'); 
-            case 6:
+            case 5:
                 return view('dashboard.sales-head'); 
-            case 7:
+            case 6:
                 return view('dashboard.finance-head'); 
-            case 8:
+            case 7:
                 return view('dashboard.maintenance-head'); 
-            case 9:
+            case 8:
                 return view('dashboard.marketing-head'); 
             default:
                 return redirect()->route('home')->with('error', 'Dashboard not found'); 

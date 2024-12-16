@@ -1,5 +1,11 @@
-
 # Laravel 11 Code Conventions
+
+## Github
+- Werken in je eigen branch
+- Alleen pushen wanneer het werkt
+- als je klaar bent met jou gedeelte van de branch push het naar de main
+- communiceer met elkaar waar je aan gaat werken voor zo min mogelijk merge conflicten
+- bij de commits zoveel mogeljk nederlands houden en gebruik goede namen dat voor zich zelf spreekt
 
 ## Algemene Conventies
 1. **Engels als voertaal**:

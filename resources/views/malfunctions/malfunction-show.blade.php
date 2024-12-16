@@ -4,6 +4,7 @@
 <div class="container mx-auto mt-10">
     <h1 class="text-3xl font-bold mb-5">Storing Pagina</h1>
     <div class="bg-white border border-gray-300 rounded-lg p-5">
+        <!-- Klant informatie sectie -->
         <div class="flex">
             <div class="w-1/2">
                 <h2 class="text-xl font-bold mb-5">Klant informatie</h2>
@@ -15,17 +16,15 @@
                 <p class="mb-2"><span class="font-bold">Oplossing:</span> {{ $malfunction->solution }}</p>
             </div>
 
+            <!-- Placeholder voor afbeelding/diagram -->
             <div class="w-1/2 flex justify-center items-center">
                 <div class="w-48 h-48 bg-gray-200 flex items-center justify-center">
+                    <!-- Hier kan een afbeelding worden geplaatst -->
                     <span class="text-gray-500">Afbeelding</span>
                 </div>
             </div>
         </div>
 
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-        <!-- Storingsgeschiedenis sectie -->
-=======
                 <p class="mb-2"><span class="font-bold">Oplossing:</span> {{ $malfunction->solution }}</p>
             </div>
             <div class="flex justify-start mt-5">
@@ -33,9 +32,6 @@
             </div>
         </div>
         
->>>>>>> Stashed changes
-=======
->>>>>>> main
         <h2 class="text-xl font-bold mt-10 mb-5">Storingsgeschiedenis</h2>
         <table class="table-auto w-full bg-white border border-gray-300 rounded-lg">
             <thead>
