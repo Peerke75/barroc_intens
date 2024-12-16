@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('malfunctions', function (Blueprint $table) {
+        Schema::create('leasecontracten', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id');
-            $table->foreignId('customer_id');
-            $table->string('message');
-            $table->string('status');
-            $table->dateTime('date');
             $table->timestamps();
         });
     }
@@ -27,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('malfunctions');
+        Schema::dropIfExists('leasecontracten');
     }
 };
