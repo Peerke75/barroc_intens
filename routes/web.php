@@ -21,8 +21,7 @@ use App\Models\Malfunction;
 use App\Models\Sales;
 use App\Models\Event;
 use App\Models\Customer;
-
-
+use Database\Seeders\ProposalsSeeder;
 
 Route::get('/', function () {
     return redirect('/login');
@@ -30,8 +29,12 @@ Route::get('/', function () {
 
 Route::get('/dashboard', [DashboardController::class, 'showDashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/dashboard/sales/export', [DashboardController::class, 'export'])
+    ->middleware('auth')
+    ->name('dashboard.sales.export');
 
 Route::get('/proposals/search', [ProposalController::class, 'search'])->name('proposals.search');
+Route::get('/proposals' , [ProposalsSeeder::class, 'index'])->name('proposals.index');
 Route::resource('proposals', ProposalController::class)->middleware('auth');
 
 Route::get('/proposals/create', [ProposalController::class, 'create'])->name('proposals.create');
