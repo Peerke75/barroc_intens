@@ -20,7 +20,7 @@
         <!-- Storinginformatie -->
         <div class="text-lg font-medium text-gray-700 flex items-center space-x-2">
             <strong class="text-gray-800">Storing Beschrijving:</strong>
-            <span class="text-red-600">{{ $sale->malfunction->description ?? 'Geen omschrijving beschikbaar' }}</span>
+            <span class="text-red-600">{{ $sale->malfunction->message ?? 'Geen omschrijving beschikbaar' }}</span>
         </div>
 
 

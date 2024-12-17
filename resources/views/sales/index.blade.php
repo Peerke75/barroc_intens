@@ -32,7 +32,7 @@
                         <td class="px-6 py-4 text-sm text-gray-700 border-b">{{ $sale->customer->name }}</td>
                         <td class="px-6 py-4 text-sm text-gray-700 border-b">{{ $sale->user->name }}</td>
                         <td class="px-6 py-4 text-sm text-gray-700 border-b">
-                            {{ $sale->malfunction ? $sale->malfunction->description : 'Geen' }}
+                            {{ $sale->malfunction ? $sale->malfunction->message : 'Geen' }}
                         </td>
                         <td class="px-6 py-4 text-sm text-gray-700 border-b">{{ \Illuminate\Support\Str::limit($sale->description, 50) }}</td>
                         <td class="px-6 py-4 text-sm text-gray-700 border-b">{{ $sale->date }}</td>

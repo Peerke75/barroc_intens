@@ -45,7 +45,7 @@
                 <select id="malfunction_id" name="malfunction_id" class="w-full sm:w-5/5 border-2 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-400 focus:outline-none transition">
                     @foreach ($malfunctions as $malfunction)
                         <option value="{{ $malfunction->id }}" {{ old('malfunction_id', $sale->malfunction_id ?? '') == $malfunction->id ? 'selected' : '' }}>
-                            {{ $malfunction->description }}
+                            {{ $malfunction->message }}
                         </option>
                     @endforeach
                 </select>
