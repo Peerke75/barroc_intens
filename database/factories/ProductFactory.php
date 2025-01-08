@@ -15,6 +15,8 @@ class ProductFactory extends Factory
             'name' => $this->faker->word(),
             'amount' => $this->faker->numberBetween(1, 100),
             'ean' => $this->faker->numberBetween(10000000, 99999999),
+
+            'product_category_id' => 1,
         ];
     }
 }
