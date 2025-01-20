@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('product_id');
             $table->foreignId('user_id');
+            $table->string('approval_status')->default('pending');
             $table->dateTime('date');
             $table->timestamps();
         });

@@ -10,9 +10,10 @@ class Order extends Model
     use HasFactory;
 
     protected $fillable = [
-        'product_id',  
+        'product_id',
         'user_id',
-        'date'
+        'date',
+        'approval_status', // Voeg dit toe om de approval_status te ondersteunen
     ];
 
     public function product()
@@ -24,5 +25,9 @@ class Order extends Model
     {
         return $this->belongsTo(User::class);
     }
-}
 
+    public function orderLines()
+    {
+        return $this->hasMany(OrderLine::class); // Relatie met de OrderLine
+    }
+}

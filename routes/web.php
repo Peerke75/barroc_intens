@@ -79,6 +79,9 @@ Route::get('/products/{id}/info', [ProductController::class, 'show'])->name('pro
 Route::get('/products/{product}/buy', [ProductController::class, 'buy'])->name('products.buy');
 
 Route::post('/orders/{productId}', [OrderController::class, 'store'])->name('orders.store');
+Route::patch('/orders/{order}/approve', [OrderController::class, 'approveOrder'])->name('orders.approve');
+
+
 
 Route::get('/customers/downloadPdf/{customer}', [CustomerController::class, 'downloadPdf'])->name('customers.downloadPdf');
 Route::get('machines', [MachineController::class, 'index'])->name('machines.index');
