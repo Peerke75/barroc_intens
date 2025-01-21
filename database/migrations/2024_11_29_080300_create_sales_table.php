@@ -21,6 +21,7 @@ return new class extends Migration
         $table->string('location');
         $table->date('date');
         $table->string('status');
+        $table->dateTime('start_appointment');
         $table->dateTime('end_appointment');
         $table->timestamps();
         });

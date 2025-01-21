@@ -16,6 +16,7 @@ use App\Http\Controllers\CustomerServiceController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\VisitController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\LeaseController;
 use App\Models\Malfunction;
 use App\Models\Sales;
 use App\Models\Event;
@@ -130,5 +131,15 @@ Route::post('/events', [EventController::class, 'store'])->middleware('auth');
 Route::put('/events/{id}', [EventController::class, 'update'])->middleware('auth');
 Route::delete('/events/{id}', [EventController::class, 'destroy'])->middleware('auth');
 
+
+Route::resource('leasecontracts', LeaseController::class)->names([
+    'index' => 'leasecontracts.index',
+    'create' => 'leasecontracts.create',
+    'store' => 'leasecontracts.store',
+    'show' => 'leasecontracts.show',
+    'edit' => 'leasecontracts.edit',
+    'update' => 'leasecontracts.update',
+    'destroy' => 'leasecontracts.destroy',
+]);
 
 require __DIR__.'/auth.php';
