@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('mail');
             $table->boolean('BKR_check')->default(False);
             $table->string('order_status')->nullable();
-
             $table->timestamps();
         });
     }
