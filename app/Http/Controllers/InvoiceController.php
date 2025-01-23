@@ -43,7 +43,7 @@ class InvoiceController extends Controller
         session(['new_invoices' => $invoices]);
 
         return redirect()
-            ->route('customers.show', $customer->id)
-            ->with('success', 'Facturen succesvol opgeslagen!');
+        ->route('customers')
+        ->with('success', 'Facturen succesvol opgeslagen!');
     }
 }
