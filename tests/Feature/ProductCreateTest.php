@@ -38,7 +38,6 @@ class ProductCreateTest extends TestCase
     {
         Storage::fake('public');
 
-        // Ensure there's a valid category ID in your database (if necessary)
         $this->createProductCategory();
 
         $productData = [
@@ -52,11 +51,9 @@ class ProductCreateTest extends TestCase
         $response = $this->actingAs($this->user)
             ->post(route('products.store'), $productData);
 
-        // Check if the redirect goes to the correct route
         $response->assertRedirect(route('products'))
             ->assertSessionHas('success', 'Product succesvol aangemaakt!');
 
-        // Check if the product was created
         $this->assertDatabaseHas('products', [
             'name' => $productData['name'],
             'price' => $productData['price'],
@@ -69,10 +66,8 @@ class ProductCreateTest extends TestCase
     {
         Storage::fake('public');
 
-        // Ensure there's a valid category ID in your database (if necessary)
         $category = $this->createProductCategory();
 
-        // Create a product to update
         $product = Product::factory()->create([
             'name' => 'Old Product',
             'price' => 30.00,
@@ -92,11 +87,9 @@ class ProductCreateTest extends TestCase
         $response = $this->actingAs($this->user)
             ->put(route('products.update', $product->id), $updatedProductData);
 
-        // Check if the redirect goes to the correct route
         $response->assertRedirect(route('products'))
             ->assertSessionHas('success', 'Product succesvol bewerkt!');
 
-        // Check if the product was updated
         $this->assertDatabaseHas('products', [
             'id' => $product->id,
             'name' => $updatedProductData['name'],
@@ -109,10 +102,8 @@ class ProductCreateTest extends TestCase
     public function it_deletes_a_product_successfully() {
         Storage::fake('public');
 
-        // Ensure there's a valid category ID in your database (if necessary)
         $category = $this->createProductCategory();
 
-        // Create a product to delete
         $product = Product::factory()->create([
             'name' => 'Product to Delete',
             'price' => 30.00,
@@ -124,10 +115,8 @@ class ProductCreateTest extends TestCase
         $response = $this->actingAs($this->user)
             ->delete(route('products.destroy', $product->id));
 
-        // Check if the redirect goes to the correct route
         $response->assertRedirect(route('products'));
 
-        // Check if the product was deleted
         $this->assertDatabaseMissing('products', [
             'id' => $product->id,
             'name' => $product->name,

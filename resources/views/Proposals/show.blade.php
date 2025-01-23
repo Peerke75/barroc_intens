@@ -14,7 +14,6 @@
 <div class="container mx-auto p-8 bg-white shadow-lg rounded-lg border border-gray-200 max-w-3xl">
     <h1 class="text-3xl font-semibold text-gray-800 mb-6">Offerte voor {{ $proposal->customer->name }}</h1>
 
-    <!-- Klantgegevens -->
     <div class="bg-gray-50 p-6 rounded-lg shadow-sm mb-8">
         <h2 class="text-xl font-semibold text-gray-800 mb-4">Klantgegevens</h2>
         <p class="text-gray-700"><span class="font-semibold">Bedrijfsnaam:</span> {{ $proposal->customer->company_name }}</p>
@@ -22,7 +21,6 @@
         <p class="text-gray-700"><span class="font-semibold">Email:</span> {{ $proposal->customer->mail }}</p>
     </div>
 
-    <!-- Prijsregels overzicht -->
     <div class="mt-6 p-6 bg-gray-50 rounded-lg shadow-sm mb-8">
         <h2 class="text-xl font-semibold text-gray-800 mb-4">Prijsregels:</h2>
         <ul class="divide-y divide-gray-300">
@@ -46,7 +44,6 @@
     </div>
 
     <div class="flex justify-between items-center">
-        <!-- Plus-icoon -->
         <div class="text-left">
             <a href="javascript:void(0);" class="text-green-600 hover:text-green-800" id="add-line-btn">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -56,7 +53,6 @@
         </div>
     </div>
 
-    <!-- Dynamisch Toevoegen van een prijsregel -->
     <div id="new-line-form" class="hidden mt-4">
         <form action="{{ route('proposals.addPriceLine', $proposal->id) }}" method="POST" class="flex items-center space-x-4">
             @csrf
@@ -86,13 +82,11 @@
     </div>
 
     <div class="mt-6 flex items-center justify-between">
-        <!-- Terugknop -->
         <a href="{{ route('proposals.index') }}"
            class="bg-gray-200 text-gray-700 hover:bg-gray-300 px-4 py-2 rounded inline-block transition duration-200 ease-in-out shadow-sm">
             ← Terug naar Overzicht
         </a>
 
-        <!-- Verwijder Offerte -->
         <form action="{{ route('proposals.destroy', $proposal->id) }}" method="POST"
               onsubmit="return confirm('Weet je zeker dat je deze offerte wilt verwijderen?');">
             @csrf
@@ -112,25 +106,22 @@
         const formContainer = document.getElementById('new-line-form');
         const cancelButton = document.getElementById('cancel-btn');
 
-        // Toon het formulier wanneer op de plus-knop wordt geklikt
         addButton.addEventListener('click', function () {
             formContainer.classList.remove('hidden');
-            addButton.parentElement.classList.add('hidden'); // Verberg plus-knop
+            addButton.parentElement.classList.add('hidden'); 
         });
 
-        // Annuleer het toevoegen van een prijsregel
         cancelButton.addEventListener('click', function () {
             formContainer.classList.add('hidden');
-            addButton.parentElement.classList.remove('hidden'); // Toon plus-knop opnieuw
+            addButton.parentElement.classList.remove('hidden'); 
         });
 
-        // Vul automatisch de prijs in wanneer een product wordt geselecteerd
         document.querySelectorAll('.product-selector').forEach(select => {
             select.addEventListener('change', function() {
                 const selectedOption = this.options[this.selectedIndex];
                 const price = selectedOption.getAttribute('data-price');
                 const priceInput = this.closest('form').querySelector('.price-input');
-                priceInput.value = price || ''; // Vul de prijs in of laat leeg als geen product geselecteerd is
+                priceInput.value = price || ''; 
             });
         });
     });

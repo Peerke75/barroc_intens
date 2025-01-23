@@ -10,10 +10,8 @@
                 class="w-full p-3 border border-gray-300 rounded shadow focus:outline-none focus:ring-2 focus:ring-yellow-400"
                 style="background-color: #ffffff; color: #000;">
 
-                <!-- Suggesties container -->
                 <ul id="search-results"
                     class="absolute w-full border border-gray-300 rounded bg-white mt-1 hidden shadow-lg z-10">
-                    <!-- Suggesties worden hier geladen -->
                 </ul>
             </div>
 
@@ -24,7 +22,6 @@
             </a>
         </div>
 
-        <!-- Offerte list -->
         <ul class="space-y-6">
             @foreach ($proposals as $proposal)
                 <li class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300">
@@ -50,24 +47,19 @@
         const searchInput = document.getElementById('proposal-search');
         const resultsContainer = document.getElementById('search-results');
 
-        // Haal resultaten op bij het typen
         searchInput.addEventListener('input', function () {
             const query = searchInput.value;
 
-            // Start alleen een fetch als de invoer minstens 2 karakters bevat
             if (query.length >= 2) {
                 fetch(`/proposals/search?query=${query}`)
                     .then(response => response.json())
                     .then(data => {
 
-                        // Reset de resultatenlijst
                         resultsContainer.innerHTML = '';
 
                         if (data.length > 0) {
-                            // Maak de resultatencontainer zichtbaar
                             resultsContainer.classList.remove('hidden');
 
-                            // Vul de resultatenlijst met data
                             data.forEach(proposal => {
                                 const listItem = document.createElement('li');
                                 listItem.classList.add(
@@ -79,13 +71,11 @@
                                     'border-gray-200'
                                 );
 
-                                // Voeg klantnaam en offerte-ID toe
                                 listItem.innerHTML = `
                                     <span class="font-semibold">
                                         ${proposal.customer ? proposal.customer.company_name : 'Onbekend'}
                                     </span> - Offerte ID: #${proposal.id}`;
 
-                                // Voeg een klikgebeurtenis toe
                                 listItem.addEventListener('click', () => {
                                     window.location.href = `/proposals/${proposal.id}`;
                                 });
@@ -93,17 +83,14 @@
                                 resultsContainer.appendChild(listItem);
                             });
                         } else {
-                            // Verberg de resultatencontainer als er geen resultaten zijn
                             resultsContainer.classList.add('hidden');
                         }
                     });
             } else {
-                // Verberg de resultatencontainer als de invoer leeg is
                 resultsContainer.classList.add('hidden');
             }
         });
 
-        // Sluit de suggesties wanneer je buiten de zoekbalk klikt
         document.addEventListener('click', function (event) {
             if (!resultsContainer.contains(event.target) && event.target !== searchInput) {
                 resultsContainer.classList.add('hidden');

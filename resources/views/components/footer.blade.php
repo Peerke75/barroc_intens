@@ -18,11 +18,9 @@
                 <p class="text-gray-500 text-sm">Phone: (123) 456-7890</p>
             </div>
         </div>
-        <!-- Map container -->
         <div id="map" style="height: 400px;"></div>
         @vite('resources/js/leaflet.js')
 
-        <!-- Leaflet JS -->
         <div class="mt-8 text-center text-sm">
             &copy; @php date("Y") @endphp Barroc intens, Alle rechten gereserveerd.
         </div>

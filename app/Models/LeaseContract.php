@@ -21,7 +21,7 @@ class LeaseContract extends Model
         'status',
     ];
 
-    // Relaties
+   
     public function customer()
     {
         return $this->belongsTo(Customer::class);
