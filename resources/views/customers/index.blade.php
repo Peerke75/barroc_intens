@@ -22,7 +22,7 @@
                         <button
                             class="w-full text-left bg-gray-200 text-gray-800 font-medium py-3 px-4 rounded-lg shadow-sm hover:bg-gray-300 hover:shadow-md transition-transform transform hover:scale-105 focus:outline-none"
                             onclick="showCustomerDetails({{ $customer->id }})">
-                            {{ $loop->iteration }}. {{ $customer->name }} <!-- Add the iteration number before the name -->
+                            {{ $loop->iteration }}. {{ $customer->name }} 
                         </button>
                     </li>
                 @endforeach
