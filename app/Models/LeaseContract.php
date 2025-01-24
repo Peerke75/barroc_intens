@@ -31,4 +31,9 @@ class LeaseContract extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function machines()
+    {
+        return $this->hasMany(Machine::class);
+    }
 }

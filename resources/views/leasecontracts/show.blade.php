@@ -9,49 +9,41 @@
         </div>
         <div class="border-t border-gray-200">
             <dl>
-                <!-- Klant -->
                 <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">Klant</dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ $leaseContract->customer->name }}</dd>
                 </div>
-                
-                <!-- Gebruiker -->
+
                 <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">Gebruiker</dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ $leaseContract->user->name }}</dd>
                 </div>
-                
-                <!-- Startdatum -->
+
                 <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">Startdatum</dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ $leaseContract->start_date }}</dd>
                 </div>
-                
-                <!-- Einddatum -->
+
                 <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">Einddatum</dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ $leaseContract->end_date }}</dd>
                 </div>
-                
-                <!-- Betaalmethode -->
+
                 <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">Betaalmethode</dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ $leaseContract->payment_method }}</dd>
                 </div>
-                
-                <!-- Aantal Machines -->
+
                 <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">Aantal Machines</dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ $leaseContract->machine_amount }}</dd>
                 </div>
-                
-                <!-- Opzegtermijn -->
+
                 <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">Opzegtermijn</dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ $leaseContract->notice_period }}</dd>
                 </div>
-                
-                <!-- Status -->
+
                 <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">Status</dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
@@ -63,9 +55,25 @@
             </dl>
         </div>
     </div>
-    <div class="mt-6 flex justify-end">
-        <a href="{{ route('leasecontracts.index') }}" class="text-blue-600 hover:text-blue-800 font-semibold mr-4">Terug naar overzicht</a>
-        <a href="{{ route('leasecontracts.edit', $leaseContract->id) }}" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">Bewerken</a>
+    <div class="mt-6 flex justify-between items-center">
+        <!-- Terug naar overzicht knop -->
+        <a href="{{ route('leasecontracts.index') }}"
+            class="flex items-center text-blue-600 hover:text-blue-800 font-semibold">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+            </svg>
+            Terug naar overzicht
+        </a>
+
+        <!-- Bewerken knop -->
+        <a href="{{ route('leasecontracts.edit', $leaseContract->id) }}"
+            class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487a2.25 2.25 0 0 1 3.182 3.182L9.121 18.593a4.5 4.5 0 0 1-1.691 1.068l-3.402 1.134 1.134-3.402a4.5 4.5 0 0 1 1.068-1.691l10.632-10.632z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 9l-4.5-4.5" />
+            </svg>
+            Bewerken
+        </a>
     </div>
 </div>
 @endsection

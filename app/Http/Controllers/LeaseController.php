@@ -4,21 +4,29 @@ namespace App\Http\Controllers;
 use App\Models\LeaseContract;
 use App\Models\Customer;
 use App\Models\User;
+use App\Models\Machine;
 use Illuminate\Http\Request;
 
 class LeaseController extends Controller
 {
     public function index()
     {
-        $leaseContracts = LeaseContract::with('customer', 'user')->paginate(10);
+        $leaseContracts = LeaseContract::with('customer', 'user', 'machines')->get();
         return view('leasecontracts.index', compact('leaseContracts'));
+    }
+
+    public function show($id)
+    {
+        $leaseContract = LeaseContract::with('customer', 'user', 'machines')->findOrFail($id);
+        return view('leasecontracts.show', compact('leaseContract'));
     }
 
     public function create()
     {
         $customers = Customer::all();
         $users = User::all();
-        return view('leasecontracts.create', compact('customers', 'users'));
+        $machines = Machine::all();
+        return view('leasecontracts.create', compact('customers', 'users', 'machines'));
     }
 
     public function store(Request $request)
@@ -44,7 +52,8 @@ class LeaseController extends Controller
         $leaseContract = LeaseContract::findOrFail($id);
         $customers = Customer::all();
         $users = User::all();
-        return view('leasecontracts.edit', compact('leaseContract', 'customers', 'users'));
+        $machines = Machine::all();
+        return view('leasecontracts.edit', compact('leaseContract', 'customers', 'users', 'machines'));
     }
 
     public function update(Request $request, $id)

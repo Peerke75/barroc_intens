@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('machines', function (Blueprint $table) {
+        Schema::create('lease_machine', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('malfunction_id');
-            $table->foreignId('lease_contract_id');
-            $table->string('name');
-            $table->decimal('price');
-            $table->enum('status', ['active', 'inactive', 'maintenance']);
             $table->timestamps();
         });
     }
@@ -27,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('machines');
+        Schema::dropIfExists('lease_machine');
     }
 };

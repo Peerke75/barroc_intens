@@ -10,4 +10,10 @@ class Machine extends Model
     use HasFactory;
 
     protected $table = 'machines';
+
+
+    public function leasecontracts()
+    {
+        return $this->belongsTo(LeaseContract::class);
+    }
 }
