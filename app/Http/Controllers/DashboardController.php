@@ -29,7 +29,7 @@ class DashboardController extends Controller
             case 8:
                 return view('dashboard.marketing-head'); 
             default:
-                return redirect()->route('home')->with('error', 'Dashboard not found'); 
+                return redirect()->route('home')->with('error', 'Dashboard niet gevonden!'); 
         }
     }
 }

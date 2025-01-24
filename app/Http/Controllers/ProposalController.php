@@ -61,7 +61,7 @@ class ProposalController extends Controller
         }
 
         return redirect()->route('proposals.show', $proposal->id)
-            ->with('success', 'Offerte succesvol aangemaakt.');
+            ->with('success', 'Offerte succesvol aangemaakt!');
     }
 
     public function destroy($id)
@@ -69,7 +69,7 @@ class ProposalController extends Controller
         $proposal = Proposal::findOrFail($id);
         $proposal->delete();
 
-        return redirect()->route('proposals.index')->with('success', 'Offerte succesvol verwijderd.');
+        return redirect()->route('proposals.index')->with('success', 'Offerte succesvol verwijderd!');
     }
 
     public function destroyPriceLine($id)
@@ -77,7 +77,7 @@ class ProposalController extends Controller
         $priceLine = ProposalPriceLine::findOrFail($id);
         $priceLine->delete();
 
-        return redirect()->back()->with('success', 'Prijsregel succesvol verwijderd.');
+        return redirect()->back()->with('success', 'Prijsregel succesvol verwijderd!');
     }
 
     public function search(Request $request)
@@ -112,7 +112,7 @@ class ProposalController extends Controller
         ]);
 
         return redirect()->route('proposals.show', $proposalId)
-            ->with('success', 'Prijsregel succesvol toegevoegd.');
+            ->with('success', 'Prijsregel succesvol toegevoegd!');
     }
 
     public function removePriceLine($priceLineId)
@@ -123,7 +123,7 @@ class ProposalController extends Controller
         $priceLine->delete();
 
         return redirect()->route('proposals.show', $proposalId)
-            ->with('success', 'Prijsregel succesvol verwijderd.');
+            ->with('success', 'Prijsregel succesvol verwijderd!');
     }
 
     public function downloadPdf(Proposal $proposal, Customer $customer)

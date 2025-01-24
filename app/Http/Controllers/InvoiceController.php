@@ -34,7 +34,7 @@ class InvoiceController extends Controller
 
         session(['new_invoice' => $invoice]);
 
-        return redirect()->route('customers.show', $customer->id)->with('success', 'Invoice created successfully.');
+        return redirect()->route('customers.show', $customer->id)->with('success', 'Factuur succesvol aangemaakt!');
     }
 
 }

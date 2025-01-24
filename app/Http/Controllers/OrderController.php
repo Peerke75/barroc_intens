@@ -37,6 +37,6 @@ class OrderController extends Controller
         $product->save();
 
         return redirect()->route('products.info', ['id' => $product->id])
-            ->with('success', 'Bestelling is succesvol geplaatst en opgeslagen in Order Lines!');
+            ->with('success', 'Bestelling is succesvol geplaatst!');
     }
 }
