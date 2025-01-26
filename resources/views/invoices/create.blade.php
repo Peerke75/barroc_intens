@@ -12,7 +12,6 @@
     <form action="{{ route('invoice.store', $customer->id) }}" method="POST" class="space-y-6">
         @csrf
 
-        <!-- Omschrijving -->
         <div>
             <label for="description" class="block text-sm font-semibold text-gray-700">Omschrijving</label>
             <input type="text" name="description" id="description" value="{{ old('description') }}" required
@@ -20,7 +19,6 @@
                    placeholder="Omschrijving">
         </div>
 
-        <!-- Prijs -->
         <div>
             <label for="price" class="block text-sm font-semibold text-gray-700">Prijs (€)</label>
             <input type="number" name="price" id="price" value="{{ old('price') }}" step="0.01" required
@@ -28,7 +26,6 @@
                    placeholder="Prijs">
         </div>
 
-        <!-- Hoeveelheid -->
         <div>
             <label for="quantity" class="block text-sm font-semibold text-gray-700">Hoeveelheid</label>
             <input type="number" name="quantity" id="quantity" value="{{ old('quantity') }}" required
@@ -36,7 +33,6 @@
                    placeholder="Hoeveelheid">
         </div>
 
-        <!-- Opslaan knop -->
         <div class="flex justify-between items-center">
             <button type="submit" class="bg-blue-500 text-white py-3 px-6 rounded-lg hover:bg-blue-600 transition-colors duration-200 text-lg font-semibold">
                 Factuur Opslaan

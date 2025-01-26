@@ -3,7 +3,6 @@
 @section('content')
 
 <div class="flex h-screen">
-    <!-- Column 1: Customer list (scrollable) -->
     @if(session('success'))
     <div class="bg-green-100 text-green-700 px-4 py-2 rounded mb-4">
         {{ session('success') }}
@@ -24,12 +23,10 @@
         </ul>
     </div>
 
-    <!-- Column 2: Customer details -->
     <div class="w-1/2 p-8 bg-white" id="customer-details">
         <p class="text-gray-500 text-center">Selecteer een klant voor meer details</p>
     </div>
 
-    <!-- Column 3: Invoice placeholder -->
     <div class="w-1/2 bg-gray-900 text-white p-8" id="invoice-placeholder">
         <p class="text-gray-500 text-center">Factuur komt hier terecht</p>
     </div>
@@ -73,7 +70,6 @@
     let customer = customers.find(c => c.id === customerId);
     }
     if (customer) {
-        // Fetch the latest saved invoice if available
         const newInvoice = @json(session('new_invoice'));
     }
         let invoiceSection = '';
@@ -105,12 +101,10 @@
                         <p class="text-gray-600">${generateRandomDescription(customerId)}</p>
                     </div>
 
-                    <!-- Payment Status Box -->
                     <div class="mt-4 p-4 rounded-lg ${paymentStatusClass} text-white text-center">
                         <p class="text-xl font-semibold">Payment Status: ${paymentStatusText}</p>
                     </div>
 
-                    <!-- Make Invoice Button -->
 
                 </div>
             `;
