@@ -12,7 +12,7 @@ class ProductTest extends TestCase
 
 
     /** @test */
-    public function it_rejects_a_product_with_empty_name() // Edge Case 1
+    public function it_rejects_a_product_with_empty_name() 
     {
         $response = $this->post(route('products.store'), [
             'name' => '',
@@ -26,7 +26,7 @@ class ProductTest extends TestCase
     }
 
     /** @test */
-    public function it_rejects_a_product_with_invalid_ean() // Edge Case 2
+    public function it_rejects_a_product_with_invalid_ean() 
     {
         $response = $this->post(route('products.store'), [
             'name' => 'Invalid EAN Product',
@@ -40,7 +40,7 @@ class ProductTest extends TestCase
     }
 
     /** @test */
-    public function it_rejects_a_product_with_price_in_minus() // Extreme Case 1
+    public function it_rejects_a_product_with_price_in_minus() 
     {
         $response = $this->post(route('products.store'), [
             'name' => 'Expensive Product',
@@ -54,9 +54,9 @@ class ProductTest extends TestCase
     }
 
     /** @test */
-    public function it_rejects_product_with_extremely_long_name() // Extreme Case 2
+    public function it_rejects_product_with_extremely_long_name()
     {
-        $longName = str_repeat('A', 256); // 256 characters
+        $longName = str_repeat('A', 256); 
 
         $response = $this->post(route('products.store'), [
             'name' => $longName,

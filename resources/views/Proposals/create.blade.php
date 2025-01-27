@@ -7,7 +7,6 @@
         <form action="{{ route('proposals.store') }}" method="POST" class="space-y-6">
             @csrf
 
-            <!-- Kiezen van de klant -->
             <div>
                 <label for="customer_id" class="block font-semibold text-gray-700 mb-2">Klant</label>
                 <select name="customer_id" id="customer_id" required
@@ -18,14 +17,12 @@
                 </select>
             </div>
 
-            <!-- Datum van de offerte -->
             <div>
                 <label for="date" class="block font-semibold text-gray-700 mb-2">Datum</label>
                 <input type="date" name="date" value="{{ old('date') }}" required
                     class="w-full p-3 border rounded-lg bg-gray-50 focus:ring-yellow-500 focus:border-yellow-500">
             </div>
 
-            <!-- Dynamisch toe te voegen prijsregels -->
             <div id="price-lines" class="price-lines space-y-4">
                 <div class="price-line grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
@@ -48,7 +45,6 @@
                 </div>
             </div>
 
-            <!-- Plus-icoon -->
             <div class="flex justify-end mt-4">
                 <button type="button" id="add-line-btn" class="flex items-center text-green-600 hover:text-green-800">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-1">
@@ -58,7 +54,6 @@
                 </button>
             </div>
 
-            <!-- Opslaan button -->
             <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg mt-6 w-full">
                 Offerte aanmaken
             </button>
@@ -91,22 +86,20 @@
             `;
             container.appendChild(lineDiv);
 
-            // Voeg event listener toe voor het nieuwe product select
             lineDiv.querySelector('.product-selector').addEventListener('change', function() {
                 const selectedOption = this.options[this.selectedIndex];
                 const price = selectedOption.getAttribute('data-price');
                 const priceInput = this.closest('.price-line').querySelector('.price-input');
-                priceInput.value = price || ''; // Vul de prijs in of laat leeg als geen product geselecteerd is
+                priceInput.value = price || ''; 
             });
         });
 
-        // Zorg ervoor dat de prijs automatisch geladen wordt voor de bestaande regels
         document.querySelectorAll('.product-selector').forEach(select => {
             select.addEventListener('change', function() {
                 const selectedOption = this.options[this.selectedIndex];
                 const price = selectedOption.getAttribute('data-price');
                 const priceInput = this.closest('.price-line').querySelector('.price-input');
-                priceInput.value = price || ''; // Vul de prijs in of laat leeg als geen product geselecteerd is
+                priceInput.value = price || '';
             });
         });
     </script>

@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('leasecontracten', function (Blueprint $table) {
+        Schema::create('lease_machine', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
         });
@@ -22,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('leasecontracten');
+        Schema::dropIfExists('lease_machine');
     }
 };
