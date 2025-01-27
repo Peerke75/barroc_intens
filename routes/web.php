@@ -86,7 +86,7 @@ Route::get('/products/{product}/buy', [ProductController::class, 'buy'])->name('
 
 
 Route::get('/sales/head-sales', [OrderController::class, 'index'])
-    ->middleware(CheckUserId::class)
+    ->middleware('auth', CheckUserId::class . ':5')
     ->name('head-sales.index');
 
 Route::post('/orders/{productId}', [OrderController::class, 'store'])->name('orders.store');
@@ -108,13 +108,14 @@ Route::get('/machines', function () {
     return view('machines');
 })->name('machines');
 
-Route::get('/customers', [CustomerController::class, 'index'])->name('customers');
-Route::get('/customers/create', [CustomerController::class, 'create'])->name('customers.create');
-Route::post('/customers', [CustomerController::class, 'store'])->name('customers.store');
-Route::get('/customers/{customer}/invoice/create', [InvoiceController::class, 'create'])->name('invoice.create');
-Route::post('/customers/{customer}/invoice', [InvoiceController::class, 'store'])->name('invoice.store');
-Route::get('/customers/{customer}', [CustomerController::class, 'show'])->name('customers.show');
-
+Route::middleware(['auth', CheckUserId::class . ':2,6'])->group(function () {
+    Route::get('/customers', [CustomerController::class, 'index'])->name('customers');
+    Route::get('/customers/create', [CustomerController::class, 'create'])->name('customers.create');
+    Route::post('/customers', [CustomerController::class, 'store'])->name('customers.store');
+    Route::get('/customers/{customer}/invoice/create', [InvoiceController::class, 'create'])->name('invoice.create');
+    Route::post('/customers/{customer}/invoice', [InvoiceController::class, 'store'])->name('invoice.store');
+    Route::get('/customers/{customer}', [CustomerController::class, 'show'])->name('customers.show');
+});
 
 
 
