@@ -34,18 +34,11 @@ class Customer extends Model
 
     public function index()
     {
-<<<<<<< Updated upstream
-        $customers = Customer::with('invoices')->get();  
+
+        $customers = Customer::with('invoices')->get();
         return view('customers.index', compact('customers'));
     }
 
-    
-=======
-        $customers = Customer::with('invoices')->get(); 
-        return view('customers.index', compact('customers'));
-    }
-
->>>>>>> Stashed changes
     public function proposals()
     {
         return $this->hasMany(Proposal::class, 'customer_id');

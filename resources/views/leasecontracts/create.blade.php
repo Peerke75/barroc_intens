@@ -5,7 +5,7 @@
     <h1 class="text-3xl font-bold text-center mt-3 mb-6">Nieuw Leasecontract</h1>
     <form action="{{ route('leasecontracts.store') }}" method="POST">
         @csrf
-        
+
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
                 <label for="customer_id" class="block text-sm font-medium text-gray-700">Klant</label>
@@ -82,7 +82,6 @@
             </div>
         </div>
 
-        <!-- Machines Section -->
         <div class="mt-8">
             <h2 class="text-2xl font-bold text-gray-800 mb-6">Machines Toevoegen</h2>
             <div id="price-lines" class="price-lines space-y-4">
@@ -117,7 +116,6 @@
             </div>
         </div>
 
-        <!-- Submit Button -->
         <div class="mt-6">
             <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">
                 Opslaan

@@ -56,7 +56,6 @@
         </div>
     </div>
     <div class="mt-6 flex justify-between items-center">
-        <!-- Terug naar overzicht knop -->
         <a href="{{ route('leasecontracts.index') }}"
             class="flex items-center text-blue-600 hover:text-blue-800 font-semibold">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
@@ -65,7 +64,6 @@
             Terug naar overzicht
         </a>
 
-        <!-- Bewerken knop -->
         <a href="{{ route('leasecontracts.edit', $leaseContract->id) }}"
             class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">

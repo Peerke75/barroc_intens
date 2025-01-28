@@ -12,12 +12,9 @@ class InvoiceSeeder extends Seeder
 
     public function run()
     {
-<<<<<<< Updated upstream
+
         $customer1 = Customer::find(1);
-=======
-        $customer1 = Customer::find(1); 
->>>>>>> Stashed changes
-        $customer2 = Customer::find(2); 
+        $customer2 = Customer::find(2);
 
         if ($customer1) {
             Invoice::create([
@@ -26,7 +23,7 @@ class InvoiceSeeder extends Seeder
                 'quantity' => 2,
                 'description' => 'Consulting services for project X',
                 'price' => 150.00,
-                'total' => 300.00, 
+                'total' => 300.00,
             ]);
             $customers = Customer::all();
 

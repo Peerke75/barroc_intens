@@ -22,23 +22,14 @@ class ProposalController extends Controller
     public function show($id)
     {
         $proposal = Proposal::with('customer', 'priceLines.product')->findOrFail($id);
-<<<<<<< Updated upstream
         $products = Product::all();
-=======
-        $products = Product::all(); 
->>>>>>> Stashed changes
-
         return view('proposals.show', compact('proposal', 'products'));
     }
 
     public function create()
     {
         $customers = Customer::all();
-<<<<<<< Updated upstream
         $products = Product::all();
-=======
-        $products = Product::all(); 
->>>>>>> Stashed changes
         return view('proposals.create', compact('customers', 'products'));
     }
 
@@ -58,26 +49,18 @@ class ProposalController extends Controller
         ]);
 
         foreach ($request->product_id as $index => $product_id) {
-<<<<<<< Updated upstream
             $product = Product::findOrFail($product_id);
-=======
-            $product = Product::findOrFail($product_id); 
->>>>>>> Stashed changes
 
             ProposalPriceLine::create([
                 'proposal_id' => $proposal->id,
                 'product_id' => $product_id,
-<<<<<<< Updated upstream
                 'price' => $product->price,
-=======
-                'price' => $product->price, 
->>>>>>> Stashed changes
                 'amount' => $request->amount[$index],
             ]);
         }
 
         return redirect()->route('proposals.show', $proposal->id)
-            ->with('success', 'Offerte succesvol aangemaakt.');
+            ->with('success', 'Offerte succesvol aangemaakt!');
     }
 
     public function destroy($id)
@@ -85,7 +68,7 @@ class ProposalController extends Controller
         $proposal = Proposal::findOrFail($id);
         $proposal->delete();
 
-        return redirect()->route('proposals.index')->with('success', 'Offerte succesvol verwijderd.');
+        return redirect()->route('proposals.index')->with('success', 'Offerte succesvol verwijderd!');
     }
 
     public function destroyPriceLine($id)
@@ -93,32 +76,21 @@ class ProposalController extends Controller
         $priceLine = ProposalPriceLine::findOrFail($id);
         $priceLine->delete();
 
-        return redirect()->back()->with('success', 'Prijsregel succesvol verwijderd.');
+        return redirect()->back()->with('success', 'Prijsregel succesvol verwijderd!');
     }
 
     public function search(Request $request)
     {
         $query = $request->get('query');
 
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
         $proposals = Proposal::whereHas('customer', function ($queryBuilder) use ($query) {
             $queryBuilder->where('company_name', 'LIKE', "%{$query}%");
         })
         ->with('customer')
-<<<<<<< Updated upstream
         ->limit(5)
         ->get();
 
         return response()->json($proposals);
-=======
-        ->limit(5) 
-        ->get();
-
-        return response()->json($proposals); 
->>>>>>> Stashed changes
     }
 
     public function addPriceLine(Request $request, $proposalId)
@@ -133,16 +105,12 @@ class ProposalController extends Controller
         ProposalPriceLine::create([
             'proposal_id' => $proposalId,
             'product_id' => $request->product_id,
-<<<<<<< Updated upstream
             'price' => $product->price,
-=======
-            'price' => $product->price, 
->>>>>>> Stashed changes
             'amount' => $request->amount,
         ]);
 
         return redirect()->route('proposals.show', $proposalId)
-            ->with('success', 'Prijsregel succesvol toegevoegd.');
+            ->with('success', 'Prijsregel succesvol toegevoegd!');
     }
 
     public function removePriceLine($priceLineId)
@@ -153,7 +121,7 @@ class ProposalController extends Controller
         $priceLine->delete();
 
         return redirect()->route('proposals.show', $proposalId)
-            ->with('success', 'Prijsregel succesvol verwijderd.');
+            ->with('success', 'Prijsregel succesvol verwijderd!');
     }
 
     public function downloadPdf(Proposal $proposal, Customer $customer)

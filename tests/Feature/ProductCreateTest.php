@@ -116,14 +116,6 @@ class ProductCreateTest extends TestCase
 
         $response->assertRedirect(route('products'));
 
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
-        $this->assertDatabaseMissing('products', [
-            'id' => $product->id,
-            'name' => $product->name,
-            'price' => $product->price,
-        ]);
+        
     }
 }

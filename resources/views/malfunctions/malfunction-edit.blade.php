@@ -19,7 +19,6 @@
             @csrf
             @method('PUT')
 
-            <!-- Product Select -->
             <div>
                 <label for="product_id" class="block text-sm font-medium">Product</label>
                 <select name="product_id" id="product_id" class="w-full border px-3 py-2" required>
@@ -31,7 +30,6 @@
                 </select>
             </div>
 
-            <!-- Customer Select -->
             <div>
                 <label for="customer_id" class="block text-sm font-medium">Klant</label>
                 <select name="customer_id" id="customer_id" class="w-full border px-3 py-2" required>
@@ -43,13 +41,11 @@
                 </select>
             </div>
 
-            <!-- Message -->
             <div>
                 <label for="message" class="block text-sm font-medium">Bericht</label>
                 <textarea name="message" id="message" class="w-full border px-3 py-2" rows="3" required>{{ $malfunction->message }}</textarea>
             </div>
 
-            <!-- Status -->
             <div>
                 <label for="status" class="block text-sm font-medium">Status</label>
                 <select name="status" id="status" class="w-full border px-3 py-2" required>
@@ -58,14 +54,12 @@
                 </select>
             </div>
 
-            <!-- Date -->
             <div>
                 <label for="date" class="block text-sm font-medium">Datum</label>
                 <input type="date" name="date" id="date" class="w-full border px-3 py-2"
                     value="{{ $malfunction->date }}" required>
             </div>
 
-            <!-- Submit Button -->
             <div class="flex justify-end">
                 <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded">Bijwerken</button>
             </div>

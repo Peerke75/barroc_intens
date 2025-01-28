@@ -33,10 +33,8 @@
 </div>
 
 <script>
-    // Prepare customers with invoices data
     let customers = @json($customer);
 
-    // Random description generator function
     function generateRandomDescription(customerId) {
         const descriptions = [
             "Customer specializes in web development services with innovative online solutions.",
@@ -51,12 +49,11 @@
         return descriptions[Math.floor(Math.random() * descriptions.length)];
     }
 
-    // Random invoice generation function
     function generateRandomInvoice() {
         const descriptions = ["Web development services", "Consulting", "Design services", "Hosting", "SEO optimization"];
         const randomDescription = descriptions[Math.floor(Math.random() * descriptions.length)];
-        const randomPrice = (Math.random() * (500 - 50) + 50).toFixed(2); // Price between 50 and 500 EUR
-        const randomQuantity = Math.floor(Math.random() * 5) + 1; // Quantity between 1 and 5
+        const randomPrice = (Math.random() * (500 - 50) + 50).toFixed(2);
+        const randomQuantity = Math.floor(Math.random() * 5) + 1;
 
         return {
             number: "INV-" + Math.floor(Math.random() * 100000),
@@ -151,7 +148,7 @@
     }
 }
 let customers = @json($customer);
-let newInvoice = @json(session('new_invoice', null)); // Pass the newly created invoice
+let newInvoice = @json(session('new_invoice', null)); 
 
 </script>
 

@@ -12,14 +12,14 @@ return new class extends Migration
     public function up()
     {
         Schema::table('customers', function (Blueprint $table) {
-            $table->timestamp('archived_at')->nullable();  // Add archived_at column
+            $table->timestamp('archived_at')->nullable();
         });
     }
 
     public function down()
     {
         Schema::table('customers', function (Blueprint $table) {
-            $table->dropColumn('archived_at');  // Drop the column if rollback is required
+            $table->dropColumn('archived_at'); 
         });
     }
 

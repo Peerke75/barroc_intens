@@ -23,7 +23,6 @@ class DashboardController extends Controller
             case 4:
                 return view('dashboard.marketing');
             case 5:
-            // Alleen orders ophalen die 5000 of meer bedragen en nog niet zijn goedgekeurd
             $pendingOrders = \App\Models\Order::where('approval_status', 'pending')
                 ->whereHas('orderLines', function ($query) {
                     $query->where('total_price', '>=', 5000);

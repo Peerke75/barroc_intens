@@ -22,7 +22,7 @@ class SalesController extends Controller
     {
         $customers = Customer::all();
         $users = User::all();
-        $malfunctions = Malfunction::all(); 
+        $malfunctions = Malfunction::all();
         return view('sales.create', compact('customers', 'users', 'malfunctions'));
     }
 
@@ -42,14 +42,10 @@ class SalesController extends Controller
         ]);
 
         if ($request->start_appointment) {
-            $validated['start_appointment'] = $request->date . ' ' . $request->start_appointment . ':00';  
+            $validated['start_appointment'] = $request->date . ' ' . $request->start_appointment . ':00';
         }
         if ($request->end_appointment) {
-<<<<<<< Updated upstream
-            $validated['end_appointment'] = $request->date . ' ' . $request->end_appointment . ':00'; 
-=======
-            $validated['end_appointment'] = $request->date . ' ' . $request->end_appointment . ':00';  
->>>>>>> Stashed changes
+            $validated['end_appointment'] = $request->date . ' ' . $request->end_appointment . ':00';
         }
 
         $validated['priority'] = $request->priority === 'yes' ? 1 : ($request->priority === 'no' ? 0 : $validated['priority']);
@@ -102,7 +98,6 @@ class SalesController extends Controller
     public function calendar()
     {
         $customers = Customer::all();
-
         $events = Event::all();
 
         return view('calendar', ['events' => $events, 'customers' => $customers]);

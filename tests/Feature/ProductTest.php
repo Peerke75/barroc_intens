@@ -11,12 +11,9 @@ class ProductTest extends TestCase
     use RefreshDatabase;
 
 
-    /** @test */
-<<<<<<< Updated upstream
-    public function it_rejects_a_product_with_empty_name() 
-=======
-    public function it_rejects_a_product_with_empty_name()  
->>>>>>> Stashed changes
+
+    public function it_rejects_a_product_with_empty_name()
+
     {
         $response = $this->post(route('products.store'), [
             'name' => '',
@@ -29,8 +26,8 @@ class ProductTest extends TestCase
         $response->assertSessionHasErrors(['name']);
     }
 
-    /** @test */
-    public function it_rejects_a_product_with_invalid_ean() 
+
+    public function it_rejects_a_product_with_invalid_ean()
     {
         $response = $this->post(route('products.store'), [
             'name' => 'Invalid EAN Product',
@@ -43,8 +40,8 @@ class ProductTest extends TestCase
         $response->assertSessionHasErrors(['ean']);
     }
 
-    /** @test */
-    public function it_rejects_a_product_with_price_in_minus() 
+    
+    public function it_rejects_a_product_with_price_in_minus()
     {
         $response = $this->post(route('products.store'), [
             'name' => 'Expensive Product',
@@ -57,14 +54,10 @@ class ProductTest extends TestCase
         $response->assertSessionHasErrors(['price']);
     }
 
-    /** @test */
-<<<<<<< Updated upstream
     public function it_rejects_product_with_extremely_long_name()
-=======
-    public function it_rejects_product_with_extremely_long_name() 
->>>>>>> Stashed changes
+
     {
-        $longName = str_repeat('A', 256); 
+        $longName = str_repeat('A', 256);
 
         $response = $this->post(route('products.store'), [
             'name' => $longName,
@@ -77,7 +70,7 @@ class ProductTest extends TestCase
         $response->assertSessionHasErrors(['name']);
     }
 
-    /** @test */
+    
     public function it_rejects_a_product_with_empty_category_id()
     {
         $response = $this->post(route('products.store'), [
@@ -91,7 +84,7 @@ class ProductTest extends TestCase
         $response->assertSessionHasErrors(['product_category_id']);
     }
 
-    /** @test */
+    
     public function it_rejects_a_product_with_empty_amount()
     {
         $response = $this->post(route('products.store'), [
@@ -105,7 +98,7 @@ class ProductTest extends TestCase
         $response->assertSessionHasErrors(['amount']);
     }
 
-    /** @test */
+    
     public function it_rejects_a_product_with_empty_ean()
     {
         $response = $this->post(route('products.store'), [

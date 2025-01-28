@@ -10,15 +10,6 @@
 @endif
 <div class="p-6">
     <h1 class="text-3xl font-bold mb-4">Finance Head Dashboard</h1>
-    <!DOCTYPE html>
-    <html lang="en">
-
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Expense Charts</title>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    </head>
 
     <body>
         <div style="display: flex; justify-content: space-around; padding: 20px;">
@@ -34,7 +25,7 @@
 
         <script>
             const monthlyLabels = ['Januari', 'Februari', 'Maart', 'April', 'Mei', 'Juni', 'Juli', 'Augustus', 'September', 'Oktober', 'November', 'December'];
-            const monthlyData = [400, 300, 500, 450, 600, 550, 700, 650, 620, 580, 490, 520]; 
+            const monthlyData = [400, 300, 500, 450, 600, 550, 700, 650, 620, 580, 490, 520];
 
             const ctxMonthly = document.getElementById('monthlyChart').getContext('2d');
             const monthlyChart = new Chart(ctxMonthly, {
@@ -56,7 +47,7 @@
                             beginAtZero: true,
                             ticks: {
                                 callback: function(value) {
-                                    return '€' + value; 
+                                    return '€' + value;
                                 }
                             }
                         }
@@ -74,7 +65,7 @@
             });
 
             const yearlyLabels = ['2020', '2021', '2022', '2023', '2024'];
-            const yearlyData = [5200, 6100, 5800, 6000, 6500]; 
+            const yearlyData = [5200, 6100, 5800, 6000, 6500];
 
             const ctxYearly = document.getElementById('yearlyChart').getContext('2d');
             const yearlyChart = new Chart(ctxYearly, {
@@ -87,7 +78,7 @@
                         borderColor: 'rgba(255, 99, 132, 1)',
                         backgroundColor: 'rgba(255, 99, 132, 0.2)',
                         borderWidth: 2,
-                        fill: true 
+                        fill: true
                     }]
                 },
                 options: {
@@ -97,7 +88,7 @@
                             beginAtZero: true,
                             ticks: {
                                 callback: function(value) {
-                                    return '€' + value; 
+                                    return '€' + value;
                                 }
                             }
                         }

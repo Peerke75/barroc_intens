@@ -1,13 +1,11 @@
 <footer class="bg-gray-800 text-gray-300 py-8">
     <div class="container mx-auto px-4 max-w-screen-xl">
         <div class="flex flex-wrap justify-between">
-            <!-- Over Ons -->
             <div class="w-full md:w-1/3 mb-6 md:mb-0 text-center md:text-left">
                 <h5 class="text-gray-100 font-bold text-lg mb-2">Over Ons</h5>
                 <p class="text-gray-400 text-sm">Wij zijn gespecialiseerd in koffie en staan klaar om al je vragen te beantwoorden.</p>
             </div>
 
-            <!-- Linkjes -->
             <div class="w-full md:w-1/3 mb-6 md:mb-0 text-center">
                 <h5 class="text-gray-100 font-bold text-lg mb-2">Linkjes</h5>
                 <ul class="space-y-2">
@@ -18,7 +16,6 @@
                 </ul>
             </div>
 
-            <!-- Bereik Ons -->
             <div class="w-full md:w-1/3 text-center md:text-right">
                 <h5 class="text-gray-100 font-bold text-lg mb-2">Bereik ons</h5>
                 <p class="text-gray-400 text-sm">1234 Terheidenseweg 350, Breda</p>
@@ -27,10 +24,9 @@
             </div>
         </div>
 
-        <!-- Map -->
         <div id="map" class="mt-8 h-64 md:h-96"></div>
         @vite('resources/js/leaflet.js')
-        <!-- Copyright -->
+
         <div class="mt-8 text-center text-sm text-gray-500">
             &copy; {{ date('Y') }} Barroc Intens. Alle rechten voorbehouden.
         </div>
