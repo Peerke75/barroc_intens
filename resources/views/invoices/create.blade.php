@@ -66,12 +66,6 @@
                     class="bg-blue-500 text-white py-3 px-6 rounded-lg hover:bg-blue-600 transition text-lg font-semibold">
                 Factuur Opslaan
             </button>
-
-            <!-- Cancel Link -->
-            <a href="{{ route('customers.show', $customer->id) }}"
-               class="text-blue-500 font-semibold hover:underline">
-                Annuleren
-            </a>
         </div>
     </form>
 </div>
