@@ -5,7 +5,6 @@
 <div class="container px-3">
     <h2 class="text-lg font-semibold mb-4">Nieuwe Storing Aanmaken</h2>
 
-    <!-- Display Validation Errors -->
     @if ($errors->any())
         <div class="text-red-500 mb-4">
             <ul>

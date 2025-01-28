@@ -18,4 +18,9 @@ class Product extends Model
         return $this->belongsTo(ProductCategory::class, 'product_category_id');
     }
 
+    public function malfunctions()
+    {
+        return $this->hasMany(Malfunction::class);
+    }
+
 }

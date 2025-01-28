@@ -1,24 +1,6 @@
 @extends('layouts.app')
-
+<title>Bestelling Bevestigen</title>
 @section('content')
-    <!DOCTYPE html>
-    <html lang="nl">
-
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Bestelling Bevestigen</title>
-        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-        <script>
-            function updateTotal() {
-                const price = {{ $product->price }};
-                const quantity = document.getElementById('quantity').value;
-                const total = price * quantity;
-                document.getElementById('totalAmount').innerText = '€' + total.toFixed(2);
-            }
-        </script>
-    </head>
-
     <body class="bg-gray-100">
 
         <div class="container mx-auto px-4 py-8">
@@ -36,25 +18,28 @@
                     <div class="mb-4">
                         <label for="quantity" class="block text-gray-700 font-medium mb-2">Aantal:</label>
                         <input type="number" id="quantity" name="quantity" value="1" min="1"
-                               class="border border-gray-300 rounded-lg p-2 w-full"
-                               oninput="updateTotal()">
+                            class="border border-gray-300 rounded-lg p-2 w-full" oninput="updateTotal()">
                     </div>
 
                     <p class="text-lg font-semibold text-gray-800 mb-4">
                         Totaal: <span id="totalAmount">€{{ number_format($product->price, 2) }}</span>
                     </p>
 
-                    <button type="submit"
-                            class="block text-center py-2 px-4 rounded transition w-full"
-                            style="background-color:#000000; color:#fdd716;">
+                    <button type="submit" class="block text-center py-2 px-4 rounded transition w-full"
+                        style="background-color:#000000; color:#fdd716;">
                         Bestelling Bevestigen
                     </button>
                 </form>
 
             </div>
         </div>
-
+        <script>
+            function updateTotal() {
+                const price = {{ $product->price }};
+                const quantity = document.getElementById('quantity').value;
+                const total = price * quantity;
+                document.getElementById('totalAmount').innerText = '€' + total.toFixed(2);
+            }
+        </script>
     </body>
-
-    </html>
 @endsection

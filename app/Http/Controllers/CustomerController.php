@@ -68,17 +68,6 @@ class CustomerController extends Controller
         return redirect()->route('customers.index')->with('success', 'Klant succesvol verwijderd!');
     }
 
-    private function generateConnectionFeeInvoice($customerId)
-    {
-        return [
-            'number' => "CF-" . rand(10000, 99999),
-            'description' => "Connection Fee",
-            'price' => 100.00,
-            'quantity' => 1,
-            'total' => 100.00,
-        ];
-    }
-
     public function show(Customer $customer)
     {
         $customer->load('invoices');
@@ -92,7 +81,7 @@ class CustomerController extends Controller
 
         $invoices = $customer->invoices;
         if ($invoices->isEmpty()) {
-            return redirect()->back()->with('error', 'No invoices available for this customer.');
+            return redirect()->back()->with('error', 'Geen facturen beschikbaar voor deze klant.');
         }
 
         $pdf = Pdf::loadView('invoices.pdf', [
