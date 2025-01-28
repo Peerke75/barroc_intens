@@ -9,7 +9,7 @@
     </div>
 @endif
 <div class="p-6">
-    <h1 class="text-3xl font-bold mb-4">Marketing Head Dashboard</h1>
-    <p>Welcome to the Marketing Head dashboard. Drive marketing strategy, lead campaigns, and manage brand performance.</p>
+    <h1 class="text-3xl font-bold mb-4">Stock Head Dashboard</h1>
+    <p>Welcome to the Stock Head dashboard. Drive stock strategy, lead campaigns, and manage brand performance.</p>
 </div>
 @endsection

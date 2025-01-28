@@ -12,14 +12,6 @@ use App\Models\Product;
 class OrderController extends Controller
 {
 
-
-    public function index()
-    {
-        $pendingOrders = Order::where('approval_status', 'pending')->with(['product', 'orderLines'])->get();
-
-        return view('sales.head-sales', compact('pendingOrders'));
-    }
-
     public function store(Request $request, $productId)
     {
         $product = Product::findOrFail($productId);
@@ -47,7 +39,7 @@ class OrderController extends Controller
         ]);
 
         if ($approvalStatus === 'approved') {
-            $product->amount -= $quantity;
+            $product->amount += $quantity;
             $product->save();
         }
 
