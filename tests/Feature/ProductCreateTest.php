@@ -61,7 +61,6 @@ class ProductCreateTest extends TestCase
     }
 
 
-    /** @test */
     public function it_updates_a_product_successfully()
     {
         Storage::fake('public');
@@ -117,6 +116,10 @@ class ProductCreateTest extends TestCase
 
         $response->assertRedirect(route('products'));
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
         $this->assertDatabaseMissing('products', [
             'id' => $product->id,
             'name' => $product->name,

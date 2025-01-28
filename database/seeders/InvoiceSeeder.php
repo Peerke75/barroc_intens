@@ -12,7 +12,11 @@ class InvoiceSeeder extends Seeder
 
     public function run()
     {
+<<<<<<< Updated upstream
         $customer1 = Customer::find(1);
+=======
+        $customer1 = Customer::find(1); 
+>>>>>>> Stashed changes
         $customer2 = Customer::find(2); 
 
         if ($customer1) {

@@ -121,7 +121,11 @@
                 const selectedOption = this.options[this.selectedIndex];
                 const price = selectedOption.getAttribute('data-price');
                 const priceInput = this.closest('form').querySelector('.price-input');
+<<<<<<< Updated upstream
                 priceInput.value = price || ''; 
+=======
+                priceInput.value = price || '';
+>>>>>>> Stashed changes
             });
         });
     });

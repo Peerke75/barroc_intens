@@ -45,7 +45,11 @@ class SalesController extends Controller
             $validated['start_appointment'] = $request->date . ' ' . $request->start_appointment . ':00';  
         }
         if ($request->end_appointment) {
+<<<<<<< Updated upstream
             $validated['end_appointment'] = $request->date . ' ' . $request->end_appointment . ':00'; 
+=======
+            $validated['end_appointment'] = $request->date . ' ' . $request->end_appointment . ':00';  
+>>>>>>> Stashed changes
         }
 
         $validated['priority'] = $request->priority === 'yes' ? 1 : ($request->priority === 'no' ? 0 : $validated['priority']);

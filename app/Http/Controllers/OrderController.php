@@ -30,7 +30,11 @@ class OrderController extends Controller
 
         $quantity = $request->quantity;
 
+<<<<<<< Updated upstream
         $approvalStatus = $quantity >= 5000 ? 'pending' : 'approved';
+=======
+        $approvalStatus = $totalPrice >= 5000 ? 'pending' : 'approved';
+>>>>>>> Stashed changes
 
         $order = Order::create([
             'product_id' => $product->id,
@@ -43,7 +47,11 @@ class OrderController extends Controller
             'order_id' => $order->id,
             'product_id' => $product->id,
             'quantity' => $quantity,
+<<<<<<< Updated upstream
             'total_price' => $quantity * $product->price,
+=======
+            'total_price' => $totalPrice, 
+>>>>>>> Stashed changes
         ]);
 
         if ($approvalStatus === 'approved') {

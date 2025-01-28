@@ -99,7 +99,11 @@
                 const selectedOption = this.options[this.selectedIndex];
                 const price = selectedOption.getAttribute('data-price');
                 const priceInput = this.closest('.price-line').querySelector('.price-input');
+<<<<<<< Updated upstream
                 priceInput.value = price || '';
+=======
+                priceInput.value = price || ''; 
+>>>>>>> Stashed changes
             });
         });
     </script>

@@ -12,7 +12,11 @@ class ProductTest extends TestCase
 
 
     /** @test */
+<<<<<<< Updated upstream
     public function it_rejects_a_product_with_empty_name() 
+=======
+    public function it_rejects_a_product_with_empty_name()  
+>>>>>>> Stashed changes
     {
         $response = $this->post(route('products.store'), [
             'name' => '',
@@ -54,7 +58,11 @@ class ProductTest extends TestCase
     }
 
     /** @test */
+<<<<<<< Updated upstream
     public function it_rejects_product_with_extremely_long_name()
+=======
+    public function it_rejects_product_with_extremely_long_name() 
+>>>>>>> Stashed changes
     {
         $longName = str_repeat('A', 256); 
 
