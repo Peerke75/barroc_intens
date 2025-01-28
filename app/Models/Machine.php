@@ -10,4 +10,17 @@ class Machine extends Model
     use HasFactory;
 
     protected $table = 'machines';
+
+    protected $fillable = [
+        'name',
+        'price',
+        'status',
+        'storage_id',
+        'malfunction_id',
+    ];
+
+    public function leasecontracts()
+    {
+        return $this->belongsTo(LeaseContract::class);
+    }
 }

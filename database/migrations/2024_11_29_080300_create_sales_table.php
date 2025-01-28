@@ -12,17 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('sales', function (Blueprint $table) {
-            $table->id();
-        $table->foreignId('customer_id');
-        $table->foreignId('user_id');
-        $table->foreignId('malfunction_id');
+        $table->id();
+        $table->foreignId('customer_id')->constrained()->onDelete('cascade');
+        $table->foreignId('user_id')->constrained()->onDelete('cascade');
+        $table->foreignId('malfunction_id')->constrained()->onDelete('cascade');
         $table->text('description');
         $table->string('priority');
         $table->string('location');
         $table->date('date');
         $table->string('status');
-        $table->dateTime('start_appointment');
-        $table->dateTime('end_appointment');
+        $table->dateTime('start_appointment')->nullable();
+        $table->dateTime('end_appointment')->nullable();
         $table->timestamps();
         });
     }

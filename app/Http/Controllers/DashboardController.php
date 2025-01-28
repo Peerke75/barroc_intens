@@ -1,7 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Exports\CustomersExport;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DashboardController extends Controller
 {
@@ -11,25 +13,36 @@ class DashboardController extends Controller
 
         switch ($function_id) {
             case 0:
-                return view('dashboard.admin'); 
+                return view('dashboard.admin');
             case 1:
-                return view('dashboard.sales'); 
+                return view('dashboard.sales');
             case 2:
-                return view('dashboard.finance'); 
+                return view('dashboard.finance');
             case 3:
-                return view('dashboard.maintenance'); 
+                return view('dashboard.maintenance');
             case 4:
-                return view('dashboard.marketing'); 
+                return view('dashboard.marketing');
             case 5:
-                return view('dashboard.sales-head'); 
+            $pendingOrders = \App\Models\Order::where('approval_status', 'pending')
+                ->whereHas('orderLines', function ($query) {
+                    $query->where('total_price', '>=', 5000);
+                })
+                ->with(['product', 'user'])
+                ->get();
+
+            return view('dashboard.sales-head', compact('pendingOrders'));
             case 6:
-                return view('dashboard.finance-head'); 
+                return view('dashboard.finance-head');
             case 7:
-                return view('dashboard.maintenance-head'); 
+                return view('dashboard.maintenance-head');
             case 8:
-                return view('dashboard.marketing-head'); 
+                return view('dashboard.marketing-head');
             default:
-                return redirect()->route('home')->with('error', 'Dashboard not found'); 
+                return redirect()->route('home')->with('error', 'Dashboard not found');
         }
+    }
+    public function export()
+    {
+        return Excel::download(new CustomersExport, 'customers.xlsx');
     }
 }

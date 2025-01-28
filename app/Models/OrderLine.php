@@ -8,6 +8,23 @@ use Illuminate\Database\Eloquent\Model;
 class OrderLine extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'order_id',
+        'product_id',
+        'quantity',
+        'total_price',
+    ];
 
     protected $table = 'order_lines';
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
+
 }

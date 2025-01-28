@@ -22,20 +22,18 @@
                         <button
                             class="w-full text-left bg-gray-200 text-gray-800 font-medium py-3 px-4 rounded-lg shadow-sm hover:bg-gray-300 hover:shadow-md transition-transform transform hover:scale-105 focus:outline-none"
                             onclick="showCustomerDetails({{ $customer->id }})">
-                            {{ $customer->name }}
+                            {{ $loop->iteration }}. {{ $customer->name }} 
                         </button>
                     </li>
                 @endforeach
             </ul>
         </div>
 
-
         <div class="w-1/2 p-8 bg-gray-50 shadow-lg" id="customer-details">
             <div class="flex flex-col items-center justify-center h-full text-center space-y-4 text-gray-400">
                 <p class="text-xl font-semibold">Selecteer een klant voor meer details</p>
             </div>
         </div>
-
 
         <div class="w-1/2 bg-gray-900 text-white p-8 shadow-lg" id="invoice-placeholder">
             <p class="text-gray-400 text-center italic">Factuur komt hier terecht</p>
@@ -97,7 +95,6 @@
                     </div>
                 </div>
             `;
-
 
                 document.getElementById('customer-details').innerHTML = detailsSection;
 

@@ -16,6 +16,15 @@ class ProductController extends Controller
         return view('products.products-show', compact('products'));
     }
 
+    public function show($id)
+    {
+        $product = Product::findOrFail($id);
+        return view('products.products-info', compact('product'));
+    }
+    public function buy(Product $product)
+    {
+        return view('products.products-buy-in', compact('product'));
+    }
 
     public function create()
     {
@@ -26,10 +35,10 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'price' => 'required|numeric',
+            'price' => 'required|numeric|min:0',
             'product_category_id' => 'required|exists:product_categories,id',
             'amount' => 'required',
-            'ean' => 'required',
+            'ean' => 'required|integer',
         ]);
 
         Product::create([
@@ -44,7 +53,6 @@ class ProductController extends Controller
 
         return redirect()->route('products');
     }
-
 
     public function edit($id)
     {
@@ -86,38 +94,6 @@ class ProductController extends Controller
         return redirect()->route('products');
     }
 
-    public function show($id)
-    {
-        $product = Product::findOrFail($id);
-        return view('products.products-info', compact('product'));
-    }
-    public function buy(Product $product)
-    {
-        return view('products.products-buy-in', compact('product'));
-    }
-
-    public function storeOrder(Request $request, Product $product)
-    {
-
-        $request->validate([
-            'quantity' => 'required|integer|min:1',
-        ]);
-
-        $quantity = $request->input('quantity');
-
-        $order = Order::create([
-            'product_id' => $product->id,
-            'user_id' => Auth::id(),
-            'date' => now(),
-        ]);
-
-
-        $product->increment('amount', $quantity);
-
-    // Redirect naar de info pagina van het product
-    return redirect()->route('products.info', ['id' => $product->id])
-        ->with('success', 'Bestelling is succesvol geplaatst!');
-    }
     public function search(Request $request)
     {
         $query = $request->get('query');

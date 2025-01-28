@@ -3,7 +3,6 @@
 @section('content')
 
 <div class="flex h-screen">
-    <!-- Column 1: Customer list (scrollable) -->
     @if(session('success'))
     <div class="bg-green-100 text-green-700 px-4 py-2 rounded mb-4">
         {{ session('success') }}
@@ -24,22 +23,18 @@
         </ul>
     </div>
 
-    <!-- Column 2: Customer details -->
     <div class="w-1/2 p-8 bg-white" id="customer-details">
         <p class="text-gray-500 text-center">Selecteer een klant voor meer details</p>
     </div>
 
-    <!-- Column 3: Invoice placeholder -->
     <div class="w-1/2 bg-gray-900 text-white p-8" id="invoice-placeholder">
         <p class="text-gray-500 text-center">Factuur komt hier terecht</p>
     </div>
 </div>
 
 <script>
-    // Prepare customers with invoices data
     let customers = @json($customer);
 
-    // Random description generator function
     function generateRandomDescription(customerId) {
         const descriptions = [
             "Customer specializes in web development services with innovative online solutions.",
@@ -54,12 +49,11 @@
         return descriptions[Math.floor(Math.random() * descriptions.length)];
     }
 
-    // Random invoice generation function
     function generateRandomInvoice() {
         const descriptions = ["Web development services", "Consulting", "Design services", "Hosting", "SEO optimization"];
         const randomDescription = descriptions[Math.floor(Math.random() * descriptions.length)];
-        const randomPrice = (Math.random() * (500 - 50) + 50).toFixed(2); // Price between 50 and 500 EUR
-        const randomQuantity = Math.floor(Math.random() * 5) + 1; // Quantity between 1 and 5
+        const randomPrice = (Math.random() * (500 - 50) + 50).toFixed(2);
+        const randomQuantity = Math.floor(Math.random() * 5) + 1;
 
         return {
             number: "INV-" + Math.floor(Math.random() * 100000),
@@ -73,7 +67,6 @@
     let customer = customers.find(c => c.id === customerId);
     }
     if (customer) {
-        // Fetch the latest saved invoice if available
         const newInvoice = @json(session('new_invoice'));
     }
         let invoiceSection = '';
@@ -105,12 +98,10 @@
                         <p class="text-gray-600">${generateRandomDescription(customerId)}</p>
                     </div>
 
-                    <!-- Payment Status Box -->
                     <div class="mt-4 p-4 rounded-lg ${paymentStatusClass} text-white text-center">
                         <p class="text-xl font-semibold">Payment Status: ${paymentStatusText}</p>
                     </div>
 
-                    <!-- Make Invoice Button -->
 
                 </div>
             `;
@@ -157,7 +148,7 @@
     }
 }
 let customers = @json($customer);
-let newInvoice = @json(session('new_invoice', null)); // Pass the newly created invoice
+let newInvoice = @json(session('new_invoice', null)); 
 
 </script>
 

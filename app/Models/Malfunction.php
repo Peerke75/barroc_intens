@@ -11,6 +11,10 @@ class Malfunction extends Model
 
     protected $table = 'malfunctions';
 
+    protected $fillable = [
+        'product_id', 'customer_id', 'message', 'status', 'date'
+    ];
+
     protected $dates = ['date'];
 
     public function customer()
@@ -21,6 +25,11 @@ class Malfunction extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
     }
 
 }

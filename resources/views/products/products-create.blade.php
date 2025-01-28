@@ -16,7 +16,7 @@
                 <label for="price" class="block text-gray-700 font-medium">Prijs</label>
                 <input type="number" name="price" id="price" value="{{ old('price') }}" class="w-full p-2 border border-gray-300 rounded" step="0.01" required>
             </div>
-            
+
             <div class="mb-4">
                 <label for="amount" class="block text-gray-700 font-medium">Aantal</label>
                 <input type="number" name="amount" id="amount" value="{{ old('amount') }}" class="w-full p-2 border border-gray-300 rounded" step="0.01" required>

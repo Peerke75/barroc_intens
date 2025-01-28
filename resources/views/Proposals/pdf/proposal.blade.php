@@ -5,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Offerte #{{ $proposal->id }}</title>
     <style>
-        /* Voeg Tailwind's utility-first benadering in de inline stijl toe voor PDF styling */
         @import url('https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css');
 
-        /* PDF-specifieke styling voor gebruik in DomPDF */
         body {
             font-family: Arial, sans-serif;
-            color: #000000; /* Kleur 2: Zwart */
+            color: #000000; 
             background-color: #f7f7f7;
             margin: 0;
             padding: 0;
@@ -26,7 +24,7 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         h1, h2 {
-            color: #fdd716; /* Kleur 1: Goud (#fdd716) */
+            color: #fdd716; 
         }
         h1 {
             font-size: 28px;
@@ -68,7 +66,7 @@
             border-bottom: 1px solid #ddd;
         }
         .price-table th {
-            background-color: #fdd716; /* Kleur 1: Goud (#fdd716) */
+            background-color: #fdd716; 
             color: #ffffff;
         }
         .price-table td {
@@ -85,7 +83,6 @@
 <body>
 
     <div class="container">
-        <!-- Bedrijf logo en gegevens -->
         <div class="proposal-header flex justify-between items-center mb-8">
             <img src="{{ public_path('img/Logo6_klein.png') }}" alt="Company Logo" class="company-logo">
             <div class="company-info text-sm">
@@ -97,10 +94,8 @@
             </div>
         </div>
 
-        <!-- Titel Offerte -->
         <h1 class="text-2xl font-bold text-yellow-500 mb-4">Offerte Details</h1>
 
-        <!-- Tabel met prijsregels -->
         <table class="price-table w-full border-collapse mb-6">
             <thead>
                 <tr class="bg-yellow-500 text-white">
@@ -122,7 +117,6 @@
             </tbody>
         </table>
 
-        <!-- Totale prijs -->
         <div class="total text-right">
             <p><strong>Totaal:</strong> €{{ number_format($proposal->priceLines->sum(function($line) { return $line->price * $line->amount; }), 2) }}</p>
         </div>

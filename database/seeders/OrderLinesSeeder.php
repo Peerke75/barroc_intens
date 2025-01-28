@@ -11,14 +11,16 @@ class OrderLinesSeeder extends Seeder
     {
         OrderLine::create([
             'order_id' => 1,
-            'amount' => 2,
-            'price' => 250.00,
+            'product_id' => 1,
+            'quantity'=> 12,
+            'total_price' =>2399.88,
         ]);
-        
+
         OrderLine::create([
             'order_id' => 2,
-            'amount' => 1,
-            'price' => 500.00,
+            'product_id' => 2,
+            'quantity'=> 4,
+            'total_price' =>199.96,
         ]);
     }
 }
