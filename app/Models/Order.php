@@ -13,7 +13,7 @@ class Order extends Model
         'product_id',
         'user_id',
         'date',
-        'approval_status', // Voeg dit toe om de approval_status te ondersteunen
+        'approval_status', 
     ];
 
     public function product()
@@ -28,6 +28,6 @@ class Order extends Model
 
     public function orderLines()
     {
-        return $this->hasMany(OrderLine::class); // Relatie met de OrderLine
+        return $this->hasMany(OrderLine::class); 
     }
 }

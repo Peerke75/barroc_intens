@@ -5,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Offerte #{{ $proposal->id }}</title>
     <style>
-        /* Voeg Tailwind's utility-first benadering in de inline stijl toe voor PDF styling */
         @import url('https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css');
 
-        /* PDF-specifieke styling voor gebruik in DomPDF */
         body {
             font-family: Arial, sans-serif;
-            color: #000000; /* Kleur 2: Zwart */
+            color: #000000; 
             background-color: #f7f7f7;
             margin: 0;
             padding: 0;
@@ -26,7 +24,7 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         h1, h2 {
-            color: #fdd716; /* Kleur 1: Goud (#fdd716) */
+            color: #fdd716; 
         }
         h1 {
             font-size: 28px;
@@ -68,7 +66,7 @@
             border-bottom: 1px solid #ddd;
         }
         .price-table th {
-            background-color: #fdd716; /* Kleur 1: Goud (#fdd716) */
+            background-color: #fdd716; 
             color: #ffffff;
         }
         .price-table td {

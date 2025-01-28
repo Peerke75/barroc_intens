@@ -33,11 +33,9 @@
         </div>
 
         <script>
-            // Testdata voor maandelijkse uitgaven
             const monthlyLabels = ['Januari', 'Februari', 'Maart', 'April', 'Mei', 'Juni', 'Juli', 'Augustus', 'September', 'Oktober', 'November', 'December'];
-            const monthlyData = [400, 300, 500, 450, 600, 550, 700, 650, 620, 580, 490, 520]; // Maandelijkse bedragen in euro's
+            const monthlyData = [400, 300, 500, 450, 600, 550, 700, 650, 620, 580, 490, 520]; 
 
-            // Maandelijkse grafiek
             const ctxMonthly = document.getElementById('monthlyChart').getContext('2d');
             const monthlyChart = new Chart(ctxMonthly, {
                 type: 'bar',
@@ -58,7 +56,7 @@
                             beginAtZero: true,
                             ticks: {
                                 callback: function(value) {
-                                    return '€' + value; // Voeg "€" toe aan de y-as
+                                    return '€' + value; 
                                 }
                             }
                         }
@@ -75,11 +73,9 @@
                 }
             });
 
-            // Testdata voor jaarlijkse uitgaven
             const yearlyLabels = ['2020', '2021', '2022', '2023', '2024'];
-            const yearlyData = [5200, 6100, 5800, 6000, 6500]; // Jaarlijkse bedragen in euro's
+            const yearlyData = [5200, 6100, 5800, 6000, 6500]; 
 
-            // Jaarlijkse grafiek
             const ctxYearly = document.getElementById('yearlyChart').getContext('2d');
             const yearlyChart = new Chart(ctxYearly, {
                 type: 'line',
@@ -91,7 +87,7 @@
                         borderColor: 'rgba(255, 99, 132, 1)',
                         backgroundColor: 'rgba(255, 99, 132, 0.2)',
                         borderWidth: 2,
-                        fill: true // Kleur onder de lijn
+                        fill: true 
                     }]
                 },
                 options: {
@@ -101,7 +97,7 @@
                             beginAtZero: true,
                             ticks: {
                                 callback: function(value) {
-                                    return '€' + value; // Voeg "€" toe aan de y-as
+                                    return '€' + value; 
                                 }
                             }
                         }

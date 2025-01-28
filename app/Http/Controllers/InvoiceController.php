@@ -17,16 +17,14 @@ class InvoiceController extends Controller
 
     public function store(Request $request, Customer $customer)
     {
-        // Validate arrays of invoice items
         $request->validate([
             'description.*' => 'required|string|max:255',
             'price.*' => 'required|numeric|min:0',
             'quantity.*' => 'required|integer|min:1',
         ]);
 
-        $invoices = []; // To store newly created invoices for session or further use
+        $invoices = [];
 
-        // Loop through each item and create an invoice entry
         foreach ($request->description as $index => $description) {
             $invoice = new Invoice();
             $invoice->customer_id = $customer->id;
@@ -39,7 +37,6 @@ class InvoiceController extends Controller
             $invoices[] = $invoice;
         }
 
-        // Store the newly created invoices in the session (optional)
         session(['new_invoices' => $invoices]);
 
         return redirect()

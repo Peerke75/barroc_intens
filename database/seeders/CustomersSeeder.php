@@ -49,7 +49,6 @@ class CustomersSeeder extends Seeder
             ],
         ]);
 
-        // Insert 500 random customers using Faker
         foreach (range(4, 503) as $index) {
             DB::table('customers')->insert([
                 'contract_id' => $faker->numberBetween(1, 1000),
