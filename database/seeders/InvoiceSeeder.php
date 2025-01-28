@@ -12,9 +12,8 @@ class InvoiceSeeder extends Seeder
 
     public function run()
     {
-        // Example of manually adding invoices for specific customers
-        $customer1 = Customer::find(1); // Assuming you have a customer with ID 1
-        $customer2 = Customer::find(2); // Assuming you have a customer with ID 2
+        $customer1 = Customer::find(1);
+        $customer2 = Customer::find(2); 
 
         if ($customer1) {
             Invoice::create([
@@ -23,7 +22,7 @@ class InvoiceSeeder extends Seeder
                 'quantity' => 2,
                 'description' => 'Consulting services for project X',
                 'price' => 150.00,
-                'total' => 300.00, // quantity * price
+                'total' => 300.00, 
             ]);
             $customers = Customer::all();
 
@@ -31,7 +30,6 @@ class InvoiceSeeder extends Seeder
 
             foreach ($customers as $customer) {
                 foreach (range(1, rand(1, 5)) as $i) {
-                    // Generate a random invoice number
                     $invoiceNumber = 'INV-' . str_pad(rand(1000, 9999), 4, '0', STR_PAD_LEFT);
 
                     Invoice::create([
@@ -56,7 +54,6 @@ class InvoiceSeeder extends Seeder
                 ]);
             }
 
-            // Add more customers and invoices as needed
         }
     }
 }

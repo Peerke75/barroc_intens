@@ -34,11 +34,11 @@ class Customer extends Model
 
     public function index()
     {
-        $customers = Customer::with('invoices')->get(); // Eager load invoices
+        $customers = Customer::with('invoices')->get();  
         return view('customers.index', compact('customers'));
     }
 
-    // Relatie naar Proposals
+    
     public function proposals()
     {
         return $this->hasMany(Proposal::class, 'customer_id');

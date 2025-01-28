@@ -14,10 +14,15 @@ class Machine extends Model
 
     // Vulbare velden voor mass-assignment
     protected $fillable = [
-        'name',      
-        'price',     
-        'status',   
-        'storage_id', 
-        'malfunction_id', 
+        'name',
+        'price',
+        'status',
+        'storage_id',
+        'malfunction_id',
     ];
+
+    public function leasecontracts()
+    {
+        return $this->belongsTo(LeaseContract::class);
+    }
 }

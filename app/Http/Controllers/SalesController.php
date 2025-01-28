@@ -41,12 +41,11 @@ class SalesController extends Controller
             'end_appointment' => 'nullable|date_format:H:i',
         ]);
 
-        // Convert time to a full datetime format
         if ($request->start_appointment) {
-            $validated['start_appointment'] = $request->date . ' ' . $request->start_appointment . ':00';  // Add seconds
+            $validated['start_appointment'] = $request->date . ' ' . $request->start_appointment . ':00';  
         }
         if ($request->end_appointment) {
-            $validated['end_appointment'] = $request->date . ' ' . $request->end_appointment . ':00';  // Add seconds
+            $validated['end_appointment'] = $request->date . ' ' . $request->end_appointment . ':00'; 
         }
 
         $validated['priority'] = $request->priority === 'yes' ? 1 : ($request->priority === 'no' ? 0 : $validated['priority']);

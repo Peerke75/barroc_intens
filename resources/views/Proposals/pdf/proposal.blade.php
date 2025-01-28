@@ -85,7 +85,6 @@
 <body>
 
     <div class="container">
-        <!-- Bedrijf logo en gegevens -->
         <div class="proposal-header flex justify-between items-center mb-8">
             <img src="{{ public_path('img/Logo6_klein.png') }}" alt="Company Logo" class="company-logo">
             <div class="company-info text-sm">
@@ -97,10 +96,8 @@
             </div>
         </div>
 
-        <!-- Titel Offerte -->
         <h1 class="text-2xl font-bold text-yellow-500 mb-4">Offerte Details</h1>
 
-        <!-- Tabel met prijsregels -->
         <table class="price-table w-full border-collapse mb-6">
             <thead>
                 <tr class="bg-yellow-500 text-white">
@@ -122,7 +119,6 @@
             </tbody>
         </table>
 
-        <!-- Totale prijs -->
         <div class="total text-right">
             <p><strong>Totaal:</strong> €{{ number_format($proposal->priceLines->sum(function($line) { return $line->price * $line->amount; }), 2) }}</p>
         </div>
