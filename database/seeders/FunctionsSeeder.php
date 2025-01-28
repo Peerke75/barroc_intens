@@ -39,7 +39,7 @@ class FunctionsSeeder extends Seeder
         ]);
 
         DB::table('functions')->insert([
-            'name' => 'marketing',
+            'name' => 'stocker',
             'description' => 'zorgt voor de promotie van producten en diensten.',
             'created_at' => now(),
             'updated_at' => now(),
@@ -67,7 +67,7 @@ class FunctionsSeeder extends Seeder
         ]);
 
         DB::table('functions')->insert([
-            'name' => 'marketing head',
+            'name' => 'stocker head',
             'description' => 'de baas van de afdeling inkoop.',
             'created_at' => now(),
             'updated_at' => now(),

@@ -22,7 +22,7 @@ class ProposalController extends Controller
     public function show($id)
     {
         $proposal = Proposal::with('customer', 'priceLines.product')->findOrFail($id);
-        $products = Product::all();  
+        $products = Product::all();
 
         return view('proposals.show', compact('proposal', 'products'));
     }
@@ -30,7 +30,7 @@ class ProposalController extends Controller
     public function create()
     {
         $customers = Customer::all();
-        $products = Product::all(); 
+        $products = Product::all();
         return view('proposals.create', compact('customers', 'products'));
     }
 
@@ -50,12 +50,12 @@ class ProposalController extends Controller
         ]);
 
         foreach ($request->product_id as $index => $product_id) {
-            $product = Product::findOrFail($product_id); 
+            $product = Product::findOrFail($product_id);
 
             ProposalPriceLine::create([
                 'proposal_id' => $proposal->id,
                 'product_id' => $product_id,
-                'price' => $product->price, 
+                'price' => $product->price,
                 'amount' => $request->amount[$index],
             ]);
         }
@@ -84,20 +84,20 @@ class ProposalController extends Controller
     {
         $query = $request->get('query');
 
-        
+
         $proposals = Proposal::whereHas('customer', function ($queryBuilder) use ($query) {
             $queryBuilder->where('company_name', 'LIKE', "%{$query}%");
         })
-        ->with('customer') 
-        ->limit(5) 
+        ->with('customer')
+        ->limit(5)
         ->get();
 
-        return response()->json($proposals); 
+        return response()->json($proposals);
     }
 
     public function addPriceLine(Request $request, $proposalId)
     {
-\        $request->validate([
+        $request->validate([
             'product_id' => 'required|exists:products,id',
             'amount' => 'required|integer|min:1',
         ]);
@@ -107,7 +107,7 @@ class ProposalController extends Controller
         ProposalPriceLine::create([
             'proposal_id' => $proposalId,
             'product_id' => $request->product_id,
-            'price' => $product->price, 
+            'price' => $product->price,
             'amount' => $request->amount,
         ]);
 

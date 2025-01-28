@@ -31,16 +31,6 @@
                     class="text-white py-2 px-4 rounded transition hover:bg-yellow-400">
                     Product Create
                 </a>
-                @if (auth()->check() && auth()->user()->function_id === 5)
-                        <a href="{{ route('head-sales.index') }}"
-                        class="bg-yellow-500 hover:bg-yellow-600 text-black py-2 px-4 rounded transition">
-                            Head Sales
-                        </a>
-
-                @endif
-
-
-
             </div>
 
             <h1 class="text-3xl font-bold text-center mb-8">Product Overzicht</h1>

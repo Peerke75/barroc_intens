@@ -21,7 +21,7 @@ class DashboardController extends Controller
             case 3:
                 return view('dashboard.maintenance');
             case 4:
-                return view('dashboard.marketing');
+                return view('dashboard.stock');
             case 5:
             // Alleen orders ophalen die 5000 of meer bedragen en nog niet zijn goedgekeurd
             $pendingOrders = \App\Models\Order::where('approval_status', 'pending')
@@ -37,7 +37,7 @@ class DashboardController extends Controller
             case 7:
                 return view('dashboard.maintenance-head');
             case 8:
-                return view('dashboard.marketing-head');
+                return view('dashboard.stock-head');
             default:
                 return redirect()->route('home')->with('error', 'Dashboard not found');
         }
