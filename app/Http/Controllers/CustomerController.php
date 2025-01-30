@@ -74,21 +74,14 @@ class CustomerController extends Controller
         return view('customers.show', compact('customer'));
     }
 
-
     public function downloadPdf($customerId)
     {
-        $customer = Customer::findOrFail($customerId);
+        $customer = Customer::with('invoices')->findOrFail($customerId);
 
-        $invoices = $customer->invoices;
-        if ($invoices->isEmpty()) {
+        if ($customer->invoices->isEmpty()) {
             return redirect()->back()->with('error', 'Geen facturen beschikbaar voor deze klant.');
         }
 
-        $pdf = Pdf::loadView('invoices.pdf', [
-            'customer' => $customer,
-            'invoices' => $invoices,
-        ]);
-
-        return $pdf->download('factuur-' . $customerId . '-invoice.pdf');
+        return Pdf::loadView('invoices.pdf', compact('customer'))->download("factuur-$customerId-invoice.pdf");
     }
 }

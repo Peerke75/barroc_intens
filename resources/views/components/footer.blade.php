@@ -24,7 +24,7 @@
             </div>
         </div>
 
-        <div id="map" class="mt-8 h-64 md:h-96"></div>
+        <div id="map" class="mt-8 h-64 md:h-96" loading="lazy"></div>
         @vite('resources/js/leaflet.js')
 
         <div class="mt-8 text-center text-sm text-gray-500">

@@ -49,7 +49,7 @@ class CustomersSeeder extends Seeder
             ],
         ]);
 
-        foreach (range(4, 503) as $index) {
+        foreach (range(0, 24) as $index) {
             DB::table('customers')->insert([
                 'contract_id' => $faker->numberBetween(1, 1000),
                 'contact_persons_id' => $faker->numberBetween(1, 1000),
