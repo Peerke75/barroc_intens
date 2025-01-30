@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container mx-auto p-8 bg-white shadow-lg rounded-lg border border-gray-200">
-        <div class="flex justify-between items-center mb-8">
-            <h1 class="text-4xl font-semibold text-gray-800">Offertes</h1>
+    <div class="container mx-auto p-4 sm:p-8 bg-white shadow-lg rounded-lg border border-gray-200">
+        <div class="flex flex-col sm:flex-row justify-between items-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-semibold text-gray-800 mb-4 sm:mb-0">Offertes</h1>
 
-            <div class="relative mb-6 max-w-md mx-auto">
+            <div class="relative mb-6 max-w-md mx-auto w-full sm:w-1/3">
                 <input type="text" id="proposal-search" placeholder="Zoek offerte..."
                 class="w-full p-3 border border-gray-300 rounded shadow focus:outline-none focus:ring-2 focus:ring-yellow-400"
                 style="background-color: #ffffff; color: #000;">
@@ -15,8 +15,6 @@
                 </ul>
             </div>
 
-
-
             <a href="{{ route('proposals.create') }}" class="bg-yellow-500 text-black font-semibold px-6 py-3 rounded-lg hover:bg-yellow-600 transition duration-300">
                 Nieuwe Offerte
             </a>
@@ -25,8 +23,8 @@
         <ul class="space-y-6">
             @foreach ($proposals as $proposal)
                 <li class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300">
-                    <div class="flex justify-between items-center">
-                        <div>
+                    <div class="flex flex-col sm:flex-row justify-between items-center">
+                        <div class="mb-4 sm:mb-0">
                             <h3 class="text-lg font-medium text-gray-700">
                                 Offerte voor: {{ $proposal->customer->company_name ?? 'Onbekend' }} - {{ $proposal->date->format('d-m-Y') }}
                             </h3>
@@ -44,60 +42,59 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-        const searchInput = document.getElementById('proposal-search');
-        const resultsContainer = document.getElementById('search-results');
+            const searchInput = document.getElementById('proposal-search');
+            const resultsContainer = document.getElementById('search-results');
 
-        searchInput.addEventListener('input', function () {
-            const query = searchInput.value;
+            searchInput.addEventListener('input', function () {
+                const query = searchInput.value;
 
-            if (query.length >= 2) {
-                fetch(`/proposals/search?query=${query}`)
-                    .then(response => response.json())
-                    .then(data => {
+                if (query.length >= 2) {
+                    fetch(`/proposals/search?query=${query}`)
+                        .then(response => response.json())
+                        .then(data => {
 
-                        resultsContainer.innerHTML = '';
+                            resultsContainer.innerHTML = '';
 
-                        if (data.length > 0) {
-                            resultsContainer.classList.remove('hidden');
+                            if (data.length > 0) {
+                                resultsContainer.classList.remove('hidden');
 
-                            data.forEach(proposal => {
-                                const listItem = document.createElement('li');
-                                listItem.classList.add(
-                                    'p-3',
-                                    'hover:bg-yellow-200',
-                                    'cursor-pointer',
-                                    'text-gray-800',
-                                    'border-b',
-                                    'border-gray-200'
-                                );
+                                data.forEach(proposal => {
+                                    const listItem = document.createElement('li');
+                                    listItem.classList.add(
+                                        'p-3',
+                                        'hover:bg-yellow-200',
+                                        'cursor-pointer',
+                                        'text-gray-800',
+                                        'border-b',
+                                        'border-gray-200'
+                                    );
 
-                                listItem.innerHTML = `
-                                    <span class="font-semibold">
-                                        ${proposal.customer ? proposal.customer.company_name : 'Onbekend'}
-                                    </span> - Offerte ID: #${proposal.id}`;
+                                    listItem.innerHTML = `
+                                        <span class="font-semibold">
+                                            ${proposal.customer ? proposal.customer.company_name : 'Onbekend'}
+                                        </span> - Offerte ID: #${proposal.id}`;
 
-                                listItem.addEventListener('click', () => {
-                                    window.location.href = `/proposals/${proposal.id}`;
+                                    listItem.addEventListener('click', () => {
+                                        window.location.href = `/proposals/${proposal.id}`;
+                                    });
+
+                                    resultsContainer.appendChild(listItem);
                                 });
+                            } else {
+                                resultsContainer.classList.add('hidden');
+                            }
+                        });
+                } else {
+                    resultsContainer.classList.add('hidden');
+                }
+            });
 
-                                resultsContainer.appendChild(listItem);
-                            });
-                        } else {
-                            resultsContainer.classList.add('hidden');
-                        }
-                    });
-            } else {
-                resultsContainer.classList.add('hidden');
-            }
+            document.addEventListener('click', function (event) {
+                if (!resultsContainer.contains(event.target) && event.target !== searchInput) {
+                    resultsContainer.classList.add('hidden');
+                }
+            });
         });
-
-        document.addEventListener('click', function (event) {
-            if (!resultsContainer.contains(event.target) && event.target !== searchInput) {
-                resultsContainer.classList.add('hidden');
-            }
-        });
-    });
-
     </script>
 
 @endsection

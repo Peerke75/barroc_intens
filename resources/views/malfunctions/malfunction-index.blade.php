@@ -29,45 +29,49 @@
         </div>
     @endif
 
-    <div class="container mx-auto mt-10">
+    <div class="container mx-auto mt-10 px-4">
         <h1 class="text-3xl font-bold mb-5">Storingen</h1>
-        <div class="flex justify-end mb-5">
-            <a href="{{ route('storingen.create') }}" class="btn btn-primary">Nieuwe storing</a>
+        <div class="flex justify-between items-center mb-5 flex-col sm:flex-row">
+            <a href="{{ route('storingen.create') }}" class="btn btn-primary w-full sm:w-auto mb-3 sm:mb-0">Nieuwe storing</a>
         </div>
-        <table class="table-auto w-full bg-white border border-gray-300 rounded-lg">
-            <thead>
-                <tr class="bg-gray-200 text-left">
-                    <th class="px-4 py-2 border">ID</th>
-                    <th class="px-4 py-2 border">Klant</th>
-                    <th class="px-4 py-2 border">datum storing</th>
-                    <th class="px-4 py-2 border">status</th>
-                    <th class="px-4 py-2 border">Meer info</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if ($malfunctions->isEmpty())
-                    <tr>
-                        <td class="px-4 py-2 border" colspan="5">Er zijn geen storingen gevonden.</td>
+        <div class="overflow-x-auto">
+            <table class="table-auto w-full bg-white border border-gray-300 rounded-lg">
+                <thead>
+                    <tr class="bg-gray-200 text-left">
+                        <th class="px-4 py-2 border">ID</th>
+                        <th class="px-4 py-2 border">Klant</th>
+                        <th class="px-4 py-2 border">datum storing</th>
+                        <th class="px-4 py-2 border">status</th>
+                        <th class="px-4 py-2 border">Meer info</th>
                     </tr>
-                @endif
-                @foreach ($malfunctions as $malfunction)
-                    <tr>
-                        <td class="px-4 py-2 border">{{ $malfunction->id }}</td>
-                        <td class="px-4 py-2 border">{{ $malfunction->customer->name }}</td>
-                        <td class="px-4 py-2 border">{{ $malfunction->date }}</td>
-                        <td class="px-4 py-2 border">{{ $malfunction->status }}</td>
-                        <td class="px-4 py-2 border">
-                            <a href="{{ route('storingen.show', $malfunction->id) }}" class="btn btn-info">Bekijk</a>
-                            <a href="{{ route('storingen.edit', $malfunction->id) }}" class="btn btn-warning">Bewerken</a>
-                            <form action="{{ route('storingen.destroy', $malfunction->id) }}" method="POST" class="inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Verwijderen</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @if ($malfunctions->isEmpty())
+                        <tr>
+                            <td class="px-4 py-2 border" colspan="5">Er zijn geen storingen gevonden.</td>
+                        </tr>
+                    @endif
+                    @foreach ($malfunctions as $malfunction)
+                        <tr>
+                            <td class="px-4 py-2 border">{{ $malfunction->id }}</td>
+                            <td class="px-4 py-2 border">{{ $malfunction->customer->name }}</td>
+                            <td class="px-4 py-2 border">{{ $malfunction->date }}</td>
+                            <td class="px-4 py-2 border">{{ $malfunction->status }}</td>
+                            <td class="px-4 py-2 border">
+                                <div class="flex flex-wrap gap-2">
+                                    <a href="{{ route('storingen.show', $malfunction->id) }}" class="btn btn-info w-full sm:w-auto">Bekijk</a>
+                                    <a href="{{ route('storingen.edit', $malfunction->id) }}" class="btn btn-warning w-full sm:w-auto">Bewerken</a>
+                                    <form action="{{ route('storingen.destroy', $malfunction->id) }}" method="POST" class="inline w-full sm:w-auto">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger w-full sm:w-auto">Verwijderen</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 @endsection
