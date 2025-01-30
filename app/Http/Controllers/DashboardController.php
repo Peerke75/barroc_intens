@@ -23,20 +23,19 @@ class DashboardController extends Controller
             case 4:
                 return view('dashboard.stock');
             case 5:
-            $pendingOrders = \App\Models\Order::where('approval_status', 'pending')
-                ->whereHas('orderLines', function ($query) {
-                    $query->where('total_price', '>=', 5000);
-                })
-                ->with(['product', 'user'])
-                ->get();
-
-            return view('dashboard.sales-head', compact('pendingOrders'));
+            return view('dashboard.sales-head');
             case 6:
                 return view('dashboard.finance-head');
             case 7:
                 return view('dashboard.maintenance-head');
             case 8:
-                return view('dashboard.stock-head');
+                $pendingOrders = \App\Models\Order::where('approval_status', 'pending')
+                ->whereHas('orderLines', function ($query) {
+                    $query->where('total_price', '>=', 5000);
+                })
+                ->with(['product', 'user'])
+                ->get();
+                return view('dashboard.stock-head', compact('pendingOrders'));
             default:
                 return redirect()->route('home')->with('error', 'Dashboard not found');
         }

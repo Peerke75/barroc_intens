@@ -51,6 +51,11 @@ class User extends Authenticatable
         return $this->hasMany(Malfunction::class);
     }
 
+    public function proposals()
+    {
+        return $this->hasMany(Proposal::class);
+    }
+
     public function events()
     {
         return $this->hasMany(Event::class);
