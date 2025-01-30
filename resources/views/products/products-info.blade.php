@@ -1,9 +1,6 @@
 @extends('layouts.app')
 <title>Product Informatie</title>
 @section('content')
-
-    <body class="bg-gray-100">
-
     @if (session('success'))
         <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative m-4 " role="alert">
             <strong class="font-bold">Succes!</strong>
@@ -42,8 +39,13 @@
                         d="M14.348 5.652a1 1 0 00-1.414 0L10 8.586 7.066 5.652a1 1 0 00-1.414 1.414L8.586 10l-2.934 2.934a1 1 0 101.414 1.414L10 11.414l2.934 2.934a1 1 0 001.414-1.414L11.414 10l2.934-2.934a1 1 0 000-1.414z" />
                 </svg>
             </span>
-    </div>
+        </div>
     @endif
+
+    <body class="bg-gray-100">
+
+        <div class="container mx-auto px-4 py-8">
+            <h1 class="text-3xl font-bold text-center mb-8">{{ $product->name }} - Product Informatie</h1>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div class="bg-white shadow-lg rounded-lg p-6 relative">
