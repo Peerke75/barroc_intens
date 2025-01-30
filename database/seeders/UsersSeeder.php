@@ -23,6 +23,17 @@ class UsersSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
+        DB::table('users')->insert([
+            'function_id' => 0,
+            'name' => 'Mees van Opstal',
+            'email' => 'meesvopstal06@hotmail.com',
+            'email_verified_at' => now(),
+            'password' => 123456789,
+            'remember_token' => Str::random(10),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
         DB::table('password_reset_tokens')->insert([
             'email' => 'jane@example.com',
             'token' => Str::random(60),
