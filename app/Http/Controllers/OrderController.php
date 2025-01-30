@@ -44,11 +44,9 @@ class OrderController extends Controller
         }
 
         return redirect()->route('products.info', ['id' => $product->id])
-            ->with('success', $approvalStatus === 'approved'
-                ? 'Bestelling is succesvol geplaatst!'
-                : 'Bestelling is in afwachting van goedkeuring.');
+        ->with('success', $approvalStatus === 'approved' ? 'Bestelling is succesvol geplaatst!' : null)
+        ->with('warning', $approvalStatus !== 'approved' ? 'Bestelling is in afwachting van goedkeuring.' : null);
     }
-
 
     public function approveOrder($orderId)
     {
@@ -66,6 +64,23 @@ class OrderController extends Controller
         $product->amount += $quantity;
         $product->save();
 
-        return redirect()->back()->with('success', 'Bestelling is goedgekeurd en voorraad is bijgewerkt.');
+        return redirect()->route('products.info', ['id' => $product->id])
+        ->with('success', 'Bestelling is goedgekeurd en voorraad is bijgewerkt.');
     }
+
+    public function rejectOrder($orderId)
+    {
+        $order = Order::findOrFail($orderId);
+
+        if ($order->approval_status !== 'pending') {
+            return redirect()->back()->with('error', 'Deze bestelling is al verwerkt.');
+        }
+
+        $order->approval_status = 'rejected';
+        $order->save();
+
+        return redirect()->route('products.info', ['id' => $order->product->id])
+            ->with('warning', 'Bestelling is afgekeurd.');
+    }
+
 }

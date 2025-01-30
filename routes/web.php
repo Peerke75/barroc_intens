@@ -144,6 +144,8 @@ Route::middleware(['auth', CheckUserId::class . ':0,4,8'])->group(function () {
 
     Route::post('/orders/{productId}', [OrderController::class, 'store'])->name('orders.store');
     Route::patch('/orders/{order}/approve', [OrderController::class, 'approveOrder'])->name('orders.approve');
+    Route::patch('/orders/{order}/reject', [OrderController::class, 'rejectOrder'])->name('orders.reject');
+
 });
 
 require __DIR__.'/auth.php';
