@@ -59,8 +59,6 @@
 
                         <div id="dropdownMenu"
                             class="hidden absolute right-0 mt-2 w-28 bg-white border border-gray-200 rounded-md shadow-lg">
-                            <a href="{{ route('products.create') }}"
-                                class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Create</a>
                             <a href="{{ route('products.edit', $product->id) }}"
                                 class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Edit</a>
                         </div>

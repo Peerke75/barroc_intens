@@ -22,14 +22,14 @@
 
             <div class="mb-4">
                 <label for="amount" class="block text-gray-700 font-medium">Aantal</label>
-                <input type="number" name="amount" id="amount" value="{{ old('amount') }}"
+                <input type="number" name="amount" id="amount" value="{{ old('amount', $product->amount) }}"
                     class="w-full p-2 border border-gray-300 rounded" step="0.01" required>
             </div>
 
 
             <div class="mb-4">
                 <label for="ean" class="block text-gray-700 font-medium">Ean nummer</label>
-                <input type="number" name="ean" id="ean" value="{{ old('ean') }}"
+                <input type="number" name="ean" id="ean" value="{{ old('ean', $product->ean) }}"
                     class="w-full p-2 border border-gray-300 rounded" step="0.01" required>
             </div>
 
