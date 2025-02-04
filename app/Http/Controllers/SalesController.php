@@ -7,6 +7,7 @@ use App\Models\CustomerService;
 use Illuminate\Http\Request;
 use App\Models\Sales;
 use App\Models\Event;
+use App\Models\LeaseContract;
 use App\Models\User;
 use App\Models\Malfunction;
 
@@ -102,4 +103,5 @@ class SalesController extends Controller
 
         return view('calendar', ['events' => $events, 'customers' => $customers]);
     }
+
 }

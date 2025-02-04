@@ -73,7 +73,7 @@
 
             <div>
                 <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
-                <select name="status" id="status" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required disabled>
+                <select name="status" id="status" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required @readonly(true)>
                     <option value="pending" {{ (isset($leaseContract) && $leaseContract->status === 'pending') ? 'selected' : '' }}>In afwachting</option>
                     <option value="active" {{ (isset($leaseContract) && $leaseContract->status === 'active') ? 'selected' : '' }}>Actief</option>
                     <option value="terminated" {{ (isset($leaseContract) && $leaseContract->status === 'terminated') ? 'selected' : '' }}>Beëindigd</option>
