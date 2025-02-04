@@ -25,6 +25,7 @@
 
             @if(in_array(auth()->user()->function_id, [0, 3, 7]))
                 <a href="{{ route('storingen.index') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Storingen</a>
+                <a href="{{ route('machines.index')}}"class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Machines</a>
             @endif
 
             @if(in_array(auth()->user()->function_id, [0, 4, 8]))

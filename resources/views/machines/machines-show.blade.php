@@ -41,7 +41,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             @foreach ($machines as $machine)
                 <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                    <img src="https://via.placeholder.com/300" alt="Machine Afbeelding" class="w-full h-48 object-cover">
+                    <img src="https://picsum.photos/200/300" alt="Machine Afbeelding" class="w-full h-48 object-cover">
                     <div class="p-4">
                         <h2 class="text-xl font-semibold mb-2">{{ $machine->name }}</h2>
                         <div class="flex justify-between items-center mb-4">

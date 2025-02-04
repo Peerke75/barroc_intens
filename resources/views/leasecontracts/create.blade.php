@@ -73,7 +73,7 @@
 
             <div>
                 <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
-                <select name="status" id="status" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+                <select name="status" id="status" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required disabled>
                     <option value="pending" {{ (isset($leaseContract) && $leaseContract->status === 'pending') ? 'selected' : '' }}>In afwachting</option>
                     <option value="active" {{ (isset($leaseContract) && $leaseContract->status === 'active') ? 'selected' : '' }}>Actief</option>
                     <option value="terminated" {{ (isset($leaseContract) && $leaseContract->status === 'terminated') ? 'selected' : '' }}>Beëindigd</option>
@@ -111,7 +111,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-1">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
-                    Prijsregel toevoegen
+                    Machine toevoegen
                 </button>
             </div>
         </div>
