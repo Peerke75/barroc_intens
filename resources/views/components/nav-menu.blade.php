@@ -3,12 +3,20 @@
         <!-- Logo / Branding -->
         <div class="flex space-x-4">
             <a href="{{ route('dashboard') }}" class="text-white font-bold text-xl">Barroc_Intens</a>
+        </div>
 
+        <!-- Mobile Hamburger Button (Visible on tablet and small screens) -->
+        <button id="hamburger" class="block md:hidden text-white">
+            ☰
+        </button>
+
+        <!-- Navigation Links (Hidden on small screens) -->
+        <div class="hidden md:flex space-x-4">
             @if(in_array(auth()->user()->function_id, [0, 1, 5]))
                 <a href="{{ route('sales.index') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Afspraken</a>
                 <a href="{{ route('agenda') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Agenda</a>
                 <a href="{{ route('proposals.index') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Offertes</a>
-                <a href="{{ route('leasecontracts.index') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">leasecontracten</a>
+                <a href="{{ route('leasecontracts.index') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Leasecontracten</a>
             @endif
 
             @if(in_array(auth()->user()->function_id, [0, 2, 6]))
@@ -22,24 +30,6 @@
             @if(in_array(auth()->user()->function_id, [0, 4, 8]))
                 <a href="{{ route('products') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Voorraad</a>
             @endif
-
-        </div>
-
-        <!-- Mobile Hamburger Button (Visible on tablet and small screens) -->
-        <button id="hamburger" class="block md:hidden text-white">
-            ☰
-        </button>
-
-
-        <!-- Navigation Links (Hidden on small screens) -->
-        <div class="flex space-x-4 md:flex hidden">
-            <a href="{{ route('products') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Voorraad</a>
-            <a href="{{ route('customers') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Klanten</a>
-            <a href="{{ route('storingen.index') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Storingen</a>
-            <a href="{{ route('sales.index') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Afspraken</a>
-            <a href="{{ route('agenda') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Agenda</a>
-            <a href="{{ route('proposals.index') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Offertes</a>
-            <a href="{{ route('leasecontracts.index') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">leasecontracten</a>
         </div>
 
         <!-- Right Section (Login/Logout) -->
@@ -63,15 +53,36 @@
             <button id="close-drawer" class="text-white">X</button>
         </div>
 
-        <!-- Mobile Navigation Links -->
+        <!-- Mobile Navigation Links (Only visible in drawer) -->
         <div class="flex flex-col items-center space-y-4 mt-4">
-            <a href="{{ route('products') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Voorraad</a>
-            <a href="{{ route('customers') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Klanten</a>
-            <a href="{{ route('storingen.index') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Storingen</a>
-            <a href="{{ route('sales.index') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Afspraken</a>
-            <a href="{{ route('agenda') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Agenda</a>
-            <a href="{{ route('proposals.index') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Offertes</a>
-            <a href="{{ route('leasecontracts.index') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">leasecontracten</a>
+            @if(in_array(auth()->user()->function_id, [0, 1, 5]))
+                <a href="{{ route('sales.index') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Afspraken</a>
+                <a href="{{ route('agenda') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Agenda</a>
+                <a href="{{ route('proposals.index') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Offertes</a>
+                <a href="{{ route('leasecontracts.index') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Leasecontracten</a>
+            @endif
+
+            @if(in_array(auth()->user()->function_id, [0, 2, 6]))
+                <a href="{{ route('customers') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Klanten</a>
+            @endif
+
+            @if(in_array(auth()->user()->function_id, [0, 3, 7]))
+                <a href="{{ route('storingen.index') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Storingen</a>
+            @endif
+
+            @if(in_array(auth()->user()->function_id, [0, 4, 8]))
+                <a href="{{ route('products') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Voorraad</a>
+            @endif
         </div>
     </div>
 </nav>
+
+<script>
+    document.getElementById("hamburger").addEventListener("click", function() {
+        document.getElementById("mobile-nav-drawer").classList.remove("-translate-x-full");
+    });
+
+    document.getElementById("close-drawer").addEventListener("click", function() {
+        document.getElementById("mobile-nav-drawer").classList.add("-translate-x-full");
+    });
+</script>
