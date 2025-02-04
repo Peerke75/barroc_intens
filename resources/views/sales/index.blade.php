@@ -91,7 +91,7 @@
                                 </span>
                             </td>
                             <td class="px-6 py-4 flex items-center space-x-4">
-                                <a href="{{ route('proposals.show', $proposal->id) }}"
+                                <a href="{{ route('sales.show', $sale->id) }}"
                                     class="flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -102,7 +102,7 @@
                                     </svg>
                                 </a>
 
-                                <a href="{{ route('proposals.edit', $proposal->id) }}"
+                                <a href="{{ route('sales.edit', $sale->id) }}"
                                     class="flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -111,7 +111,7 @@
                                     </svg>
                                 </a>
 
-                                <form action="{{ route('proposals.destroy', $proposal->id) }}" method="POST"
+                                <form action="{{ route('sales.destroy', $sale->id) }}" method="POST"
                                     class="inline">
                                     @csrf
                                     @method('DELETE')
