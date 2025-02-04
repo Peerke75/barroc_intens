@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
-use App\Models\Invoice;
 
 class CustomersSeeder extends Seeder
 {
@@ -13,6 +12,7 @@ class CustomersSeeder extends Seeder
     {
         $faker = Faker::create();
 
+        // Handmatige klanten
         DB::table('customers')->insert([
             [
                 'contract_id' => 1,
@@ -49,8 +49,10 @@ class CustomersSeeder extends Seeder
             ],
         ]);
 
-        foreach (range(0, 24) as $index) {
-            DB::table('customers')->insert([
+        // 500 willekeurige klanten genereren
+        $customers = [];
+        for ($i = 0; $i < 500; $i++) {
+            $customers[] = [
                 'contract_id' => $faker->numberBetween(1, 1000),
                 'contact_persons_id' => $faker->numberBetween(1, 1000),
                 'company_name' => $faker->company,
@@ -60,7 +62,10 @@ class CustomersSeeder extends Seeder
                 'order_status' => $faker->randomElement(['active', 'pending', 'inactive']),
                 'created_at' => now(),
                 'updated_at' => now(),
-            ]);
+            ];
         }
+
+        // Insert alle klanten tegelijk voor betere performance
+        DB::table('customers')->insert($customers);
     }
 }
