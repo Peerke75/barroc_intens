@@ -2,7 +2,8 @@
 <title>Barroc Intens | Klanten Overzicht</title>
 
 @section('content')
-    <div class="flex h-screen bg-gray-50">
+    <div class="flex flex-col md:flex-row md:h-screen bg-gray-50">
+
         @if (session('success'))
             <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative m-4 " role="alert">
                 <strong class="font-bold">Succes!</strong>
@@ -31,7 +32,7 @@
             </div>
         @endif
 
-        <div class="w-1/4 bg-white overflow-y-auto p-4 border-r border-gray-200 shadow-lg">
+        <div class="w-full md:w-1/4 bg-white overflow-y-auto p-4 border-b md:border-r border-gray-200 shadow-lg" id="customer-list">
             <div class="my-4 text-center">
                 <a href="{{ route('customers.create') }}"
                     class="inline-block bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 shadow-md transition-transform transform hover:scale-105">
@@ -51,13 +52,13 @@
             </ul>
         </div>
 
-        <div class="w-1/2 p-8 bg-gray-50 shadow-lg" id="customer-details">
+        <div class="w-full md:w-1/2 p-8 bg-gray-50 shadow-lg" id="customer-details">
             <div class="flex flex-col items-center justify-center h-full text-center space-y-4 text-gray-400">
                 <p class="text-xl font-semibold">Selecteer een klant voor meer details</p>
             </div>
         </div>
 
-        <div class="w-1/2 bg-gray-900 text-white p-8 shadow-lg" id="invoice-placeholder">
+        <div class="w-full md:w-1/2 bg-gray-900 text-white p-8 shadow-lg" id="invoice-placeholder">
             <p class="text-gray-400 text-center italic">Factuur komt hier terecht</p>
         </div>
     </div>
@@ -179,4 +180,39 @@
             }
         }
     </script>
+
+    <!-- Mobile responsive styling -->
+    <style>
+        @media (max-width: 768px) {
+            .flex {
+                flex-direction: column !important; /* Stack the columns vertically on mobile */
+            }
+
+            #customer-details, #invoice-placeholder {
+                width: 100% !important; /* Full width for mobile layout */
+                padding: 1rem; /* Add padding for better spacing */
+            }
+
+            /* Customer list adjustments for mobile */
+            #customer-list {
+                max-height: 350px; /* Limit the height of the customer list */
+                overflow-y: auto; /* Make the list scrollable */
+            }
+
+            /* Adjust the text sizes for mobile */
+            #customer-details p, #invoice-placeholder p {
+                font-size: 1rem;
+            }
+
+            /* Ensure padding and margin is correct */
+            .space-y-3 {
+                margin-bottom: 1rem;
+            }
+
+            .space-y-4 {
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+
 @endsection

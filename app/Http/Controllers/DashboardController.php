@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\CustomersExport;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -35,7 +36,14 @@ class DashboardController extends Controller
                 })
                 ->with(['product', 'user'])
                 ->get();
-                return view('dashboard.stock-head', compact('pendingOrders'));
+                
+                $lowStockProducts = Product::where('amount', '<', 1000)
+                    ->orderBy('amount', 'asc')
+                    ->get();
+
+                // We geven beide datasets door aan de view
+                return view('dashboard.stock-head', compact('pendingOrders', 'lowStockProducts'));
+
             default:
                 return redirect()->route('home')->with('error', 'Dashboard not found');
         }
