@@ -15,7 +15,6 @@ class Machine extends Model
         'name',
         'price',
         'status',
-        'storage_id',
         'malfunction_id',
     ];
 

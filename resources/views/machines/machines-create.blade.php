@@ -1,69 +1,51 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container mx-auto px-4 py-8">
-        <h1 class="text-3xl font-bold mb-6">Nieuwe Machine Toevoegen</h1>
+<div class="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+    <h1 class="text-2xl font-semibold text-gray-800 mb-6">Nieuwe Machine Toevoegen</h1>
 
-        @if ($errors->any())
-            <div class="text-red-500 mb-4">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+    @if ($errors->any())
+        <div class="mb-4 p-4 bg-red-100 border-l-4 border-red-500 text-red-700 rounded">
+            <ul class="list-disc pl-5">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
-        <form action="{{ route('machines.store') }}" method="POST" class="space-y-4">
-            @csrf
+    <form action="{{ route('machines.store') }}" method="POST" class="space-y-5">
+        @csrf
 
-            <div>
-                <label for="name" class="block text-gray-700 font-medium">Naam</label>
-                <input type="text" name="name" id="name" value="{{ old('name') }}" 
-                    class="w-full p-2 border border-gray-300 rounded" required>
-                @error('name')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                @enderror
-            </div>
+        <div>
+            <label for="name" class="block text-sm font-medium text-gray-700">Naam</label>
+            <input type="text" name="name" id="name" value="{{ old('name') }}" class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-blue-500 focus:border-blue-500" required>
+        </div>
 
-            <div>
-                <label for="price" class="block text-gray-700 font-medium">Prijs</label>
-                <input type="number" name="price" id="price" value="{{ old('price') }}" 
-                    class="w-full p-2 border border-gray-300 rounded" step="0.01" required>
-                @error('price')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                @enderror
-            </div>
+        <div>
+            <label for="price" class="block text-sm font-medium text-gray-700">Prijs</label>
+            <input type="number" name="price" id="price" value="{{ old('price') }}" step="0.01" class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-blue-500 focus:border-blue-500" required>
+        </div>
 
-            <div>
-                <label for="status" class="block text-gray-700 font-medium">Status</label>
-                <input type="text" name="status" id="status" value="{{ old('status') }}" 
-                    class="w-full p-2 border border-gray-300 rounded" required>
-                @error('status')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                @enderror
-            </div>
+        <div>
+            <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+            <select name="status" id="status" class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-blue-500 focus:border-blue-500" required>
+                <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Actief</option>
+                <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>Inactief</option>
+                <option value="maintenance" {{ old('status') == 'maintenance' ? 'selected' : '' }}>Onderhoud</option>
+            </select>
+        </div>
 
-            <div>
-                <label for="storage_id" class="block text-gray-700 font-medium">Opslaglocatie</label>
-                <select name="storage_id" id="storage_id" class="w-full p-2 border border-gray-300 rounded" required>
-                    <option value="">Selecteer opslaglocatie</option>
-                    @foreach(\App\Models\Storage::all() as $storage)
-                        <option value="{{ $storage->id }}" {{ old('storage_id') == $storage->id ? 'selected' : '' }}>
-                            {{ $storage->product_names }}
-                        </option>
-                    @endforeach
-                </select>
-                @error('storage_id')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                @enderror
-            </div>
+        <div>
+            <label for="description" class="block text-sm font-medium text-gray-700">Omschrijving</label>
+            <textarea name="description" id="description" class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-blue-500 focus:border-blue-500" rows="4" required>{{ old('description') }}</textarea>
+        </div>
 
-            <div class="flex justify-start">
-                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded">
-                    Machine Toevoegen
-                </button>
-            </div>
-        </form>
-    </div>
+        <div class="flex justify-end">
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2 rounded-lg shadow-md transition-all">
+                Machine Toevoegen
+            </button>
+        </div>
+    </form>
+</div>
 @endsection

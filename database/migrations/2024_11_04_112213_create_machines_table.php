@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('machines', function (Blueprint $table) {
             $table->id();
             $table->foreignId('malfunction_id')->nullable();
-            $table->foreignId('lease_contract_id');
             $table->string('name');
             $table->decimal('price');
             $table->enum('status', ['active', 'inactive', 'maintenance']);
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }

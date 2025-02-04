@@ -1,37 +1,56 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container mx-auto px-4 py-8">
-        <h1 class="text-3xl font-bold mb-6">Bewerk Machine: {{ $machine->name }}</h1>
+<div class="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+    <h1 class="text-2xl font-semibold text-gray-800 mb-6">Machine Bewerken</h1>
 
-        <form action="{{ route('machines.update', $machine->id) }}" method="POST">
-            @csrf
-            @method('PUT')
+    @if ($errors->any())
+        <div class="mb-4 p-4 bg-red-100 border-l-4 border-red-500 text-red-700 rounded">
+            <ul class="list-disc pl-5">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
-            <div class="mb-4">
-                <label for="name" class="block text-gray-700 font-medium">Naam</label>
-                <input type="text" name="name" id="name" value="{{ old('name', $machine->name) }}" class="w-full p-2 border border-gray-300 rounded" required>
-            </div>
+    <form action="{{ route('machines.update', $machine->id) }}" method="POST" class="space-y-5">
+        @csrf
+        @method('PUT')
 
-            <div class="mb-4">
-                <label for="price" class="block text-gray-700 font-medium">Prijs</label>
-                <input type="number" name="price" id="price" value="{{ old('price', $machine->price) }}" class="w-full p-2 border border-gray-300 rounded" step="0.01" required>
-            </div>
+        <div>
+            <label for="name" class="block text-sm font-medium text-gray-700">Naam</label>
+            <input type="text" name="name" id="name" value="{{ old('name', $machine->name) }}"
+                class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-blue-500 focus:border-blue-500" required>
+        </div>
 
-            <div class="mb-4">
-                <label for="status" class="block text-gray-700 font-medium">Status</label>
-                <input type="text" name="status" id="status" value="{{ old('status', $machine->status) }}" class="w-full p-2 border border-gray-300 rounded" required>
-            </div>
+        <div>
+            <label for="price" class="block text-sm font-medium text-gray-700">Prijs</label>
+            <input type="number" name="price" id="price" value="{{ old('price', $machine->price) }}" step="0.01"
+                class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-blue-500 focus:border-blue-500" required>
+        </div>
 
-            <div class="flex space-x-2">
-                <button type="submit" class="py-2 px-4 bg-blue-500 text-white rounded">Machine Bijwerken</button>
-        </form>
+        <div>
+            <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+            <select name="status" id="status"
+                class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-blue-500 focus:border-blue-500" required>
+                <option value="active" {{ old('status', $machine->status) == 'active' ? 'selected' : '' }}>Actief</option>
+                <option value="inactive" {{ old('status', $machine->status) == 'inactive' ? 'selected' : '' }}>Inactief</option>
+                <option value="maintenance" {{ old('status', $machine->status) == 'maintenance' ? 'selected' : '' }}>Onderhoud</option>
+            </select>
+        </div>
 
-                <form action="{{ route('machines.destroy', $machine->id) }}" method="POST" onsubmit="return confirm('Weet je zeker dat je deze machine wilt verwijderen?');">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="py-2 px-4 bg-red-500 text-white rounded">Verwijderen</button>
-                </form>
-            </div>
-    </div>
+        <div>
+            <label for="description" class="block text-sm font-medium text-gray-700">Omschrijving</label>
+            <textarea name="description" id="description"
+                class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-blue-500 focus:border-blue-500" rows="4" required>{{ old('description', $machine->description) }}</textarea>
+        </div>
+
+        <div class="flex justify-end">
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2 rounded-lg shadow-md transition-all">
+                Wijzigingen Opslaan
+            </button>
+        </div>
+    </form>
+</div>
 @endsection

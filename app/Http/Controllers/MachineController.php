@@ -23,29 +23,19 @@ class MachineController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'price' => 'required|numeric',
-            'status' => 'required|string|max:255',
-            'storage_id' => 'required|exists:storages,id', 
+            'price' => 'required|numeric|min:0',
+            'status' => 'required|in:active,inactive,maintenance',
+            'description' => 'required|string',
         ]);
 
-        try {
-            $machine = Machine::create([
-                'name' => $request->name,
-                'price' => $request->price,
-                'status' => $request->status,
-                'storage_id' => $request->storage_id,
-            ]);
+        Machine::create($validatedData);
 
-            return redirect()->route('machines.index', ['id' => $machine->id])
-                ->with('success', 'Machine succesvol toegevoegd!');
-        } catch (\Exception $e) {
-            Log::error('Machine opslaan mislukt: ' . $e->getMessage());
-            return back()->withErrors('Er is een fout opgetreden tijdens het opslaan. Probeer opnieuw.')
-                ->withInput();
-        }
+        return redirect()->route('machines.index')->with('success', 'Machine succesvol toegevoegd!');
     }
+
+
 
 
     public function edit($id)
@@ -54,21 +44,17 @@ class MachineController extends Controller
         return view('machines.machines-edit', compact('machine'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Machine $machine)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'price' => 'required|numeric',
-            'status' => 'required|string|max:255',
+            'price' => 'required|numeric|min:0',
+            'status' => 'required|in:active,inactive,maintenance',
+            'description' => 'required|string',
         ]);
-    
-        $machine = Machine::findOrFail($id);
-        $machine->update([
-            'name' => $request->name,
-            'price' => $request->price,
-            'status' => $request->status,
-        ]);
-    
+
+        $machine->update($validatedData);
+
         return redirect()->route('machines.index')->with('success', 'Machine succesvol bijgewerkt!');
     }
 
