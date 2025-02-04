@@ -62,7 +62,7 @@
                 <h2 class="text-2xl font-semibold mb-4">Producten Laag in Voorraad</h2>
 
                 @if ($lowStockProducts->isEmpty())
-                    <p class="text-green-600 ">Alle producten hebben voldoende voorraad.</p>
+                    <p class="text-gray-500 ">Alle producten hebben voldoende voorraad.</p>
                 @else
                     <div class="space-y-6">
                         @foreach ($lowStockProducts as $product)
