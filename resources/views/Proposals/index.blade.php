@@ -32,7 +32,7 @@
         <div class="flex justify-between items-center mb-8">
             <h1 class="text-4xl font-semibold text-gray-800">Offertes</h1>
 
-            <div class="relative mb-6 max-w-md mx-auto">
+            <div class="relative mb-6 max-w-md mx-auto w-full sm:w-1/3">
                 <input type="text" id="proposal-search" placeholder="Zoek offerte..."
                     class="w-full p-3 border border-gray-300 rounded shadow focus:outline-none focus:ring-2 focus:ring-yellow-400"
                     style="background-color: #ffffff; color: #000;">
