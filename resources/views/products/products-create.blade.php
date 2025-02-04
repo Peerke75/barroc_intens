@@ -1,43 +1,61 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container mx-auto px-4 py-8">
-        <h1 class="text-3xl font-bold mb-6">Nieuw Product</h1>
+<div class="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+    <h1 class="text-2xl font-semibold text-gray-800 mb-6">Nieuw Product</h1>
 
-        <form action="{{ route('products.store') }}" method="POST">
-            @csrf
+    @if ($errors->any())
+        <div class="mb-4 p-4 bg-red-100 border-l-4 border-red-500 text-red-700 rounded">
+            <ul class="list-disc pl-5">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
-            <div class="mb-4">
-                <label for="name" class="block text-gray-700 font-medium">Product Naam</label>
-                <input type="text" name="name" id="name" value="{{ old('name') }}" class="w-full p-2 border border-gray-300 rounded" required>
+    <form action="{{ route('products.store') }}" method="POST" class="space-y-5">
+        @csrf
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700">Product Naam</label>
+                <input type="text" name="name" id="name" value="{{ old('name') }}" class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-blue-500 focus:border-blue-500" required>
             </div>
 
-            <div class="mb-4">
-                <label for="price" class="block text-gray-700 font-medium">Prijs</label>
-                <input type="number" name="price" id="price" value="{{ old('price') }}" class="w-full p-2 border border-gray-300 rounded" step="0.01" required>
+            <div>
+                <label for="price" class="block text-sm font-medium text-gray-700">Prijs</label>
+                <input type="number" name="price" id="price" value="{{ old('price') }}" step="0.01" class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-blue-500 focus:border-blue-500" required>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+                <label for="amount" class="block text-sm font-medium text-gray-700">Aantal</label>
+                <input type="number" name="amount" id="amount" value="{{ old('amount') }}" step="0.01" class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-blue-500 focus:border-blue-500" required>
             </div>
 
-            <div class="mb-4">
-                <label for="amount" class="block text-gray-700 font-medium">Aantal</label>
-                <input type="number" name="amount" id="amount" value="{{ old('amount') }}" class="w-full p-2 border border-gray-300 rounded" step="0.01" required>
+            <div>
+                <label for="ean" class="block text-sm font-medium text-gray-700">EAN Nummer</label>
+                <input type="number" name="ean" id="ean" value="{{ old('ean') }}" step="0.01" class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-blue-500 focus:border-blue-500" required>
             </div>
+        </div>
 
-            <div class="mb-4">
-                <label for="ean" class="block text-gray-700 font-medium">Ean nummer</label>
-                <input type="number" name="ean" id="ean" value="{{ old('ean') }}" class="w-full p-2 border border-gray-300 rounded" step="0.01" required>
-            </div>
+        <div>
+            <label for="product_category_id" class="block text-sm font-medium text-gray-700">Categorie</label>
+            <select name="product_category_id" id="product_category_id" class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-blue-500 focus:border-blue-500" required>
+                <option value="">Selecteer een categorie</option>
+                @foreach(\App\Models\ProductCategory::all() as $category)
+                    <option value="{{ $category->id }}" {{ old('product_category_id') == $category->id ? 'selected' : '' }}>{{ $category->type }}</option>
+                @endforeach
+            </select>
+        </div>
 
-            <div class="mb-4">
-                <label for="product_category_id" class="block text-gray-700 font-medium">Categorie</label>
-                <select name="product_category_id" id="product_category_id" class="w-full p-2 border border-gray-300 rounded" required>
-                    <option value="">Selecteer een categorie</option>
-                    @foreach(\App\Models\ProductCategory::all() as $category)
-                        <option value="{{ $category->id }}" {{ old('product_category_id') == $category->id ? 'selected' : '' }}>{{ $category->type }}</option>
-                    @endforeach
-                </select>
-            </div>
-
-            <button type="submit" class="py-2 px-4 bg-blue-500 text-white rounded">Product Toevoegen</button>
-        </form>
-    </div>
+        <div class="flex justify-end">
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2 rounded-lg shadow-md transition-all">
+                Product Toevoegen
+            </button>
+        </div>
+    </form>
+</div>
 @endsection
