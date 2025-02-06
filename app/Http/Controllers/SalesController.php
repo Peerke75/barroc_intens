@@ -70,25 +70,36 @@ class SalesController extends Controller
     }
 
     public function update(Request $request, Sales $sale)
-    {
-        $validated = $request->validate([
-            'customer_id' => 'required|integer|exists:customers,id',
-            'user_id' => 'required|integer|exists:users,id',
-            'malfunction_id' => 'nullable|integer|exists:malfunctions,id',
-            'description' => 'required|string|max:255',
-            'priority' => 'required|boolean',
-            'location' => 'required|string|max:255',
-            'date' => 'required|date',
-            'status' => 'required|string',
-            'start_appointment' => 'nullable|date_format:H:i',
-            'end_appointment' => 'nullable|date_format:H:i',
-        ]);
+{
+    $validated = $request->validate([
+        'customer_id' => 'required|integer|exists:customers,id',
+        'user_id' => 'required|integer|exists:users,id',
+        'malfunction_id' => 'nullable|integer|exists:malfunctions,id',
+        'description' => 'required|string|max:255',
+        'priority' => 'required|boolean',
+        'location' => 'required|string|max:255',
+        'date' => 'required|date',
+        'status' => 'required|string',
+        'start_appointment' => 'nullable|date_format:H:i',
+        'end_appointment' => 'nullable|date_format:H:i',
+    ]);
 
-        $validated['priority'] = $request->priority === 'yes' ? 1 : ($request->priority === 'no' ? 0 : $validated['priority']);
-
-        $sale->update($validated);
-        return redirect()->route('sales.index')->with('success', 'Afspraak succesvol bijgewerkt!');
+    // Controleer of start_appointment is ingevuld en voeg de datum toe
+    if ($request->start_appointment) {
+        $validated['start_appointment'] = $request->date . ' ' . $request->start_appointment . ':00';
     }
+
+    // Controleer of end_appointment is ingevuld en voeg de datum toe
+    if ($request->end_appointment) {
+        $validated['end_appointment'] = $request->date . ' ' . $request->end_appointment . ':00';
+    }
+
+    $validated['priority'] = $request->priority === 'yes' ? 1 : ($request->priority === 'no' ? 0 : $validated['priority']);
+
+    $sale->update($validated);
+    return redirect()->route('sales.index')->with('success', 'Afspraak succesvol bijgewerkt!');
+}
+
 
     public function destroy(Sales $sale)
     {
