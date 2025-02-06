@@ -90,9 +90,9 @@
                                     {{ ucfirst(str_replace('_', ' ', $sale->status)) }}
                                 </span>
                             </td>
-                            <td class="px-6 py-4 flex items-center justify-center space-x-4">
+                            <td class="px-6 py-4 flex items-center justify-center space-x-4 mt-2">
                                 <a href="{{ route('sales.show', $sale->id) }}"
-                                    class="flex items-center justify-center">
+                                    class="flex items-center justify-center text-blue-500">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -103,7 +103,7 @@
                                 </a>
 
                                 <a href="{{ route('sales.edit', $sale->id) }}"
-                                    class="flex items-center justify-center">
+                                    class="flex items-center justify-center text-yellow-500">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -117,7 +117,7 @@
                                     @method('DELETE')
                                     <button type="submit"
                                         onclick="return confirm('Weet je zeker dat je deze storing wilt verwijderen?')"
-                                        class="flex items-center justify-center">
+                                        class="flex items-center justify-center text-red-500">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                             <path stroke-linecap="round" stroke-linejoin="round"

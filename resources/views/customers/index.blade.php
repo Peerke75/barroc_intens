@@ -35,7 +35,7 @@
         <div class="w-full md:w-1/4 bg-white overflow-y-auto p-4 border-b md:border-r border-gray-200 shadow-lg" id="customer-list">
             <div class="my-4 text-center">
                 <a href="{{ route('customers.create') }}"
-                    class="inline-block bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 shadow-md transition-transform transform hover:scale-105">
+                    class="inline-block bg-yellow-500 text-white py-2 px-4 rounded-lg hover:bg-yellow-600 shadow-md transition-transform transform hover:scale-105">
                     Voeg Klant Toe
                 </a>
             </div>
