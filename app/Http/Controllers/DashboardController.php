@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\CustomersExport;
+use App\Models\LeaseContract;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
@@ -24,7 +25,10 @@ class DashboardController extends Controller
             case 4:
                 return view('dashboard.stock');
             case 5:
-            return view('dashboard.sales-head');
+                $leaseContracts = LeaseContract::with('customer')
+                ->whereNotIn('status', ['active', 'terminated'])
+                ->get();
+                return view('dashboard.sales-head', compact('leaseContracts',));
             case 6:
                 return view('dashboard.finance-head');
             case 7:
@@ -36,7 +40,7 @@ class DashboardController extends Controller
                 })
                 ->with(['product', 'user'])
                 ->get();
-                
+
                 $lowStockProducts = Product::where('amount', '<', 1000)
                     ->orderBy('amount', 'asc')
                     ->get();
@@ -48,6 +52,7 @@ class DashboardController extends Controller
                 return redirect()->route('home')->with('error', 'Dashboard not found');
         }
     }
+
     public function export()
     {
         return Excel::download(new CustomersExport, 'customers.xlsx');

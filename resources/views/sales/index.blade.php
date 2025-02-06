@@ -62,7 +62,7 @@
                 </thead>
                 <tbody class="bg-white">
                     @forelse($sales->sortByDesc('priority') as $sale)
-                        <tr class="hover:bg-gray-50">
+                        <tr class="hover:bg-gray-100 border-b">
                             <td class="px-6 py-4 text-sm text-gray-700 border-b">{{ $sale->id }}</td>
                             <td class="px-6 py-4 text-sm text-gray-700 border-b">{{ $sale->customer->name }}</td>
                             <td class="px-6 py-4 text-sm text-gray-700 border-b">{{ $sale->user->name }}</td>
@@ -90,7 +90,7 @@
                                     {{ ucfirst(str_replace('_', ' ', $sale->status)) }}
                                 </span>
                             </td>
-                            <td class="px-6 py-4 flex items-center space-x-4">
+                            <td class="px-6 py-4 flex items-center justify-center space-x-4">
                                 <a href="{{ route('sales.show', $sale->id) }}"
                                     class="flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -112,7 +112,7 @@
                                 </a>
 
                                 <form action="{{ route('sales.destroy', $sale->id) }}" method="POST"
-                                    class="inline">
+                                    class="inline m-0">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"

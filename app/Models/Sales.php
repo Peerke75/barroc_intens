@@ -33,6 +33,10 @@ class Sales extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    public function leasecontract()
+    {
+        return $this->belongsTo(LeaseContract::class);
+    }
 
     public function malfunction()
     {

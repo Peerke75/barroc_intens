@@ -41,8 +41,8 @@ class LeaseController extends Controller
             'notice_period' => 'required|string',
             'status' => 'required|string|in:pending,active,terminated,completed',
         ]);
-
-        LeaseContract::create($validated);
+        
+        $leaseContract = LeaseContract::create($validated);
 
         return redirect()->route('leasecontracts.index')->with('success', 'Leasecontract aangemaakt!');
     }
@@ -69,6 +69,7 @@ class LeaseController extends Controller
             'status' => 'required|string|in:pending,active,terminated,completed',
         ]);
 
+
         $leaseContract = LeaseContract::findOrFail($id);
         $leaseContract->update($validated);
 
@@ -81,5 +82,23 @@ class LeaseController extends Controller
         $leaseContract->delete();
 
         return redirect()->route('leasecontracts.index')->with('success', 'Leasecontract verwijderd!');
+    }
+
+    public function approve($id)
+    {
+        $leaseContract = LeaseContract::findOrFail($id);
+        $leaseContract->status = 'active';
+        $leaseContract->save();
+
+        return redirect()->route('dashboard')->with('success', 'Leasecontract goedgekeurd!');
+    }
+
+    public function reject($id)
+    {
+        $leaseContract = LeaseContract::findOrFail($id);
+        $leaseContract->status = 'terminated';
+        $leaseContract->save();
+
+        return redirect()->route('dashboard')->with('success', 'Leasecontract afgekeurd!');
     }
 }

@@ -21,7 +21,6 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\VisitController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\LeaseController;
-
 use App\Models\Malfunction;
 use App\Models\Sales;
 use App\Models\Event;
@@ -32,6 +31,7 @@ use Database\Seeders\ProposalsSeeder;
 Route::get('/', function () {
     return redirect('/login');
 });
+
 
 Route::get('/dashboard', [DashboardController::class, 'showDashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -70,6 +70,20 @@ Route::middleware(['auth', CheckUserId::class . ':0,1,5'])->group(function () {
         'destroy' => 'sales.destroy',
     ]);
 
+
+    Route::resource('leasecontracts', LeaseController::class)->names([
+        'index' => 'leasecontracts.index',
+        'create' => 'leasecontracts.create',
+        'store' => 'leasecontracts.store',
+        'show' => 'leasecontracts.show',
+        'edit' => 'leasecontracts.edit',
+        'update' => 'leasecontracts.update',
+        'destroy' => 'leasecontracts.destroy',
+    ]);
+    Route::patch('/leaseContracts/{id}/approve', [LeaseController::class, 'approve'])->name('leaseContracts.approve');
+    Route::patch('/leaseContracts/{id}/reject', [LeaseController::class, 'reject'])->name('leaseContracts.reject');
+
+
     Route::get('/proposals/search', [ProposalController::class, 'search'])->name('proposals.search');
     Route::get('/proposals' , [ProposalsSeeder::class, 'index'])->name('proposals.index');
     Route::resource('proposals', ProposalController::class)->middleware('auth');
@@ -89,15 +103,6 @@ Route::middleware(['auth', CheckUserId::class . ':0,1,5'])->group(function () {
 });
 
 Route::middleware(['auth', CheckUserId::class . ':0,2,6'])->group(function () {
-    Route::resource('leasecontracts', LeaseController::class)->names([
-        'index' => 'leasecontracts.index',
-        'create' => 'leasecontracts.create',
-        'store' => 'leasecontracts.store',
-        'show' => 'leasecontracts.show',
-        'edit' => 'leasecontracts.edit',
-        'update' => 'leasecontracts.update',
-        'destroy' => 'leasecontracts.destroy',
-    ]);
 
     Route::get('/customers/downloadPdf/{customer}', [CustomerController::class, 'downloadPdf'])->name('customers.downloadPdf');
     Route::get('/customers', [CustomerController::class, 'index'])->name('customers');
