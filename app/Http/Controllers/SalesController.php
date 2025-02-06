@@ -84,12 +84,10 @@ class SalesController extends Controller
         'end_appointment' => 'nullable|date_format:H:i',
     ]);
 
-    // Controleer of start_appointment is ingevuld en voeg de datum toe
     if ($request->start_appointment) {
         $validated['start_appointment'] = $request->date . ' ' . $request->start_appointment . ':00';
     }
 
-    // Controleer of end_appointment is ingevuld en voeg de datum toe
     if ($request->end_appointment) {
         $validated['end_appointment'] = $request->date . ' ' . $request->end_appointment . ':00';
     }
