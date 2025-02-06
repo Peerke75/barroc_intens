@@ -71,4 +71,14 @@ class MachineController extends Controller
         $machine = Machine::findOrFail($id);
         return view('machines.machines-info', compact('machine'));
     }
+
+    public function search(Request $request)
+    {
+        $query = $request->get('query');
+        $machines = \App\Models\Machine::where('name', 'LIKE', "%{$query}%")
+            ->limit(5)
+            ->get();
+        
+        return response()->json($machines);
+    }
 }

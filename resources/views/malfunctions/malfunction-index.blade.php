@@ -70,14 +70,14 @@
                             <td class="px-6 py-4 text-sm font-medium text-gray-600 border-b">
                                 <span
                                     class="px-3 py-1 text-sm font-semibold
-                                    {{ $malfunction->status == 'Open' ? 'bg-green-500 text-white' : 'bg-red-500 text-white' }}
+                                    {{ $malfunction->status == 'Resolved' ? 'bg-green-500 text-white' : ($malfunction->status == 'Pending' ? 'bg-yellow-500 text-white' : 'bg-red-500 text-white') }}
                                     rounded-lg shadow">
                                     {{ $malfunction->status }}
                                 </span>
                             </td>
                             <td class="px-6 py-4 flex items-center space-x-4">
                                 <a href="{{ route('storingen.show', $malfunction->id) }}"
-                                    class="flex items-center justify-center">
+                                    class="flex items-center justify-center text-blue-500">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -87,7 +87,7 @@
                                     </svg>
                                 </a>
                                 <a href="{{ route('storingen.edit', $malfunction->id) }}"
-                                    class="flex items-center justify-center">
+                                    class="flex items-center justify-center text-yellow-500">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -95,7 +95,7 @@
                                     </svg>
                                 </a>
                                 <form action="{{ route('storingen.destroy', $malfunction->id) }}" method="POST"
-                                    class="inline m-0">
+                                    class="inline m-0 text-red-500">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"

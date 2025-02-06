@@ -22,7 +22,7 @@ class MalfunctionsSeeder extends Seeder
             'product_id' => 2,
             'customer_id' => 2,
             'message' => 'Strange noise coming from machine.',
-            'status' => 'In Progress',
+            'status' => 'Not fixed',
             'date' => '2024-11-06 14:00:00',
         ]);
 
@@ -46,7 +46,7 @@ class MalfunctionsSeeder extends Seeder
             'product_id' => 5,
             'customer_id' => 5,
             'message' => 'Display malfunction.',
-            'status' => 'In Progress',
+            'status' => 'Not fixed',
             'date' => '2024-11-07 13:00:00',
         ]);
 
@@ -70,7 +70,7 @@ class MalfunctionsSeeder extends Seeder
             'product_id' => 8,
             'customer_id' => 8,
             'message' => 'Connectivity issues.',
-            'status' => 'In Progress',
+            'status' => 'Not fixed',
             'date' => '2024-11-03 18:30:00',
         ]);
 
@@ -102,7 +102,7 @@ class MalfunctionsSeeder extends Seeder
             'product_id' => 12,
             'customer_id' => 12,
             'message' => 'Broken sensor.',
-            'status' => 'In Progress',
+            'status' => 'Not fixed',
             'date' => '2024-11-02 10:00:00',
         ]);
 

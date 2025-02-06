@@ -120,6 +120,7 @@ Route::middleware(['auth', CheckUserId::class . ':0,3,7'])->group(function () {
         'destroy' => 'storingen.destroy',
     ]);
 
+    Route::get('/products/machine', [ProductController::class, 'search'])->name('products.search');
     Route::get('machines-index', [MachineController::class, 'index'])->name('machines.index');
     Route::get('machines-create', [MachineController::class, 'create'])->name('machines.create');
     Route::post('machines', [MachineController::class, 'store'])->name('machines.store');

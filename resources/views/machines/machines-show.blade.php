@@ -29,6 +29,16 @@
         </div>
     @endif
     <div class="container mx-auto px-4 py-8">
+        <div class="relative mb-6 max-w-md mx-auto">
+            <input type="text" id="product-search" placeholder="Zoek Machine..."
+                class="w-full p-3 border border-gray-300 rounded shadow focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                style="background-color: #ffffff; color: #000;">
+
+            <ul id="search-results"
+                class="absolute w-full border border-gray-300 rounded bg-white mt-1 hidden shadow-lg z-10">
+            </ul>
+        </div>
+
         <div class="mb-8 text-left">
             <a href="{{ route('machines.create') }}" style="background-color:#fdd716 ;color:#000000;"
                 class="text-white py-2 px-4 rounded transition hover:bg-yellow-400">
@@ -56,4 +66,51 @@
         </div>
 
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('product-search');
+            const resultsContainer = document.getElementById('search-results');
+
+            searchInput.addEventListener('input', function() {
+                const query = searchInput.value;
+
+                if (query.length >= 2) {
+                    fetch(`/machine/search?query=${query}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            resultsContainer.innerHTML = '';
+
+                            if (data.length > 0) {
+                                resultsContainer.classList.remove('hidden');
+                                data.forEach(machine => {
+                                    const li = document.createElement('li');
+                                    li.classList.add('p-3', 'hover:bg-yellow-200',
+                                        'cursor-pointer', 'text-gray-800', 'border-b',
+                                        'border-gray-200');
+                                    li.innerHTML =
+                                        `<span class="font-semibold">${machine.name}</span> - €${parseFloat(machine.price).toFixed(2)}`;
+
+                                    li.addEventListener('click', () => {
+                                        window.location.href =
+                                            `/machine/${machine.id}/info`;
+                                    });
+
+                                    resultsContainer.appendChild(li);
+                                });
+                            } else {
+                                resultsContainer.classList.add('hidden');
+                            }
+                        });
+                } else {
+                    resultsContainer.classList.add('hidden');
+                }
+            });
+
+            document.addEventListener('click', function(event) {
+                if (!resultsContainer.contains(event.target) && event.target !== searchInput) {
+                    resultsContainer.classList.add('hidden');
+                }
+            });
+        });
+    </script>
 @endsection
