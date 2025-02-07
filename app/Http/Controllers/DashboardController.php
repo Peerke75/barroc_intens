@@ -49,7 +49,7 @@ class DashboardController extends Controller
                 return view('dashboard.stock-head', compact('pendingOrders', 'lowStockProducts'));
 
             default:
-                return redirect()->route('home')->with('error', 'Dashboard not found');
+                return redirect()->route('home')->with('error', 'Dashboard niet gevonden!');
         }
     }
 

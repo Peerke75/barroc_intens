@@ -116,6 +116,10 @@ class ProductCreateTest extends TestCase
 
         $response->assertRedirect(route('products'));
 
-        
+        $this->assertDatabaseMissing('products', [
+            'id' => $product->id,
+            'name' => $product->name,
+            'price' => $product->price,
+        ]);
     }
 }

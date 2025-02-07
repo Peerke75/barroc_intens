@@ -78,7 +78,8 @@ class CustomerController extends Controller
     {
         $customer = Customer::with('invoices')->findOrFail($customerId);
 
-        if ($customer->invoices->isEmpty()) {
+        $invoices = $customer->invoices;
+        if ($invoices->isEmpty()) {
             return redirect()->back()->with('error', 'Geen facturen beschikbaar voor deze klant.');
         }
 

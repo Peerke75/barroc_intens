@@ -41,8 +41,8 @@ class LeaseController extends Controller
             'notice_period' => 'required|string',
             'status' => 'required|string|in:pending,active,terminated,completed',
         ]);
-        
-        $leaseContract = LeaseContract::create($validated);
+
+        LeaseContract::create($validated);
 
         return redirect()->route('leasecontracts.index')->with('success', 'Leasecontract aangemaakt!');
     }
@@ -68,7 +68,6 @@ class LeaseController extends Controller
             'notice_period' => 'required|string',
             'status' => 'required|string|in:pending,active,terminated,completed',
         ]);
-
 
         $leaseContract = LeaseContract::findOrFail($id);
         $leaseContract->update($validated);

@@ -34,13 +34,6 @@ class InvoiceController extends Controller
             $invoice->total = $request->price[$index] * $request->quantity[$index];
             $invoice->save();
 
-            $invoices[] = $invoice;
-        }
-
-        session(['new_invoices' => $invoices]);
-
-        return redirect()
-        ->route('customers')
-        ->with('success', 'Facturen succesvol opgeslagen!');
+        return redirect()->route('customers.show', $customer->id)->with('success', 'Factuur succesvol aangemaakt!');
     }
 }

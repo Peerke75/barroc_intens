@@ -40,7 +40,7 @@ class ProductTest extends TestCase
         $response->assertSessionHasErrors(['ean']);
     }
 
-    
+
     public function it_rejects_a_product_with_price_in_minus()
     {
         $response = $this->post(route('products.store'), [
@@ -70,7 +70,7 @@ class ProductTest extends TestCase
         $response->assertSessionHasErrors(['name']);
     }
 
-    
+
     public function it_rejects_a_product_with_empty_category_id()
     {
         $response = $this->post(route('products.store'), [
@@ -84,7 +84,7 @@ class ProductTest extends TestCase
         $response->assertSessionHasErrors(['product_category_id']);
     }
 
-    
+
     public function it_rejects_a_product_with_empty_amount()
     {
         $response = $this->post(route('products.store'), [
@@ -98,7 +98,7 @@ class ProductTest extends TestCase
         $response->assertSessionHasErrors(['amount']);
     }
 
-    
+
     public function it_rejects_a_product_with_empty_ean()
     {
         $response = $this->post(route('products.store'), [

@@ -129,6 +129,8 @@
             const searchInput = document.getElementById('proposal-search');
             const resultsContainer = document.getElementById('search-results');
 
+            <<
+            << << < HEAD
             searchInput.addEventListener('input', function() {
                 const query = searchInput.value;
 
@@ -150,6 +152,86 @@
                                         window.location.href =
                                             `/proposals/${proposal.id}`;
                                     });
+                                    resultsContainer.appendChild(listItem); ===
+                                    === =
+                                    searchInput.addEventListener('input', function() {
+                                        const query = searchInput.value;
+
+                                        if (query.length >= 2) {
+                                            fetch(`/proposals/search?query=${query}`)
+                                                .then(response => response.json())
+                                                .then(data => {
+
+                                                        resultsContainer.innerHTML = '';
+
+                                                        if (data.length > 0) {
+                                                            resultsContainer.classList
+                                                                .remove('hidden');
+
+                                                            data.forEach(proposal => {
+                                                                    const listItem =
+                                                                        document
+                                                                        .createElement(
+                                                                            'li');
+                                                                    listItem
+                                                                        .classList
+                                                                        .add(
+                                                                            'p-3',
+                                                                            'hover:bg-yellow-200',
+                                                                            'cursor-pointer',
+                                                                            'text-gray-800',
+                                                                            'border-b',
+                                                                            'border-gray-200'
+                                                                        );
+
+                                                                    listItem
+                                                                        .innerHTML = `
+                                    <span class="font-semibold">
+                                        ${proposal.customer ? proposal.customer.company_name : 'Onbekend'}
+                                    </span> - Offerte ID: #${proposal.id}`;
+
+                                                                    listItem
+                                                                        .addEventListener(
+                                                                            'click',
+                                                                            () => {
+                                                                                window
+                                                                                    .location
+                                                                                    .href =
+                                                                                    `/proposals/${proposal.id}`; >>>
+                                                                                >>>
+                                                                                >
+                                                                                lease
+                                                                                    -
+                                                                                    contracten -
+                                                                                    maken
+                                                                            });
+                                                                } else {
+                                                                    resultsContainer
+                                                                        .classList
+                                                                        .add(
+                                                                            'hidden'
+                                                                            );
+                                                                }
+                                                            });
+                                                    } else {
+                                                        resultsContainer.classList.add(
+                                                            'hidden');
+                                                    }
+                                                });
+
+                                        <<
+                                        << << < HEAD
+                                        document.addEventListener('click', function(
+                                            event) {
+                                            if (!resultsContainer.contains(event
+                                                    .target) && event.target !==
+                                                searchInput) {
+                                                resultsContainer.classList.add(
+                                                    'hidden');
+                                            }
+                                        });
+                                    }); ===
+                                    === =
                                     resultsContainer.appendChild(listItem);
                                 });
                             } else {
@@ -167,5 +249,8 @@
                 }
             });
         });
+
+        >>>
+        >>> > lease - contracten - maken
     </script>
 @endsection

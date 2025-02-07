@@ -73,8 +73,8 @@
                         </tr>
                     @endif
                     @foreach ($leaseContracts as $contract)
-                    <tr class="hover:bg-gray-100 transition duration-300 border-b">
-                        <td class="px-6 py-4 text-sm font-medium text-gray-600 border-b">{{ $contract->id }}</td>
+                        <tr class="hover:bg-gray-100 transition duration-300 border-b">
+                            <td class="px-6 py-4 text-sm font-medium text-gray-600 border-b">{{ $contract->id }}</td>
                             <td class="px-6 py-4 text-sm font-medium text-gray-600 border-b">
                                 {{ $contract->customer->name ?? 'Onbekend' }}</td>
                             <td class="px-6 py-4 text-sm font-medium text-gray-600 border-b">{{ $contract->start_date }}

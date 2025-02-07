@@ -79,7 +79,7 @@ class ProductController extends Controller
             'ean' => $request->ean,
         ]);
 
-        session()->flash('success', 'Product succesvol bewerkt!');
+        session()->flash('success', 'Product succesvol bijgewerkt!');
 
         return redirect()->route('products');
     }

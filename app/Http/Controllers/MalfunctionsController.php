@@ -35,7 +35,7 @@ class MalfunctionsController extends Controller
 
         Malfunction::create($request->all());
 
-        return redirect()->route('storingen.index')->with('success', 'Storing succesvol aangemaakt.');
+        return redirect()->route('storingen.index')->with('success', 'Storing succesvol aangemaakt!');
     }
 
     public function show($id)
@@ -67,7 +67,7 @@ class MalfunctionsController extends Controller
 
         $malfunction->update($request->all());
 
-        return redirect()->route('storingen.index')->with('success', 'Storing succesvol bijgewerkt.');
+        return redirect()->route('storingen.index')->with('success', 'Storing succesvol bijgewerkt!');
     }
 
     public function destroy(Malfunction $malfunction, $id)
@@ -76,6 +76,6 @@ class MalfunctionsController extends Controller
 
         $malfunction->delete();
 
-        return redirect()->route('storingen.index')->with('success', 'Storing succesvol verwijderd.');
+        return redirect()->route('storingen.index')->with('success', 'Storing succesvol verwijderd!');
     }
 }

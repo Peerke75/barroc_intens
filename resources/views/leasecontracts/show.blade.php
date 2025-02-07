@@ -64,10 +64,6 @@
             Terug naar overzicht
         </a>
 
-        <a href="{{ route('leasecontracts.edit', $leaseContract->id) }}"
-            class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487a2.25 2.25 0 0 1 3.182 3.182L9.121 18.593a4.5 4.5 0 0 1-1.691 1.068l-3.402 1.134 1.134-3.402a4.5 4.5 0 0 1 1.068-1.691l10.632-10.632z" />
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 9l-4.5-4.5" />
             </svg>
             Bewerken

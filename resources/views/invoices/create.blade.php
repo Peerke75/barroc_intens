@@ -70,18 +70,46 @@
             <button type="button" id="add-item-button"
                 class="w-full bg-green-500 text-white py-3 px-6 rounded-lg hover:bg-green-600 transition text-lg font-semibold">
                 + Voeg Item Toe
+                <div>
+                    <label for="description" class="block text-sm font-semibold text-gray-700">Omschrijving</label>
+                    <input type="text" name="description" id="description" value="{{ old('description') }}" required
+                        class="mt-1 block w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="Omschrijving">
+                </div>
+
+                <div>
+                    <label for="price" class="block text-sm font-semibold text-gray-700">Prijs (€)</label>
+                    <input type="number" name="price" id="price" value="{{ old('price') }}" step="0.01" required
+                        class="mt-1 block w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="Prijs">
+                </div>
+
+                <div>
+                    <label for="quantity" class="block text-sm font-semibold text-gray-700">Hoeveelheid</label>
+                    <input type="number" name="quantity" id="quantity" value="{{ old('quantity') }}" required
+                        class="mt-1 block w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="Hoeveelheid">
+                </div>
+
+                <div class="flex justify-between items-center">
+                    <button type="submit"
+                        class="bg-blue-500 text-white py-3 px-6 rounded-lg hover:bg-blue-600 transition-colors duration-200 text-lg font-semibold">
+                        Factuur Opslaan
+                    </button>
+
+                    <div class="flex justify-between items-center pt-6">
+                        <button type="submit"
+                            class="bg-blue-500 text-white py-3 px-6 rounded-lg hover:bg-blue-600 transition text-lg font-semibold">
+                            Factuur Opslaan
+                        </button>
+
+                        <a href="{{ route('customers.show', $customer->id) }}"
+                            class="text-blue-500 font-semibold hover:underline">
+                            Annuleren
+                        </a>
+                    </div>
+                </div>
             </button>
-
-            <div class="flex justify-between items-center pt-6">
-                <button type="submit"
-                    class="bg-blue-500 text-white py-3 px-6 rounded-lg hover:bg-blue-600 transition text-lg font-semibold">
-                    Factuur Opslaan
-                </button>
-
-                <a href="{{ route('customers.show', $customer->id) }}" class="text-blue-500 font-semibold hover:underline">
-                    Annuleren
-                </a>
-            </div>
         </form>
     </div>
 

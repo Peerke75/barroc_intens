@@ -154,4 +154,14 @@ Route::middleware(['auth', CheckUserId::class . ':0,4,8'])->group(function () {
 
 });
 
+Route::resource('leasecontracts', LeaseController::class)->names([
+    'index' => 'leasecontracts.index',
+    'create' => 'leasecontracts.create',
+    'store' => 'leasecontracts.store',
+    'show' => 'leasecontracts.show',
+    'edit' => 'leasecontracts.edit',
+    'update' => 'leasecontracts.update',
+    'destroy' => 'leasecontracts.destroy',
+]);
+
 require __DIR__.'/auth.php';
