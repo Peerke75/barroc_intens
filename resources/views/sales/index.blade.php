@@ -33,56 +33,43 @@
         <div class="flex justify-between  mb-5">
             <h1 class="text-3xl font-bold mb-5">Afspraken</h1>
 
-            <a href="{{ route('sales.create') }}"
-                class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-4 rounded-lg shadow flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                    stroke="currentColor" class="w-5 h-5 mr-2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path>
-                </svg>
-                Nieuwe afspraak
-            </a>
-        </div>
-
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-            <table class="min-w-full table-auto border-collapse">
-                <thead class="bg-gray-200">
-                    <tr class="bg-yellow-500 text-left">
-                        <th class="px-6 py-4 text-sm font-medium text-gray-600 border-b">ID</th>
-                        <th class="px-6 py-4 text-sm font-medium text-gray-600 border-b">Klant</th>
-                        <th class="px-6 py-4 text-sm font-medium text-gray-600 border-b">Gebruiker</th>
-                        <th class="px-6 py-4 text-sm font-medium text-gray-600 border-b">Storing</th>
-                        <th class="px-6 py-4 text-sm font-medium text-gray-600 border-b">Beschrijving</th>
-                        <th class="px-6 py-4 text-sm font-medium text-gray-600 border-b">Datum</th>
-                        <th class="px-6 py-4 text-sm font-medium text-gray-600 border-b">Tijd</th>
-                        <th class="px-6 py-4 text-sm font-medium text-gray-600 border-b">Locatie</th>
-                        <th class="px-6 py-4 text-sm font-medium text-gray-600 border-b">Prioriteit</th>
-                        <th class="px-6 py-4 text-sm font-medium text-gray-600 border-b">Status</th>
-                        <th class="px-6 py-4 text-sm font-medium text-gray-600 border-b">Acties</th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white">
-                    @forelse($sales->sortByDesc('priority') as $sale)
-                        <tr class="hover:bg-gray-100 border-b">
-                            <td class="px-6 py-4 text-sm text-gray-700 border-b">{{ $sale->id }}</td>
-                            <td class="px-6 py-4 text-sm text-gray-700 border-b">{{ $sale->customer->name }}</td>
-                            <td class="px-6 py-4 text-sm text-gray-700 border-b">{{ $sale->user->name }}</td>
-                            <td class="px-6 py-4 text-sm text-gray-700 border-b">
-                                {{ $sale->malfunction ? $sale->malfunction->description : 'Geen' }}
-                            </td>
-                            <td class="px-6 py-4 text-sm text-gray-700 border-b">
-                                {{ \Illuminate\Support\Str::limit($sale->description, 50) }}</td>
-                            <td class="px-6 py-4 text-sm text-gray-700 border-b">{{ $sale->date }}</td>
-                            <td class="px-6 py-4 text-sm text-gray-700 border-b">
-                                {{ \Carbon\Carbon::parse($sale->start_appointment)->format('H:i') }} -
-                                {{ \Carbon\Carbon::parse($sale->end_appointment)->format('H:i') }}
-                            </td>
-                            <td class="px-6 py-4 text-sm text-gray-700 border-b">{{ $sale->location }}</td>
-                            <td class="px-6 py-4 text-sm text-gray-700 border-b">
-                                {{ $sale->priority == 1 ? 'Ja' : 'Nee' }}
-                            </td>
-                            <td class="px-6 py-4 text-sm text-gray-700 border-b">
-                                <span
-                                    class="px-3 py-1 rounded-full text-xs font-semibold
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+        <table class="min-w-full table-auto border-collapse">
+            <thead class="bg-gray-200">
+                <tr class="text-left">
+                    <th class="px-6 py-4 text-sm font-medium text-gray-600 border-b">ID</th>
+                    <th class="px-6 py-4 text-sm font-medium text-gray-600 border-b">Klant</th>
+                    <th class="px-6 py-4 text-sm font-medium text-gray-600 border-b">Gebruiker</th>
+                    <th class="px-6 py-4 text-sm font-medium text-gray-600 border-b">Storing</th>
+                    <th class="px-6 py-4 text-sm font-medium text-gray-600 border-b">Beschrijving</th>
+                    <th class="px-6 py-4 text-sm font-medium text-gray-600 border-b">Datum</th>
+                    <th class="px-6 py-4 text-sm font-medium text-gray-600 border-b">Tijd</th>
+                    <th class="px-6 py-4 text-sm font-medium text-gray-600 border-b">Locatie</th>
+                    <th class="px-6 py-4 text-sm font-medium text-gray-600 border-b">Prioriteit</th>
+                    <th class="px-6 py-4 text-sm font-medium text-gray-600 border-b">Status</th>
+                    <th class="px-6 py-4 text-sm font-medium text-gray-600 border-b">Acties</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white">
+                @forelse($sales->sortByDesc('priority') as $sale)
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-4 text-sm text-gray-700 border-b">{{ $sale->id }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-700 border-b">{{ $sale->customer->name }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-700 border-b">{{ $sale->user->name }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-700 border-b">
+                            {{ $sale->malfunction ? $sale->malfunction->message : 'Geen' }}
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-700 border-b">{{ \Illuminate\Support\Str::limit($sale->description, 50) }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-700 border-b">{{ $sale->date }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-700 border-b">
+                            {{ \Carbon\Carbon::parse($sale->start_appointment)->format('H:i') }} - {{ \Carbon\Carbon::parse($sale->end_appointment)->format('H:i') }}
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-700 border-b">{{ $sale->location }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-700 border-b">
+                            {{ $sale->priority == 1 ? 'Ja' : 'Nee' }}
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-700 border-b">
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold
                                 {{ $sale->status == 'open' ? 'bg-yellow-200 text-yellow-800' : '' }}
                                 {{ $sale->status == 'in_progress' ? 'bg-blue-200 text-blue-800' : '' }}
                                 {{ $sale->status == 'closed' ? 'bg-green-200 text-green-800' : '' }}"
